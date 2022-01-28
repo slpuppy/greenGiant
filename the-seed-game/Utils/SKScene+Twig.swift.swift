@@ -8,8 +8,8 @@
 import SpriteKit
 
 extension SKScene {
-    func addChild(_ twig: Twig) {
-        addChild(twig.node)
+    func addChild(_ trunk: Trunk) {
+        addChild(trunk.node)
     }
 }
 

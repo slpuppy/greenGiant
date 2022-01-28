@@ -9,7 +9,7 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    var lastTwig: Twig!
+    var lastTrunk: Trunk!
     var gameCamera: SKCameraNode!
     
     override func didMove(to view: SKView) {
@@ -28,15 +28,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 //        self.speed = -50
         #endif
         
-        let root = buildTwig()
-        root.node.position.y = self.frame.minY + root.node.frame.size.height/2
-        root.node.physicsBody?.isDynamic = false
-        self.addChild(root)
+        let firstTrunk = buildTrunk()
+        firstTrunk.node.position.y = self.frame.minY + firstTrunk.node.frame.size.height/2
+        firstTrunk.node.physicsBody?.isDynamic = false
+        self.addChild(firstTrunk)
         
-        lastTwig = root
+        lastTrunk = firstTrunk
     }
     
-    func buildTwig() -> Twig {
+    func buildTrunk() -> Trunk {
         let node = SKSpriteNode(color: .black, size: CGSize(width: 10, height: 100))
         
         let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 100))
@@ -44,25 +44,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         nodePhysicsBody.mass = 0.1
         node.physicsBody = nodePhysicsBody
         
-        let twig = Twig(node: node)
-        return twig
+        let trunk = Trunk(node: node)
+        return trunk
     }
     
     func touchDown(atPoint pos : CGPoint) {
-        let twig = buildTwig()
-        twig.node.position.y = lastTwig.node.position.y + lastTwig.node.frame.height
-        twig.node.position.x = lastTwig.node.position.x
-        self.addChild(twig)
+        let trunk = buildTrunk()
+        trunk.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height
+        trunk.node.position.x = lastTrunk.node.position.x
+        self.addChild(trunk)
 //        isPaused = true
-        twig.attach(to: lastTwig, on: self.physicsWorld)
-        twig.node.anchorPoint = .zero
-        twig.node.zRotation = 0.2 * (pos.x < frame.midX ? -1 : 1) + lastTwig.node.zRotation
-        twig.node.anchorPoint = .init(x: 0.5, y: 0.5)
+        trunk.attach(to: lastTrunk, on: self.physicsWorld)
+        trunk.node.anchorPoint = .zero
+        trunk.node.zRotation = 0.2 * (pos.x < frame.midX ? -1 : 1) + lastTrunk.node.zRotation
+        trunk.node.anchorPoint = .init(x: 0.5, y: 0.5)
 //        isPaused = false
-        lastTwig = twig
+        lastTrunk = trunk
         
         
-        self.gameCamera?.position = lastTwig.node.position
+        self.gameCamera?.position = lastTrunk.node.position
     }
     
     func touchMoved(toPoint pos : CGPoint) {

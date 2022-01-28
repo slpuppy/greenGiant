@@ -1,5 +1,5 @@
 //
-//  Twig.swift
+//  Trunk.swift
 //  the-seed-game
 //
 //  Created by Gustavo Kumasawa on 28/01/22.
@@ -7,16 +7,16 @@
 
 import SpriteKit
 
-class Twig {
+class Trunk {
     let node: SKSpriteNode
     
     init(node: SKSpriteNode) {
         self.node = node
     }
     
-    func attach(to otherTwig: Twig, on physicsWorld: SKPhysicsWorld) {
+    func attach(to otherTrunk: Trunk, on physicsWorld: SKPhysicsWorld) {
         guard let bodyA = node.physicsBody,
-              let bodyB = otherTwig.node.physicsBody else {
+              let bodyB = otherTrunk.node.physicsBody else {
             return
         }
         
