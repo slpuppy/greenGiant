@@ -10,6 +10,7 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastTrunk: Trunk!
+    var lastBranch: Branch!
     var gameCamera: SKCameraNode!
     
     override func didMove(to view: SKView) {
@@ -32,15 +33,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         firstTrunk.node.position.y = self.frame.minY + firstTrunk.node.frame.size.height/2
         firstTrunk.node.physicsBody?.isDynamic = false
         self.addChild(firstTrunk)
-        
         lastTrunk = firstTrunk
     }
     
     func buildTrunk() -> Trunk {
         let node = SKSpriteNode(color: .black, size: CGSize(width: 10, height: 100))
-        
         let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 100))
-        nodePhysicsBody.angularDamping = 50
+        nodePhysicsBody.angularDamping = 40
         nodePhysicsBody.mass = 0.1
         node.physicsBody = nodePhysicsBody
         
@@ -48,22 +47,46 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return trunk
     }
     
+    func buildBranch() -> Branch {
+        
+        let node = SKSpriteNode(color: .black, size: CGSize(width: 80, height: 10))
+        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 80, height: 10))
+        node.physicsBody = nodePhysicsBody
+        
+        let branch = Branch(node: node)
+        return branch
+        
+    }
+    
     func touchDown(atPoint pos : CGPoint) {
+        setupTrunk(pos: pos)
+        setupBranch(pos: pos)
+
+    }
+    
+    func setupTrunk(pos: CGPoint){
+        
         let trunk = buildTrunk()
         trunk.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height
         trunk.node.position.x = lastTrunk.node.position.x
         self.addChild(trunk)
-//        isPaused = true
         trunk.attach(to: lastTrunk, on: self.physicsWorld)
         trunk.node.anchorPoint = .zero
-        trunk.node.zRotation = 0.2 * (pos.x < frame.midX ? -1 : 1) + lastTrunk.node.zRotation
+        trunk.node.zRotation = 0.1 * (pos.y < frame.midX ? -1 : 1) + lastTrunk.node.zRotation
         trunk.node.anchorPoint = .init(x: 0.5, y: 0.5)
-//        isPaused = false
         lastTrunk = trunk
-        
-        
         self.gameCamera?.position = lastTrunk.node.position
-    }
+   }
+    
+    func setupBranch(pos: CGPoint) {
+        
+        let branch = buildBranch()
+        branch.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height
+        branch.node.position.x = lastTrunk.node.position.x
+        self.addChild(branch)
+        branch.attach(to: lastTrunk, on: self.physicsWorld)
+        
+  }
     
     func touchMoved(toPoint pos : CGPoint) {
     }
