@@ -22,6 +22,8 @@
 		75100A5B27A5B5A5006ACB87 /* Walls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5A27A5B5A5006ACB87 /* Walls.swift */; };
 		75100A6027A5CF80006ACB87 /* LittleBranch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5F27A5CF80006ACB87 /* LittleBranch.swift */; };
 		75100A6227A5D2D3006ACB87 /* SKScene+LittleTrunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A6127A5D2D3006ACB87 /* SKScene+LittleTrunk.swift */; };
+		75100A6627A60054006ACB87 /* Sun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A6527A60054006ACB87 /* Sun.swift */; };
+		75100A6827A600CF006ACB87 /* SKScene+Sun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A6727A600CF006ACB87 /* SKScene+Sun.swift */; };
 		7549C06127A574CE009E993B /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7549C06027A574CE009E993B /* Branch.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +44,8 @@
 		75100A5A27A5B5A5006ACB87 /* Walls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Walls.swift; sourceTree = "<group>"; };
 		75100A5F27A5CF80006ACB87 /* LittleBranch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LittleBranch.swift; sourceTree = "<group>"; };
 		75100A6127A5D2D3006ACB87 /* SKScene+LittleTrunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+LittleTrunk.swift"; sourceTree = "<group>"; };
+		75100A6527A60054006ACB87 /* Sun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sun.swift; sourceTree = "<group>"; };
+		75100A6727A600CF006ACB87 /* SKScene+Sun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Sun.swift"; sourceTree = "<group>"; };
 		7549C06027A574CE009E993B /* Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,6 +97,7 @@
 			children = (
 				0C022BFC27A42CB300B2E88A /* SKScene+Trunk.swift */,
 				75100A6127A5D2D3006ACB87 /* SKScene+LittleTrunk.swift */,
+				75100A6727A600CF006ACB87 /* SKScene+Sun.swift */,
 				75100A5627A5AD51006ACB87 /* SKScene+Background.swift */,
 				75100A5227A58769006ACB87 /* SKScene+Branch.swift */,
 			);
@@ -106,6 +111,7 @@
 				75100A5F27A5CF80006ACB87 /* LittleBranch.swift */,
 				0C022BFE27A42CCC00B2E88A /* Trunk.swift */,
 				75100A5427A5AA81006ACB87 /* Background.swift */,
+				75100A6527A60054006ACB87 /* Sun.swift */,
 				7549C06027A574CE009E993B /* Branch.swift */,
 			);
 			path = Models;
@@ -184,11 +190,13 @@
 			files = (
 				0C022BFD27A42CB300B2E88A /* SKScene+Trunk.swift in Sources */,
 				75100A6027A5CF80006ACB87 /* LittleBranch.swift in Sources */,
+				75100A6627A60054006ACB87 /* Sun.swift in Sources */,
 				7549C06127A574CE009E993B /* Branch.swift in Sources */,
 				0C022BFF27A42CCC00B2E88A /* Trunk.swift in Sources */,
 				75100A5527A5AA81006ACB87 /* Background.swift in Sources */,
 				75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */,
 				0C022BEB27A42C7B00B2E88A /* GameScene.swift in Sources */,
+				75100A6827A600CF006ACB87 /* SKScene+Sun.swift in Sources */,
 				75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */,
 				75100A5927A5B51F006ACB87 /* GameStatus.swift in Sources */,
 				0C022BED27A42C7B00B2E88A /* GameViewController.swift in Sources */,

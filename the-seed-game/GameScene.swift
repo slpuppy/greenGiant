@@ -17,7 +17,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var branchLoop: [Branch] = []
     var littleBranchLoop:[LittleBranch] = []
     var background: Background!
+    var sun: Sun!
     var walls: Walls!
+    var setupIntroCutscene: () -> Void = {}
+    
 
     var status: GameStatus = .intro
     
@@ -25,23 +28,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         physicsWorld.contactDelegate = self
      
 #if DEBUG
-        view.showsPhysics = true
+        //view.showsPhysics = true
         view.showsNodeCount = true
         view.showsFPS = true
-        //        self.speed = -50
+     
 #endif
         
         setupScene(view: view)
         setupBackground()
+        setupSun()
         self.backgroundColor = .white
+        
         
         switch status {
         case .intro:
             setupIntro()
         case .playing:
-           
-            setupStartGame()
-            
+           setupStartGame()
         case .paused:
             break
         case .gameOver:
@@ -51,27 +54,85 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
   
     func setupIntro() {
+        
+        // cria os elementos
+        
+        let bgNode = SKSpriteNode(imageNamed: "bgIntro")
         let groundNode = SKSpriteNode(imageNamed: "ground")
-        groundNode.position.y = self.frame.minY
-        
         let seedNode = SKSpriteNode(imageNamed: "seed")
-        seedNode.position.y = self.frame.midY - 20
+        let titleNode = SKSpriteNode(imageNamed: "title")
+        let subtitle = SKLabelNode(text: "Tap the seed to start")
+        subtitle.fontSize = 20
+        subtitle.fontColor = .black
         
+        // posiciona e os elementos
+        subtitle.position.y = self.frame.minY + 180
+        subtitle.zPosition = 3
+        groundNode.position.y = self.frame.minY + 10
+        groundNode.zPosition = 5
+        seedNode.position.y = self.frame.midY - 60
+        seedNode.zPosition = 5
+        titleNode.position.y = self.frame.midY + 40
+        titleNode.zPosition = 4
+        bgNode.position.y = self.frame.midY
+        bgNode.zPosition = 0
+       
+        //adiciona os elementos na cena
+        self.addChild(bgNode)
         self.addChild(groundNode)
         self.addChild(seedNode)
+        self.addChild(titleNode)
+        self.addChild(subtitle)
+        
+        // criação das animações
+        let sunAnimation = SKAction.sequence([SKAction.scale(by: 1.05, duration: 1.5), SKAction.scale(by: 1/1.05, duration: 1.5)])
+        sunAnimation.timingMode = .easeInEaseOut
+        let seedAnimation = SKAction.sequence([SKAction.scale(by: 1.1, duration: 0.5), SKAction.scale(by: 1/1.1, duration: 0.5)])
+        seedAnimation.timingMode = .easeInEaseOut
+        // inicialização das animações
+        sun.node.run(.repeatForever(sunAnimation))
+        seedNode.run(.repeatForever(seedAnimation))
+ 
+      self.setupIntroCutscene = {
+          let subtitleAnimation = SKAction.fadeOut(withDuration: 0.8)
+          let sunAnimation = SKAction.move(to: CGPoint(x: 0.0, y: self.frame.maxY + 200), duration: 1.5)
+            sunAnimation.timingMode = .easeInEaseOut
+          let seedAction1 = SKAction.move(to: CGPoint(x: 0.0, y: groundNode.frame.midY), duration: 0.8)
+          let seedAction2 = SKAction.scale(to: 0.1, duration: 0.8)
+          seedAction1.timingMode = .easeIn
+            
+            subtitle.run(subtitleAnimation)
+            self.sun.node.run(sunAnimation)
+            titleNode.run(subtitleAnimation)
+            seedNode.run(seedAction1)
+            seedNode.run(seedAction2)
+           
+        }
+        
+        
    }
+    
+    
     
    func setupBackground() {
         
         let bgNode = Background.buildBackground(frame: self.frame)
         background = Background.init(node: bgNode)
         self.addChild(background)
+   }
+    
+    func setupSun() {
+        let sunNode = Sun.buildSun(frame: self.frame)
+        sun = Sun.init(node: sunNode)
+        sun.node.zPosition = 1
+        sun.node.position = CGPoint(x: 0, y: self.frame.minY)
+        self.addChild(sun)
         
     }
     
     func setupStartGame(){
-        
-        // Constroi o background
+        status = .playing
+        //Remove elementos e animações da intro e da cutscene
         
        // Constroi as paredes
         let leftWall = Walls.buildLeftWall(frame: self.frame)
@@ -83,9 +144,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         walls.rightWall.physicsBody!.contactTestBitMask = walls.rightWall.physicsBody!.collisionBitMask
         // Constroi o primeiro tronco
         let firstTrunk = Trunk.buildTrunk()
-        firstTrunk.node.position.y = self.frame.minY + firstTrunk.node.frame.size.height/2
+        firstTrunk.node.position.y = self.frame.minY
         firstTrunk.node.physicsBody?.isDynamic = false
-        firstTrunk.node.zPosition = 1
+        firstTrunk.node.zPosition = 2
+       
+        let firstTrunkAnimation = SKAction.move(to: CGPoint(x: 0, y: self.frame.minY + 80), duration: 0.5)
+        firstTrunkAnimation.timingMode = .easeIn
+        firstTrunk.node.run(.sequence([.wait(forDuration: 0.5), firstTrunkAnimation]))
+      
         self.addChild(firstTrunk)
         lastTrunk = firstTrunk
         trunkLoop.append(firstTrunk)
@@ -108,16 +174,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
       switch status {
       case .intro:
-          break
+          setupIntroCutscene()
+          setupStartGame()
       case .playing:
+          
           setupTrunk(pos: pos)
           setupBranch(pos: pos)
           setupLittleBranch(pos: pos)
-          
-          if lastTrunk.node.position.y > self.frame.midY {
-              let action = SKAction.move(to: CGPoint(x: 0, y: lastTrunk.node.position.y), duration: 0.3)
+         if lastTrunk.node.position.y > self.frame.midY {
+              let action = SKAction.move(to: CGPoint(x: 0, y: lastTrunk.node.position.y + 200), duration: 0.4)
               action.timingMode = .easeOut
               self.gameCamera?.run(action)
+             
+             self.sun.moveWithAnimation(to: CGPoint(x: 0, y: lastTrunk.node.position.y + 400 + self.frame.height/2))
           }
           walls.updatePosition(to: lastTrunk.node.position)
           discardUselessElements()
@@ -259,5 +328,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         background.update(cameraPos: gameCamera.position)
+        sun.update(cameraPos: gameCamera.position)
+        
     }
 }
+
+

@@ -23,7 +23,8 @@ class Background {
             node.position.y += node.frame.height/2
         }
    }
-   static func buildBackground(frame: CGRect) -> SKSpriteNode {
+  
+    static func buildBackground(frame: CGRect) -> SKSpriteNode {
         
         let background = SKSpriteNode(imageNamed: "bg")
         background.zPosition = 0
