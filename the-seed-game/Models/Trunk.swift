@@ -1,16 +1,13 @@
 //
-//  Branch.swift
+//  Trunk.swift
 //  the-seed-game
 //
-//  Created by Gabriel Puppi on 29/01/22.
+//  Created by Gustavo Kumasawa on 28/01/22.
 //
-
 
 import SpriteKit
 
-
-class Branch {
-    
+class Trunk {
     let node: SKSpriteNode
     
     init(node: SKSpriteNode) {
@@ -25,29 +22,34 @@ class Branch {
         
         let anchorPosition = CGPoint(
             x: node.frame.midX,
-            y: node.frame.midY
+            y: node.frame.minY
         )
         
         let joint = SKPhysicsJointFixed.joint(
             withBodyA: bodyA,
             bodyB: bodyB,
-            anchor: anchorPosition
-        )
-
+            anchor: anchorPosition)
+        
+      
+        
+//        joint.lowerAngleLimit = 0.2
+//        joint.upperAngleLimit = 0.2
+        
         physicsWorld.add(joint)
+      
     }
     
-   static func buildBranch() -> Branch {
-        
-        let node = SKSpriteNode(color: .black, size: CGSize(width: 80, height: 10))
-        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 80, height: 5))
+    static func buildTrunk() -> Trunk {
+        let node = SKSpriteNode(imageNamed: "trunk")
+        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 12, height: 160))
+        node.zPosition = 1
+        nodePhysicsBody.angularDamping = 0.4
         nodePhysicsBody.mass = 2
         node.physicsBody = nodePhysicsBody
-        node.zPosition = 1
+        nodePhysicsBody.collisionBitMask = node.physicsBody!.collisionBitMask
         
-        let branch = Branch(node: node)
-        return branch
-        
+        let trunk = Trunk(node: node)
+        return trunk
     }
     
 }

@@ -1,14 +1,18 @@
 //
-//  Trunk.swift
+//  LittleBranch.swift
 //  the-seed-game
 //
-//  Created by Gustavo Kumasawa on 28/01/22.
+//  Created by Gabriel Puppi on 29/01/22.
 //
+
 
 import SpriteKit
 
-class Trunk {
+
+class LittleBranch {
+    
     let node: SKSpriteNode
+    
     
     init(node: SKSpriteNode) {
         self.node = node
@@ -21,8 +25,8 @@ class Trunk {
         }
         
         let anchorPosition = CGPoint(
-            x: node.frame.midX,
-            y: node.frame.minY
+            x: otherTrunk.node.frame.midX,
+            y: otherTrunk.node.frame.midY
         )
         
         let joint = SKPhysicsJointFixed.joint(
@@ -30,22 +34,25 @@ class Trunk {
             bodyB: bodyB,
             anchor: anchorPosition
         )
-//        joint.lowerAngleLimit = 0.2
-//        joint.upperAngleLimit = 0.2
-        
+
         physicsWorld.add(joint)
     }
     
-    static func buildTrunk() -> Trunk {
-        let node = SKSpriteNode(color: .black, size: CGSize(width: 20, height: 100))
-        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 100))
-        node.zPosition = 1
-        nodePhysicsBody.angularDamping = 10
-        nodePhysicsBody.mass = 1
-        node.physicsBody = nodePhysicsBody
+   static func buildLittleBranch() -> LittleBranch {
         
-        let trunk = Trunk(node: node)
-        return trunk
+        let node = SKSpriteNode(imageNamed: "littleBranch")
+        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 66, height: 40))
+        nodePhysicsBody.mass = 0.8
+        node.physicsBody = nodePhysicsBody
+        node.zPosition = 1
+        nodePhysicsBody.contactTestBitMask = node.physicsBody!.collisionBitMask
+       
+        
+        let littleBranch = LittleBranch(node: node)
+        return littleBranch
+        
     }
     
+
 }
+
