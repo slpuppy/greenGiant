@@ -36,4 +36,16 @@ class Trunk {
         physicsWorld.add(joint)
     }
     
+    static func buildTrunk() -> Trunk {
+        let node = SKSpriteNode(color: .black, size: CGSize(width: 20, height: 100))
+        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 100))
+        node.zPosition = 1
+        nodePhysicsBody.angularDamping = 10
+        nodePhysicsBody.mass = 1
+        node.physicsBody = nodePhysicsBody
+        
+        let trunk = Trunk(node: node)
+        return trunk
+    }
+    
 }

@@ -9,38 +9,16 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
     var lastTrunk: Trunk!
     var lastBranch: Branch!
     var gameCamera: SKCameraNode!
-    var leftWall: SKNode!
-    var rightWall: SKNode!
     var trunkLoop: [Trunk] = []
     var branchLoop: [Branch] = []
+    var background: Background!
+    var walls: Walls!
     
     override func didMove(to view: SKView) {
-        self.size = view.frame.size
-        self.backgroundColor = .white
-        self.anchorPoint = .init(x: 0.5, y: 0.5)
-        let camera = SKCameraNode()
-        self.addChild(camera)
-        self.gameCamera = camera
-        self.camera = camera
-        
-        leftWall = SKNode()
-        let leftWallPhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 1, height: self.frame.height))
-        leftWallPhysicsBody.isDynamic = false
-        leftWall.physicsBody = leftWallPhysicsBody
-        leftWall.position.x = self.frame.minX
-        self.addChild(leftWall)
-        
-        rightWall = SKNode()
-        let rightWallPhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 1, height: self.frame.height))
-        rightWallPhysicsBody.isDynamic = false
-        rightWall.physicsBody = rightWallPhysicsBody
-        rightWall.position.x = self.frame.maxX
-        self.addChild(rightWall)
-        
-        
         
 #if DEBUG
         view.showsPhysics = true
@@ -49,69 +27,105 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //        self.speed = -50
 #endif
         
-        let firstTrunk = buildTrunk()
+        setupScene(view: view)
+        
+        // Constroi o background
+        let bgNode = Background.buildBackground(frame: self.frame)
+        background = Background.init(node: bgNode)
+        self.addChild(background)
+        
+        
+        // Constroi as paredes
+        let leftWall = Walls.buildLeftWall(frame: self.frame)
+        let rightWall = Walls.buildRightWall(frame: self.frame)
+        self.addChild(leftWall)
+        self.addChild(rightWall)
+        walls = Walls(rightWall: rightWall, leftWall: leftWall)
+        
+        // Constroi o primeiro tronco
+        let firstTrunk = Trunk.buildTrunk()
         firstTrunk.node.position.y = self.frame.minY + firstTrunk.node.frame.size.height/2
         firstTrunk.node.physicsBody?.isDynamic = false
+        firstTrunk.node.zPosition = 1
         self.addChild(firstTrunk)
         lastTrunk = firstTrunk
         trunkLoop.append(firstTrunk)
     }
     
-    func buildTrunk() -> Trunk {
-        let node = SKSpriteNode(color: .black, size: CGSize(width: 10, height: 100))
-        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 10, height: 100))
-        nodePhysicsBody.angularDamping = 5.0
-        nodePhysicsBody.mass = 1
-        node.physicsBody = nodePhysicsBody
-        
-        let trunk = Trunk(node: node)
-        return trunk
+    func setupScene(view: SKView) {
+        self.size = view.frame.size
+        self.backgroundColor = .clear
+        self.anchorPoint = .init(x: 0.5, y: 0.5)
+        let camera = SKCameraNode()
+        self.gameCamera = camera
+        self.camera = camera
+        self.addChild(camera)
     }
     
-    func buildBranch() -> Branch {
-        
-        let node = SKSpriteNode(color: .black, size: CGSize(width: 80, height: 10))
-        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 80, height: 5))
-        nodePhysicsBody.mass = 0.5
-        node.physicsBody = nodePhysicsBody
-        
-        let branch = Branch(node: node)
-        return branch
-        
-    }
-    
-    func touchDown(atPoint pos : CGPoint) {
+  func touchDown(atPoint pos : CGPoint) {
         
         setupBranch(pos: pos)
         setupTrunk(pos: pos)
         if lastTrunk.node.position.y > self.frame.midY {
             
-            self.gameCamera?.run(.move(to: CGPoint(x: 0, y: lastTrunk.node.position.y), duration: 0.5))
+            self.gameCamera?.run(.move(to: CGPoint(x: 0, y: lastTrunk.node.position.y), duration: 0.2))
         }
-        leftWall.position.y = lastTrunk.node.position.y
-        rightWall.position.y = lastTrunk.node.position.y
+        
+        walls.updatePosition(to: lastTrunk.node.position)
+        discardUselessElements()
     }
     
     func discardUselessElements() {
-        for trunk in trunkLoop {
-            if checkUselessElement(trunk.node){
-                trunk.node.removeFromParent()
-            }
-            
-        }
+        discardUselessTrunks()
+        discardUselessBranches()
+        
     }
     
     func checkUselessElement(_ element: SKSpriteNode) -> Bool {
-        if element.position.y < (self.gameCamera.position.y - self.frame.height) {
+        if element.position.y < (self.gameCamera.position.y - self.frame.height/2) {
             return true
         }
         return false
     }
     
+    func discardUselessTrunks() {
+        var indexToRemove: Int = -1
+        for i in 0..<trunkLoop.count {
+            if checkUselessElement(trunkLoop[i].node){
+                trunkLoop[i+1].node.physicsBody?.isDynamic = false
+                trunkLoop[i].node.removeFromParent()
+                
+                
+                indexToRemove = i
+            }
+        }
+        if indexToRemove != -1 {
+            
+            for _ in 0...indexToRemove {
+                trunkLoop.removeFirst()
+            }
+        }
+    }
     
-    func setupTrunk(pos: CGPoint){
+    func discardUselessBranches() {
+        var indexToRemove: Int = -1
+        for i in 0..<branchLoop.count {
+            if checkUselessElement(branchLoop[i].node){
+                branchLoop[i+1].node.physicsBody?.isDynamic = false
+                branchLoop[i].node.removeFromParent()
+                indexToRemove = i
+            }
+        }
+        if indexToRemove != -1 {
+            for _ in 0...indexToRemove {
+                branchLoop.removeFirst()
+            }
+        }
+    }
+    
+  func setupTrunk(pos: CGPoint){
         
-        let trunk = buildTrunk()
+        let trunk = Trunk.buildTrunk()
         trunk.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height
         trunk.node.position.x = lastTrunk.node.position.x
         self.addChild(trunk)
@@ -120,21 +134,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         trunk.node.zRotation = 0.1 * (pos.y < frame.midX ? -1 : 1) + lastTrunk.node.zRotation
         trunk.node.anchorPoint = .init(x: 0.5, y: 0.5)
         lastTrunk = trunk
-        
         trunkLoop.append(lastTrunk)
-        
-    }
+   }
     
     func setupBranch(pos: CGPoint) {
         
-        let branch = buildBranch()
-        branch.node.position.y = lastTrunk.node.position.y
+        let branch = Branch.buildBranch()
+        branch.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height/2
         branch.node.position.x = (pos.x < frame.midX ? lastTrunk.node.position.x - branch.node.frame.width/2 : lastTrunk.node.position.x + branch.node.frame.width/2)
+        branch.node.anchorPoint = .init(x: 0.5, y: 0.5)
         self.addChild(branch)
         branch.attach(to: lastTrunk, on: self.physicsWorld)
         branchLoop.append(branch)
-        
-    }
+   }
     
     func touchMoved(toPoint pos : CGPoint) {
     }
@@ -159,6 +171,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        background.update(cameraPos: gameCamera.position)
     }
 }
