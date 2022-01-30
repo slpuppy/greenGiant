@@ -24,10 +24,10 @@ class Walls {
         nodePhysicsBody.isDynamic = false
         node.physicsBody = nodePhysicsBody
         node.position.x = frame.minX
+        node.name = Names.leftWall
         
         return node
-       
-        }
+    }
     
     static func buildRightWall(frame: CGRect) -> SKNode {
         let node = SKNode()
@@ -35,17 +35,19 @@ class Walls {
         nodePhysicsBody.isDynamic = false
         node.physicsBody = nodePhysicsBody
         node.position.x = frame.maxX
+        node.name = Names.rightWall
         
         return node
-       
-        }
+    }
     
     func updatePosition(to pos: CGPoint) {
         rightWall.position.y = pos.y
         leftWall.position.y = pos.y
-        
     }
     
-    
+    enum Names {
+        static let leftWall: String = "leftWall"
+        static let rightWall: String = "rightWall"
+    }
     
 }

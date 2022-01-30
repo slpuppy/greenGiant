@@ -46,13 +46,15 @@ class LittleBranch {
         node.physicsBody = nodePhysicsBody
         node.zPosition = 1
         nodePhysicsBody.contactTestBitMask = node.physicsBody!.collisionBitMask
-       
+       node.name = Names.littleBranch
         
         let littleBranch = LittleBranch(node: node)
         return littleBranch
         
     }
     
-
+    enum Names {
+        static let littleBranch: String = "littleBranch"
+    }
 }
 

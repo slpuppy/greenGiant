@@ -21,8 +21,8 @@ class Branch {
     func attach(to otherTrunk: Trunk, on physicsWorld: SKPhysicsWorld) {
         guard let bodyA = node.physicsBody,
               let bodyB = otherTrunk.node.physicsBody else {
-            return
-        }
+                  return
+              }
         
         let anchorPosition = CGPoint(
             x: otherTrunk.node.frame.midX,
@@ -34,11 +34,11 @@ class Branch {
             bodyB: bodyB,
             anchor: anchorPosition
         )
-
+        
         physicsWorld.add(joint)
     }
     
-   static func buildBranch() -> Branch {
+    static func buildBranch() -> Branch {
         
         let node = SKSpriteNode(imageNamed: "branch")
         let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 120, height: 30))
@@ -46,12 +46,15 @@ class Branch {
         node.physicsBody = nodePhysicsBody
         node.zPosition = 1
         nodePhysicsBody.contactTestBitMask = node.physicsBody!.collisionBitMask
-       
+        node.name = Names.branch
         
         let branch = Branch(node: node)
         return branch
         
     }
     
-
+    
+    enum Names {
+        static let branch: String = "branch"
+    }
 }
