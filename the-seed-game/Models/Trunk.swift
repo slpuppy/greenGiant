@@ -47,9 +47,13 @@ class Trunk {
         nodePhysicsBody.mass = 2
         node.physicsBody = nodePhysicsBody
         nodePhysicsBody.collisionBitMask = node.physicsBody!.collisionBitMask
+        node.name = Names.trunk
         
         let trunk = Trunk(node: node)
         return trunk
     }
     
+    enum Names {
+        static let trunk: String = "trunk"
+    }
 }
