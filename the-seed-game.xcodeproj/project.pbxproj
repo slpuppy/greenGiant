@@ -15,6 +15,7 @@
 		0C022BF527A42C7D00B2E88A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0C022BF327A42C7D00B2E88A /* LaunchScreen.storyboard */; };
 		0C022BFD27A42CB300B2E88A /* SKScene+Trunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022BFC27A42CB300B2E88A /* SKScene+Trunk.swift */; };
 		0C022BFF27A42CCC00B2E88A /* Trunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022BFE27A42CCC00B2E88A /* Trunk.swift */; };
+		0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */; };
 		75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5227A58769006ACB87 /* SKScene+Branch.swift */; };
 		75100A5527A5AA81006ACB87 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5427A5AA81006ACB87 /* Background.swift */; };
 		75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5627A5AD51006ACB87 /* SKScene+Background.swift */; };
@@ -35,6 +36,7 @@
 		0C022BF427A42C7D00B2E88A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0C022BFC27A42CB300B2E88A /* SKScene+Trunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Trunk.swift"; sourceTree = "<group>"; };
 		0C022BFE27A42CCC00B2E88A /* Trunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trunk.swift; sourceTree = "<group>"; };
+		0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
 		75100A5227A58769006ACB87 /* SKScene+Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Branch.swift"; sourceTree = "<group>"; };
 		75100A5427A5AA81006ACB87 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		75100A5627A5AD51006ACB87 /* SKScene+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Background.swift"; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				0C022BFE27A42CCC00B2E88A /* Trunk.swift */,
 				75100A5427A5AA81006ACB87 /* Background.swift */,
 				7549C06027A574CE009E993B /* Branch.swift */,
+				0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -191,6 +194,7 @@
 				0C022BEB27A42C7B00B2E88A /* GameScene.swift in Sources */,
 				75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */,
 				75100A5927A5B51F006ACB87 /* GameStatus.swift in Sources */,
+				0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */,
 				0C022BED27A42C7B00B2E88A /* GameViewController.swift in Sources */,
 				75100A5B27A5B5A5006ACB87 /* Walls.swift in Sources */,
 				0C022BE527A42C7B00B2E88A /* AppDelegate.swift in Sources */,
@@ -343,7 +347,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C7K95G5W2H;
+				DEVELOPMENT_TEAM = L5C36X97NN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -371,7 +375,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = C7K95G5W2H;
+				DEVELOPMENT_TEAM = L5C36X97NN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

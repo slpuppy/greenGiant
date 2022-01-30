@@ -18,17 +18,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var littleBranchLoop:[LittleBranch] = []
     var background: Background!
     var walls: Walls!
-
+    var gameOverOverlay: GameOverOverlay!
+    var animationRunning: Bool = false
+    
     var status: GameStatus = .intro
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
-     
+        
 #if DEBUG
-        view.showsPhysics = true
-        view.showsNodeCount = true
-        view.showsFPS = true
-        //        self.speed = -50
+       view.showsPhysics = true
+       view.showsNodeCount = true
+       view.showsFPS = true
+       //        self.speed = -50
 #endif
         
         setupScene(view: view)
@@ -39,17 +41,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .intro:
             setupIntro()
         case .playing:
-           
+
             setupStartGame()
-            
+
         case .paused:
             break
         case .gameOver:
             break
         }
-  
     }
-  
+    
     func setupIntro() {
         let groundNode = SKSpriteNode(imageNamed: "ground")
         groundNode.position.y = self.frame.minY
@@ -59,9 +60,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(groundNode)
         self.addChild(seedNode)
-   }
+    }
     
-   func setupBackground() {
+    func setupBackground() {
         
         let bgNode = Background.buildBackground(frame: self.frame)
         background = Background.init(node: bgNode)
@@ -73,7 +74,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Constroi o background
         
-       // Constroi as paredes
+        // Constroi as paredes
         let leftWall = Walls.buildLeftWall(frame: self.frame)
         let rightWall = Walls.buildRightWall(frame: self.frame)
         self.addChild(leftWall)
@@ -103,62 +104,119 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(camera)
     }
     
-    
-  func touchDown(atPoint pos : CGPoint) {
+    func didBegin(_ contact: SKPhysicsContact) {
+        if contact.bodyA.node == nil || contact.bodyB.node == nil {
+            return
+        }
         
-      switch status {
-      case .intro:
-          break
-      case .playing:
-          setupTrunk(pos: pos)
-          setupBranch(pos: pos)
-          setupLittleBranch(pos: pos)
-          
-          if lastTrunk.node.position.y > self.frame.midY {
-              let action = SKAction.move(to: CGPoint(x: 0, y: lastTrunk.node.position.y), duration: 0.3)
-              action.timingMode = .easeOut
-              self.gameCamera?.run(action)
-          }
-          walls.updatePosition(to: lastTrunk.node.position)
-          discardUselessElements()
-      
-      case .paused:
-          break
-      
-      case .gameOver:
-          break
-      }
+        let bodyAName = contact.bodyA.node!.name!
+        let bodyBName = contact.bodyB.node!.name!
+        
+        let wallsCollision = checkWallsCollision(
+            bodyAName: bodyAName,
+            bodyBName: bodyBName
+        )
+        
+        if wallsCollision && status != .gameOver {
+            gameOver()
+        }
     }
     
-// Funcao que cria um novo tronco vertical eposiciona na tela
+    func checkWallsCollision(bodyAName: String, bodyBName: String) -> Bool {
+        if bodyAName == Walls.Names.leftWall || bodyBName == Walls.Names.leftWall {
+            return true
+        }
+        
+        if bodyAName == Walls.Names.rightWall || bodyBName == Walls.Names.rightWall {
+            return true
+        }
+        
+        return false
+    }
+    
+    func gameOver() {
+        status = .gameOver
+        setupGameOverOverlay()
+    }
+    
+    func setupGameOverOverlay() {
+        gameOverOverlay = GameOverOverlay(frame: self.frame)
+        self.addChild(gameOverOverlay.node)
+        
+        let overlayAnimationSequence: [SKAction] = [
+            .run({
+                self.animationRunning = true
+            }),
+            .wait(forDuration: 0.3),
+            .run({
+                self.gameOverOverlay.node.position.y = self.gameCamera.position.y
+            }),
+            .fadeAlpha(to: 0.8, duration: 0.5),
+            .run({
+                self.animationRunning = false
+            })
+        ]
+        gameOverOverlay.background.run(.sequence(overlayAnimationSequence))
+    }
+    
+    func touchDown(atPoint pos : CGPoint) {
+        if animationRunning {
+            return
+        }
+        
+        switch status {
+        case .intro:
+            break
+        case .playing:
+            setupTrunk(pos: pos)
+            setupBranch(pos: pos)
+            setupLittleBranch(pos: pos)
+            
+            if lastTrunk.node.position.y > self.frame.midY {
+                let action = SKAction.move(to: CGPoint(x: 0, y: lastTrunk.node.position.y), duration: 0.3)
+                action.timingMode = .easeOut
+                self.gameCamera?.run(action)
+            }
+            walls.updatePosition(to: lastTrunk.node.position)
+            discardUselessElements()
+            
+        case .paused:
+            break
+            
+        case .gameOver:
+            gameOverOverlay.onTap()
+        }
+    }
+    
+    // Funcao que cria um novo tronco vertical eposiciona na tela
     
     func setupTrunk(pos: CGPoint){
-          
-          let trunk = Trunk.buildTrunk()
-          trunk.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height
-          trunk.node.position.x = lastTrunk.node.position.x
-          self.addChild(trunk)
-          trunk.attach(to: lastTrunk, on: self.physicsWorld)
-          trunk.node.anchorPoint = .zero
-         // trunk.node.zRotation = 0.1 * (pos.y < frame.midX ? -1 : 1) + lastTrunk.node.zRotation
-          trunk.node.anchorPoint = .init(x: 0.5, y: 0.5)
-          lastTrunk = trunk
-          trunkLoop.append(lastTrunk)
-     }
+        
+        let trunk = Trunk.buildTrunk()
+        trunk.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height
+        trunk.node.position.x = lastTrunk.node.position.x
+        self.addChild(trunk)
+        trunk.attach(to: lastTrunk, on: self.physicsWorld)
+        trunk.node.anchorPoint = .zero
+        // trunk.node.zRotation = 0.1 * (pos.y < frame.midX ? -1 : 1) + lastTrunk.node.zRotation
+        trunk.node.anchorPoint = .init(x: 0.5, y: 0.5)
+        lastTrunk = trunk
+        trunkLoop.append(lastTrunk)
+    }
     
     // Funcao que cria um novo galho horizontal eposiciona na tela
-      
-      func setupBranch(pos: CGPoint) {
-          
-          let branch = Branch.buildBranch()
-          branch.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height/2
-          branch.node.position.x = (pos.x < frame.midX ? lastTrunk.node.position.x - branch.node.frame.width/2 : lastTrunk.node.position.x + branch.node.frame.width/2)
-          branch.node.anchorPoint = .init(x: 0.5, y: 0.5)
-          branch.node.zRotation = (pos.x < frame.midX ? (-0.33) : (0.33))
-          self.addChild(branch)
-          branch.attach(to: lastTrunk, on: self.physicsWorld)
-          branchLoop.append(branch)
-     }
+    
+    func setupBranch(pos: CGPoint) {
+        
+        let branch = Branch.buildBranch()
+        branch.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height/2
+        branch.node.position.x = (pos.x < frame.midX ? lastTrunk.node.position.x - branch.node.frame.width/2 : lastTrunk.node.position.x + branch.node.frame.width/2)
+        branch.node.anchorPoint = .init(x: 0.5, y: 0.5)
+        branch.node.zRotation = (pos.x < frame.midX ? (-0.33) : (0.33))
+        self.addChild(branch)
+        branch.attach(to: lastTrunk, on: self.physicsWorld)
+        branchLoop.append(branch)
+    }
     
     func setupLittleBranch(pos: CGPoint){
         let littleBranch = LittleBranch.buildLittleBranch()
@@ -169,16 +227,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(littleBranch)
         littleBranch.attach(to: lastTrunk, on: self.physicsWorld)
         littleBranchLoop.append(littleBranch)
-        
     }
     
-    
-    
-  func discardUselessElements() {
+    func discardUselessElements() {
         discardUselessTrunks()
         discardUselessBranches()
         discardUselessLittleBranches()
-   }
+    }
     
     func checkUselessElement(_ element: SKSpriteNode) -> Bool {
         if element.position.y < (self.gameCamera.position.y - self.frame.height*0.75) {
@@ -186,7 +241,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         return false
     }
-  
+    
     func discardUselessTrunks() {
         var indexToRemove: Int = -1
         for i in 0..<trunkLoop.count {
@@ -235,7 +290,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
     }
     
- func touchMoved(toPoint pos : CGPoint) {
+    func touchMoved(toPoint pos : CGPoint) {
     }
     
     func touchUp(atPoint pos : CGPoint) {
