@@ -213,7 +213,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             .run({
                 self.animationRunning = true
             }),
-            .wait(forDuration: 0.3),
+            .wait(forDuration: 0.4),
             .run({
                 self.gameOverOverlay.node.position.y = self.gameCamera.position.y
             }),
@@ -232,16 +232,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch status {
         case .intro:
-            break
+            setupIntroCutscene()
+            setupStartGame()
         case .playing:
             setupTrunk(pos: pos)
             setupBranch(pos: pos)
             setupLittleBranch(pos: pos)
             
             if lastTrunk.node.position.y > self.frame.midY {
-                let action = SKAction.move(to: CGPoint(x: 0, y: lastTrunk.node.position.y), duration: 0.3)
+                let action = SKAction.move(to: CGPoint(x: 0, y: lastTrunk.node.position.y + 200), duration: 0.4)
                 action.timingMode = .easeOut
                 self.gameCamera?.run(action)
+                
+                self.sun.moveWithAnimation(to: CGPoint(x: 0, y: lastTrunk.node.position.y + 400 + self.frame.height/2))
             }
             walls.updatePosition(to: lastTrunk.node.position)
             discardUselessElements()
