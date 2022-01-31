@@ -20,6 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var sun: Sun!
     var walls: Walls!
     var setupIntroCutscene: () -> Void = {}
+   var score = Score(score: 0)
 
     var gameOverOverlay: GameOverOverlay!
     var animationRunning: Bool = false
@@ -52,6 +53,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .gameOver:
             break
         }
+    }
+    
+    
+    func setupScoreboard() {
+        
+        
     }
     
     func setupIntro() {
@@ -107,15 +114,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             titleNode.run(subtitleAnimation)
             seedNode.run(seedAction1)
             seedNode.run(seedAction2)
-           
         }
-        
-        
    }
-    
-    
-    
-   func setupBackground() {
+  func setupBackground() {
         
         let bgNode = Background.buildBackground(frame: self.frame)
         background = Background.init(node: bgNode)
@@ -152,10 +153,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let firstTrunkAnimation = SKAction.move(to: CGPoint(x: 0, y: self.frame.minY + 80), duration: 0.5)
         firstTrunkAnimation.timingMode = .easeIn
         firstTrunk.node.run(.sequence([.wait(forDuration: 0.5), firstTrunkAnimation]))
-      
         self.addChild(firstTrunk)
         lastTrunk = firstTrunk
         trunkLoop.append(firstTrunk)
+        
+        // Seta o Scoreboard
+        let scoreBoard = SKLabelNode(text: "\(score.score)m")
+        scoreBoard.fontSize = 30
+        scoreBoard.zPosition = 4
+        scoreBoard.fontColor = .black
+        scoreBoard.position = CGPoint(x: 0, y: self.frame.maxY - 50)
+        camera!.addChild(scoreBoard)
+        
+       
+        
+        
     }
     
     // Inicia a cena e prepara a camera
@@ -168,6 +180,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.gameCamera = camera
         self.camera = camera
         self.addChild(camera)
+        
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -225,6 +238,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOverOverlay.background.run(.sequence(overlayAnimationSequence))
     }
     
+    func addScore() {
+        
+        score.score = score.score + 1
+        
+        print(score.score)
+        
+    }
+    
     func touchDown(atPoint pos : CGPoint) {
         if animationRunning {
             return
@@ -238,6 +259,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             setupTrunk(pos: pos)
             setupBranch(pos: pos)
             setupLittleBranch(pos: pos)
+           addScore()
             
             if lastTrunk.node.position.y > self.frame.midY {
                 let action = SKAction.move(to: CGPoint(x: 0, y: lastTrunk.node.position.y + 200), duration: 0.4)

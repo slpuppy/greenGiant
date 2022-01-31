@@ -18,6 +18,8 @@ class GameOverOverlay {
         
         self.node = SKNode()
         self.node.zPosition = 100
+        
+        
         self.node.addChild(self.background)
         self.node.addChild(self.label)
     }

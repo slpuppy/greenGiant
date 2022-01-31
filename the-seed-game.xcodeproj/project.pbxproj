@@ -26,10 +26,11 @@
 		75100A6627A60054006ACB87 /* Sun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A6527A60054006ACB87 /* Sun.swift */; };
 		75100A6827A600CF006ACB87 /* SKScene+Sun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A6727A600CF006ACB87 /* SKScene+Sun.swift */; };
 		7549C06127A574CE009E993B /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7549C06027A574CE009E993B /* Branch.swift */; };
+		758812BA27A81E5C00CB693A /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758812B927A81E5C00CB693A /* Score.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C022BE127A42C7B00B2E88A /* The Seed Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "The Seed Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C022BE127A42C7B00B2E88A /* GGiant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GGiant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C022BE427A42C7B00B2E88A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C022BEA27A42C7B00B2E88A /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		0C022BEC27A42C7B00B2E88A /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +50,7 @@
 		75100A6527A60054006ACB87 /* Sun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sun.swift; sourceTree = "<group>"; };
 		75100A6727A600CF006ACB87 /* SKScene+Sun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Sun.swift"; sourceTree = "<group>"; };
 		7549C06027A574CE009E993B /* Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
+		758812B927A81E5C00CB693A /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,7 +75,7 @@
 		0C022BE227A42C7B00B2E88A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0C022BE127A42C7B00B2E88A /* The Seed Game.app */,
+				0C022BE127A42C7B00B2E88A /* GGiant.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -109,6 +111,7 @@
 		75100A5E27A5CF69006ACB87 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				758812B927A81E5C00CB693A /* Score.swift */,
 				75100A5A27A5B5A5006ACB87 /* Walls.swift */,
 				75100A5F27A5CF80006ACB87 /* LittleBranch.swift */,
 				0C022BFE27A42CCC00B2E88A /* Trunk.swift */,
@@ -137,7 +140,7 @@
 			);
 			name = "the-seed-game";
 			productName = "the-seed-game";
-			productReference = 0C022BE127A42C7B00B2E88A /* The Seed Game.app */;
+			productReference = 0C022BE127A42C7B00B2E88A /* GGiant.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -191,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				758812BA27A81E5C00CB693A /* Score.swift in Sources */,
 				0C022BFD27A42CB300B2E88A /* SKScene+Trunk.swift in Sources */,
 				75100A6027A5CF80006ACB87 /* LittleBranch.swift in Sources */,
 				75100A6627A60054006ACB87 /* Sun.swift in Sources */,
@@ -353,23 +357,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L5C36X97NN;
+				DEVELOPMENT_TEAM = C7K95G5W2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kuma.the-seed-game";
-				PRODUCT_NAME = "The Seed Game";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiant;
+				PRODUCT_NAME = GGiant;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -381,23 +388,26 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = L5C36X97NN;
+				DEVELOPMENT_TEAM = C7K95G5W2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UIStatusBarHidden = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.kuma.the-seed-game";
-				PRODUCT_NAME = "The Seed Game";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiant;
+				PRODUCT_NAME = GGiant;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
