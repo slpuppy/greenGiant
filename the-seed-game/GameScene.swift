@@ -102,6 +102,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
  
       self.setupIntroCutscene = {
           let subtitleAnimation = SKAction.fadeOut(withDuration: 0.8)
+          
+          self.sun.node.anchorPoint = .init(x: 0.5, y: 0.5)
+          self.sun.node.position.y -= self.sun.node.size.height/2
+                                            
           let sunAnimation = SKAction.move(to: CGPoint(x: 0.0, y: self.frame.maxY + 200), duration: 1.5)
             sunAnimation.timingMode = .easeInEaseOut
           let seedAction1 = SKAction.move(to: CGPoint(x: 0.0, y: groundNode.frame.midY), duration: 0.8)
@@ -126,9 +130,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let sunNode = Sun.buildSun(frame: self.frame)
         sun = Sun.init(node: sunNode)
         sun.node.zPosition = 1
-        sun.node.position = CGPoint(x: 0, y: self.frame.minY)
-        self.addChild(sun)
         
+        sun.node.anchorPoint = .init(x: 0.5, y: 1)
+        sun.node.position = CGPoint(x: 0, y: -20)
+        self.addChild(sun)
     }
     
     func setupStartGame(){
@@ -157,7 +162,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Seta a posição o Scoreboard
         let scoreBoardLabel = Scoreboard.buildLabel()
-        scoreBoardLabel.position = CGPoint(x: 0, y: self.frame.maxY - 50)
+        print((self.view?.safeAreaInsets.top)!)
+        scoreBoardLabel.position = CGPoint(x: 0, y: self.frame.maxY - (self.view?.safeAreaInsets.top)! - 45)
         camera!.addChild(scoreBoardLabel)
         
         scoreBoard = Scoreboard(node: scoreBoardLabel)

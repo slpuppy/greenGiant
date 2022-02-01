@@ -148,12 +148,12 @@ class GameOverOverlay {
     }
     
     private func setupNodesPositions(frame: CGRect) {
-        self.gameOverTitle.position.y = frame.maxY - 100
-        self.subtitle.position.y = self.gameOverTitle.position.y - 75
+        self.gameOverTitle.position.y = frame.maxY - 120
+        self.subtitle.position.y = self.gameOverTitle.position.y - 95
         self.scoreTitle.position.y = frame.midY + 40
         self.scoreLabel.position.y = frame.midY - 20
-        self.leaderboardsLabel.position.y = frame.minY + 100
-        self.playAgainLabel.position.y = self.leaderboardsLabel.position.y + 45
+        self.leaderboardsLabel.position.y = frame.minY + 120
+        self.playAgainLabel.position.y = self.leaderboardsLabel.position.y + 65
     }
     
     private func addChildsToLabelsContainer() {
