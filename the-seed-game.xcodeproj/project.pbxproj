@@ -16,6 +16,7 @@
 		0C022BFD27A42CB300B2E88A /* SKScene+Trunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022BFC27A42CB300B2E88A /* SKScene+Trunk.swift */; };
 		0C022BFF27A42CCC00B2E88A /* Trunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022BFE27A42CCC00B2E88A /* Trunk.swift */; };
 		0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */; };
+		0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */; };
 		75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5227A58769006ACB87 /* SKScene+Branch.swift */; };
 		75100A5527A5AA81006ACB87 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5427A5AA81006ACB87 /* Background.swift */; };
 		75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5627A5AD51006ACB87 /* SKScene+Background.swift */; };
@@ -39,6 +40,7 @@
 		0C022BFC27A42CB300B2E88A /* SKScene+Trunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Trunk.swift"; sourceTree = "<group>"; };
 		0C022BFE27A42CCC00B2E88A /* Trunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trunk.swift; sourceTree = "<group>"; };
 		0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
+		0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameOverOverlay.swift"; sourceTree = "<group>"; };
 		75100A5227A58769006ACB87 /* SKScene+Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Branch.swift"; sourceTree = "<group>"; };
 		75100A5427A5AA81006ACB87 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		75100A5627A5AD51006ACB87 /* SKScene+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Background.swift"; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				75100A6727A600CF006ACB87 /* SKScene+Sun.swift */,
 				75100A5627A5AD51006ACB87 /* SKScene+Background.swift */,
 				75100A5227A58769006ACB87 /* SKScene+Branch.swift */,
+				0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 				75100A5527A5AA81006ACB87 /* Background.swift in Sources */,
 				75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */,
 				0C022BEB27A42C7B00B2E88A /* GameScene.swift in Sources */,
+				0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */,
 				75100A6827A600CF006ACB87 /* SKScene+Sun.swift in Sources */,
 				75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */,
 				75100A5927A5B51F006ACB87 /* GameStatus.swift in Sources */,

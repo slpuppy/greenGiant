@@ -22,7 +22,7 @@ class Trunk {
         
         let anchorPosition = CGPoint(
             x: node.frame.midX,
-            y: node.frame.minY
+            y: node.frame.minY + 5
         )
         
         let joint = SKPhysicsJointFixed.joint(

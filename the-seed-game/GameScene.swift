@@ -9,13 +9,11 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-    
+    var firstTrunk: Trunk!
     var lastTrunk: Trunk!
     var lastBranch: Branch!
     var gameCamera: SKCameraNode!
-    var trunkLoop: [Trunk] = []
-    var branchLoop: [Branch] = []
-    var littleBranchLoop:[LittleBranch] = []
+    var treeNodesLoop: [SKSpriteNode] = []
     var background: Background!
     var sun: Sun!
     var walls: Walls!
@@ -144,7 +142,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         walls.leftWall.physicsBody!.contactTestBitMask = walls.leftWall.physicsBody!.collisionBitMask
         walls.rightWall.physicsBody!.contactTestBitMask = walls.rightWall.physicsBody!.collisionBitMask
         // Constroi o primeiro tronco
-        let firstTrunk = Trunk.buildTrunk()
+        firstTrunk = Trunk.buildTrunk()
         firstTrunk.node.position.y = self.frame.minY
         firstTrunk.node.physicsBody?.isDynamic = false
         firstTrunk.node.zPosition = 2
@@ -155,7 +153,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
       
         self.addChild(firstTrunk)
         lastTrunk = firstTrunk
-        trunkLoop.append(firstTrunk)
+        treeNodesLoop.append(firstTrunk.node)
     }
     
     // Inicia a cena e prepara a camera
@@ -177,6 +175,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let bodyAName = contact.bodyA.node!.name!
         let bodyBName = contact.bodyB.node!.name!
+        let collisionPos = contact.contactPoint
         
         let wallsCollision = checkWallsCollision(
             bodyAName: bodyAName,
@@ -184,7 +183,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         )
         
         if wallsCollision && status != .gameOver {
-            gameOver()
+            gameOver(collisionPos: collisionPos)
         }
     }
     
@@ -200,29 +199,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return false
     }
     
-    func gameOver() {
+    func gameOver(collisionPos: CGPoint) {
+        if status == .gameOver {
+            return
+        }
+        
         status = .gameOver
-        setupGameOverOverlay()
+        setupGameOverOverlay(startsAnimationAt: collisionPos)
     }
     
-    func setupGameOverOverlay() {
-        gameOverOverlay = GameOverOverlay(frame: self.frame)
-        self.addChild(gameOverOverlay.node)
-        
-        let overlayAnimationSequence: [SKAction] = [
+    func setupGameOverOverlay(startsAnimationAt pos: CGPoint) {
+        self.run(.sequence([
+            .wait(forDuration: 0.5),
             .run({
-                self.animationRunning = true
-            }),
-            .wait(forDuration: 0.4),
-            .run({
+                self.gameOverOverlay = GameOverOverlay(frame: self.frame)
                 self.gameOverOverlay.node.position.y = self.gameCamera.position.y
-            }),
-            .fadeAlpha(to: 0.8, duration: 0.5),
-            .run({
-                self.animationRunning = false
+                self.addChild(self.gameOverOverlay.node)
+                
+                self.gameOverOverlay.runOnAppearAnimation(
+                    startPos: self.convert(pos, to: self.gameOverOverlay.node),
+                    frame: self.frame
+                )
             })
-        ]
-        gameOverOverlay.background.run(.sequence(overlayAnimationSequence))
+        ]))
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -253,16 +252,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             break
             
         case .gameOver:
-            gameOverOverlay.onTap()
+            break
+//            gameOverOverlay.onTap()
         }
     }
     
-    // Funcao que cria um novo tronco vertical eposiciona na tela
+//     Funcao que cria um novo tronco vertical eposiciona na tela
     
     func setupTrunk(pos: CGPoint){
         
         let trunk = Trunk.buildTrunk()
-        trunk.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height
+        trunk.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height - 5
         trunk.node.position.x = lastTrunk.node.position.x
         self.addChild(trunk)
         trunk.attach(to: lastTrunk, on: self.physicsWorld)
@@ -270,7 +270,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // trunk.node.zRotation = 0.1 * (pos.y < frame.midX ? -1 : 1) + lastTrunk.node.zRotation
         trunk.node.anchorPoint = .init(x: 0.5, y: 0.5)
         lastTrunk = trunk
-        trunkLoop.append(lastTrunk)
+        treeNodesLoop.append(lastTrunk.node)
     }
     
     // Funcao que cria um novo galho horizontal eposiciona na tela
@@ -284,7 +284,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         branch.node.zRotation = (pos.x < frame.midX ? (-0.33) : (0.33))
         self.addChild(branch)
         branch.attach(to: lastTrunk, on: self.physicsWorld)
-        branchLoop.append(branch)
+        treeNodesLoop.append(branch.node)
     }
     
     func setupLittleBranch(pos: CGPoint){
@@ -295,68 +295,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         littleBranch.node.zRotation = (pos.x < frame.midX ? (0.33) : (-0.33))
         self.addChild(littleBranch)
         littleBranch.attach(to: lastTrunk, on: self.physicsWorld)
-        littleBranchLoop.append(littleBranch)
+        treeNodesLoop.append(littleBranch.node)
     }
     
     func discardUselessElements() {
-        discardUselessTrunks()
-        discardUselessBranches()
-        discardUselessLittleBranches()
+        var indexToRemove: Int = -1
+        for i in 0..<treeNodesLoop.count {
+            if checkUselessElement(treeNodesLoop[i]) {
+                treeNodesLoop[i].physicsBody?.isDynamic = false
+                indexToRemove = i
+            }
+        }
+        
+        if indexToRemove != -1 {
+            for _ in 0...indexToRemove {
+                treeNodesLoop.removeFirst()
+            }
+        }
     }
     
     func checkUselessElement(_ element: SKSpriteNode) -> Bool {
-        if element.position.y < (self.gameCamera.position.y - self.frame.height*0.75) {
+        if element.position.y < (self.gameCamera.position.y - self.frame.height) {
             return true
         }
         return false
-    }
-    
-    func discardUselessTrunks() {
-        var indexToRemove: Int = -1
-        for i in 0..<trunkLoop.count {
-            if checkUselessElement(trunkLoop[i].node){
-                trunkLoop[i+1].node.physicsBody?.isDynamic = false
-                trunkLoop[i].node.removeFromParent()
-                indexToRemove = i
-            }
-        }
-        if indexToRemove != -1 {
-            for _ in 0...indexToRemove {
-                trunkLoop.removeFirst()
-            }
-        }
-    }
-    
-    func discardUselessBranches() {
-        var indexToRemove: Int = -1
-        for i in 0..<branchLoop.count {
-            if checkUselessElement(branchLoop[i].node){
-                branchLoop[i+1].node.physicsBody?.isDynamic = false
-                branchLoop[i].node.removeFromParent()
-                indexToRemove = i
-            }
-        }
-        if indexToRemove != -1 {
-            for _ in 0...indexToRemove {
-                branchLoop.removeFirst()
-            }
-        }
-    }
-    
-    func discardUselessLittleBranches() {
-        var indexToRemove: Int = -1
-        for i in 0..<littleBranchLoop.count {
-            if checkUselessElement(littleBranchLoop[i].node){
-                littleBranchLoop[i+1].node.physicsBody?.isDynamic = false
-                littleBranchLoop[i].node.removeFromParent()
-                indexToRemove = i
-            }
-        }
-        if indexToRemove != -1 {
-            for _ in 0...indexToRemove {
-                littleBranchLoop.removeFirst()
-            }
-        }
     }
     
     func touchMoved(toPoint pos : CGPoint) {
@@ -384,7 +346,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         background.update(cameraPos: gameCamera.position)
         sun.update(cameraPos: gameCamera.position)
-        
     }
 }
 
