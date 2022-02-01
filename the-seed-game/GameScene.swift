@@ -19,8 +19,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var background: Background!
     var sun: Sun!
     var walls: Walls!
+    var scoreBoard: Scoreboard!
     var setupIntroCutscene: () -> Void = {}
-   var score = Score(score: 0)
+
 
     var gameOverOverlay: GameOverOverlay!
     var animationRunning: Bool = false
@@ -157,15 +158,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lastTrunk = firstTrunk
         trunkLoop.append(firstTrunk)
         
-        // Seta o Scoreboard
-        let scoreBoard = SKLabelNode(text: "\(score.score)m")
-        scoreBoard.fontSize = 30
-        scoreBoard.zPosition = 4
-        scoreBoard.fontColor = .black
-        scoreBoard.position = CGPoint(x: 0, y: self.frame.maxY - 50)
-        camera!.addChild(scoreBoard)
+        // Seta a posição o Scoreboard
+        let scoreBoardLabel = Scoreboard.buildLabel()
+        scoreBoardLabel.position = CGPoint(x: 0, y: self.frame.maxY - 50)
+        camera!.addChild(scoreBoardLabel)
         
-       
+        scoreBoard = Scoreboard(node: scoreBoardLabel)
         
         
     }
@@ -240,17 +238,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func addScore() {
         
-        score.score = score.score + 1
-        
-        print(score.score)
-        
+        Score.shared.score += 0.8
+        scoreBoard.update()
     }
     
     func touchDown(atPoint pos : CGPoint) {
         if animationRunning {
             return
         }
-        
         switch status {
         case .intro:
             setupIntroCutscene()
@@ -259,7 +254,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             setupTrunk(pos: pos)
             setupBranch(pos: pos)
             setupLittleBranch(pos: pos)
-           addScore()
+            addScore()
             
             if lastTrunk.node.position.y > self.frame.midY {
                 let action = SKAction.move(to: CGPoint(x: 0, y: lastTrunk.node.position.y + 200), duration: 0.4)
