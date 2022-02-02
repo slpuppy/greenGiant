@@ -108,7 +108,9 @@ class GameOverOverlay {
     }
     
     static private func buildScoreLabel() -> SKLabelNode {
-        let scoreLabelNode = SKLabelNode(text: "100m")
+        let scoreString = String(format: "%.1f", Score.shared.score)
+        
+        let scoreLabelNode = SKLabelNode(text: "\(scoreString)m")
         scoreLabelNode.fontSize = 58
         scoreLabelNode.fontName = FontNames.bold
         scoreLabelNode.fontColor = UIColor(named: "greenText")

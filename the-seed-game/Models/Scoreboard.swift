@@ -29,6 +29,10 @@ class Scoreboard {
         return scoreBoard
     }
     
+    func removeScoreBoard() {
+        self.node.removeFromParent()
+    }
+    
     func update() {
         
         labelScore = Score.shared.score
