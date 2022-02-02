@@ -273,7 +273,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             .run {
                 self.animationRunning = true
             },
-            .wait(forDuration: 7),
+            .wait(forDuration: 6),
             .run {
                 self.animationRunning = false
             }
