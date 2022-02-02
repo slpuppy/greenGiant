@@ -45,6 +45,11 @@ class Walls {
         leftWall.position.y = pos.y
     }
     
+    func removeWalls() {
+        self.rightWall.removeFromParent()
+        self.leftWall.removeFromParent()
+    }
+    
     enum Names {
         static let leftWall: String = "leftWall"
         static let rightWall: String = "rightWall"

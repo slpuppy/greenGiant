@@ -15,6 +15,10 @@ class Sun {
         self.node = node
     }
     
+    func removeSun() {
+        self.node.removeFromParent()
+    }
+    
     //0,3
     func update(cameraPos: CGPoint) {
         
@@ -25,7 +29,7 @@ class Sun {
             
             node.position.y += node.frame.height/2
         }
-   }
+    }
     
     func moveWithAnimation(to pos: CGPoint) {
         let animation: SKAction = .move(to: pos, duration: 0.5)
@@ -41,8 +45,22 @@ class Sun {
         sun.position.y = frame.maxY
         
         return sun
-        
     }
 
+    func runIntroStartAnimation() {
+        // criação das animações
+        let sunAnimation = SKAction.sequence([.scale(by: 1.05, duration: 1.5), .scale(by: 1/1.05, duration: 1.5)])
+        sunAnimation.timingMode = .easeInEaseOut
+        
+        // inicialização das animações
+        self.node.run(.repeatForever(sunAnimation))
+    }
 
+    func runIntroCutsceneAnimation(frame: CGRect) {
+        let sunAnimation = SKAction.move(to: CGPoint(x: 0.0, y: frame.maxY + 200), duration: 1.5)
+          sunAnimation.timingMode = .easeInEaseOut
+        
+        
+        self.node.run(sunAnimation)
+    }
 }
