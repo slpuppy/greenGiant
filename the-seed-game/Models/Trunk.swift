@@ -43,8 +43,8 @@ class Trunk {
         let node = SKSpriteNode(imageNamed: "trunk")
         let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 12, height: 160))
         node.zPosition = 1
-        nodePhysicsBody.angularDamping = 0.4
-        nodePhysicsBody.mass = 2
+        nodePhysicsBody.angularDamping = 0.2
+        nodePhysicsBody.mass = 8
         node.physicsBody = nodePhysicsBody
         nodePhysicsBody.collisionBitMask = node.physicsBody!.collisionBitMask
         node.name = Names.trunk

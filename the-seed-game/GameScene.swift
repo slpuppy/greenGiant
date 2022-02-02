@@ -337,7 +337,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func checkUselessElement(_ element: SKSpriteNode) -> Bool {
-        if element.position.y < (self.gameCamera.position.y - self.frame.height) {
+        if element.position.y < (self.gameCamera.position.y - self.frame.height - 20 ) {
             return true
         }
         return false
