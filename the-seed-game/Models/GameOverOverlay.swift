@@ -26,7 +26,7 @@ class GameOverOverlay {
         self.circleBackground = GameOverOverlay.buildCircleBackground()
         self.labelsContainer = GameOverOverlay.buildLabelsContainer()
         self.gameOverTitle = GameOverOverlay.buildGameOverTitle()
-        self.subtitle = GameOverOverlay.buildSubtitle(text: "Remember fototropism...")
+        self.subtitle = GameOverOverlay.buildSubtitle(text: "Plants can get stressed too.")
         self.scoreTitle = GameOverOverlay.buildScoreTitle()
         self.scoreLabel = GameOverOverlay.buildScoreLabel()
         self.playAgainLabel = GameOverOverlay.buildPlayAgainLabel()

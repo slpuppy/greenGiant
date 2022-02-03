@@ -178,12 +178,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setupTrunk(pos: CGPoint){
         
         let trunk = Trunk.buildTrunk()
-        trunk.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height - 5
+        trunk.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height - 3
         trunk.node.position.x = lastTrunk.node.position.x
         self.addChild(trunk)
         trunk.attach(to: lastTrunk, on: self.physicsWorld)
         trunk.node.anchorPoint = .zero
-        // trunk.node.zRotation = 0.1 * (pos.y < frame.midX ? -1 : 1) + lastTrunk.node.zRotation
+         trunk.node.zRotation = 0.03 * (pos.x < frame.midX ? -1 : 1) + lastTrunk.node.zRotation
         trunk.node.anchorPoint = .init(x: 0.5, y: 0.5)
         lastTrunk = trunk
         treeNodesLoop.append(lastTrunk.node)
@@ -307,7 +307,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func checkUselessElement(_ element: SKSpriteNode) -> Bool {
-        if element.position.y < (self.gameCamera.position.y - self.frame.height - 20 ) {
+        if element.position.y < (self.gameCamera.position.y - self.frame.height - 50 ) {
             return true
         }
         return false

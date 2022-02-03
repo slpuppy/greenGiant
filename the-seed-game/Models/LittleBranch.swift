@@ -42,7 +42,8 @@ class LittleBranch {
         
         let node = SKSpriteNode(imageNamed: "littleBranch")
         let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 66, height: 40))
-        nodePhysicsBody.mass = 8
+        nodePhysicsBody.mass = 10
+       node.physicsBody?.angularDamping = 0.2
         node.physicsBody = nodePhysicsBody
         node.zPosition = 1
         nodePhysicsBody.contactTestBitMask = node.physicsBody!.collisionBitMask

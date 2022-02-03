@@ -30,15 +30,16 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate {
             view.presentScene(scene)
             authenticateLocalPlayer()
         }
-    }
-    
-    func leaderboardClicked() {
-        
         let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
             GameCenterVC.gameCenterDelegate = self
             present(GameCenterVC, animated: true, completion: nil)
         
     }
+    
+  
+        
+      
+    
     
     func authenticateLocalPlayer() {
         let localPlayer: GKLocalPlayer = GKLocalPlayer.local

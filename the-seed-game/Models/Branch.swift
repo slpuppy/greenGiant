@@ -44,7 +44,7 @@ class Branch {
         let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 120, height: 30))
         nodePhysicsBody.mass = 20
         node.physicsBody = nodePhysicsBody
-        nodePhysicsBody.angularDamping = 0.5
+        nodePhysicsBody.angularDamping = 0.3
         node.zPosition = 1
         nodePhysicsBody.contactTestBitMask = node.physicsBody!.collisionBitMask
         node.name = Names.branch
