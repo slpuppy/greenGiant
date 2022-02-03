@@ -318,6 +318,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         walls.removeWalls()
         scoreBoard.removeScoreBoard()
         sun.removeSun()
+        Score.shared.resetScore()
         
         setupIntro()
         setupSun()
