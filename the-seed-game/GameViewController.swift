@@ -11,11 +11,33 @@ import GameplayKit
 import GameKit
 
 
-class GameViewController: UIViewController, GKGameCenterControllerDelegate {
+class GameViewController: UIViewController, GKGameCenterControllerDelegate, GameSceneDelegate {
+    
+    
+    func updateLeaderboardScore() {
+        updateScore(with: Score.shared.score)
+    }
+    
+    
+    func leaderboardTapped() {
+          let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
+          GameCenterVC.gameCenterDelegate = self
+          present(GameCenterVC, animated: true, completion: nil)
+   }
     
     func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
         gameCenterViewController.dismiss(animated:true)
     }
+    
+    func updateScore(with value: Double)
+       {
+           if (self.gcEnabled)
+           {
+               GKLeaderboard.submitScore(Int(value), context:0, player: GKLocalPlayer.local, leaderboardIDs: [self.gcDefaultLeaderBoard], completionHandler: {error in})
+           }
+       }
+    
+  
     
     
     var gcEnabled = Bool() // Check if the user has Game Center enabled
@@ -26,6 +48,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate {
         
         if let view = self.view as! SKView? {
             let scene = GameScene()
+            scene.gameSceneDelegate = self
             scene.scaleMode = .aspectFit
             view.presentScene(scene)
             authenticateLocalPlayer()

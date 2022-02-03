@@ -7,8 +7,16 @@
 
 import SpriteKit
 import GameplayKit
+import GameKit
+
+protocol GameSceneDelegate: AnyObject {
+    func leaderboardTapped()
+    func updateLeaderboardScore()
+}
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    weak var gameSceneDelegate: GameSceneDelegate?
     var firstTrunk: Trunk!
     var lastTrunk: Trunk!
     var lastBranch: Branch!
@@ -125,8 +133,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case .gameOver:
             gameOverOverlay.onTap()
             resetGame()
+            gameSceneDelegate?.leaderboardTapped()
+            
+//            if gameOverOverlay.leaderboardsLabel.contains(pos) {
+//                gameSceneDelegate?.leaderboardTapped()
+//            }
         }
     }
+  
     
     func runIntroCutsceneAnimation() {
         intro.runCutsceneAnimation()
@@ -263,7 +277,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if status == .gameOver {
             return
         }
-        
+        gameSceneDelegate?.updateLeaderboardScore()
         status = .gameOver
         showGameOverOverlay(startsAnimationAt: collisionPos)
         resetCameraPosition(delay: 1)
