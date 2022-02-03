@@ -24,11 +24,15 @@ class Background {
         }
     }
     
-    func updateBackwards(cameraPos: CGPoint) {
+    func updateBackwards(cameraPos: CGPoint, frame: CGRect) {
         let nodeY = node.position.y
         let yChange = node.frame.height * 0.25
         
         if cameraPos.y <= yChange + nodeY {
+            if (node.position.y - node.frame.height/2) < frame.maxY {
+                node.position.y = frame.maxY
+                return
+            }
             
             node.position.y -= node.frame.height/2
         }

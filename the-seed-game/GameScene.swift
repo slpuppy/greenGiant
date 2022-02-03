@@ -418,7 +418,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func update(_ currentTime: TimeInterval) {
         if status == .gameOver {
-            background.updateBackwards(cameraPos: gameCamera.position)
+            background.updateBackwards(cameraPos: gameCamera.position, frame: self.frame)
             
             return
         }
