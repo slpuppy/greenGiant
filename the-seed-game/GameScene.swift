@@ -131,13 +131,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             break
             
         case .gameOver:
+            if gameOverOverlay.leaderboardsLabel.contains(pos) {
+                gameSceneDelegate?.leaderboardTapped()
+                return
+            }
             gameOverOverlay.onTap()
             resetGame()
-            gameSceneDelegate?.leaderboardTapped()
             
-//            if gameOverOverlay.leaderboardsLabel.contains(pos) {
-//                gameSceneDelegate?.leaderboardTapped()
-//            }
+            
         }
     }
   
