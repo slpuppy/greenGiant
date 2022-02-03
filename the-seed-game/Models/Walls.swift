@@ -23,6 +23,7 @@ class Walls {
         let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 1, height:frame.height))
         nodePhysicsBody.isDynamic = false
         node.physicsBody = nodePhysicsBody
+        nodePhysicsBody.contactTestBitMask = node.physicsBody!.collisionBitMask
         node.position.x = frame.minX
         node.name = Names.leftWall
         
@@ -34,6 +35,7 @@ class Walls {
         let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 1, height:frame.height))
         nodePhysicsBody.isDynamic = false
         node.physicsBody = nodePhysicsBody
+        nodePhysicsBody.contactTestBitMask = node.physicsBody!.collisionBitMask
         node.position.x = frame.maxX
         node.name = Names.rightWall
         

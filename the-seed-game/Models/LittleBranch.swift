@@ -46,7 +46,6 @@ class LittleBranch {
        node.physicsBody?.angularDamping = 0.2
         node.physicsBody = nodePhysicsBody
         node.zPosition = 1
-        nodePhysicsBody.contactTestBitMask = node.physicsBody!.collisionBitMask
        node.name = Names.littleBranch
         
         let littleBranch = LittleBranch(node: node)

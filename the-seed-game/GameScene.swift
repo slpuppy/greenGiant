@@ -26,14 +26,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var sun: Sun!
     var walls: Walls!
     var scoreBoard: Scoreboard!
-    
     var intro: Intro!
-
-
     var gameOverOverlay: GameOverOverlay!
     var animationRunning: Bool = false
-    
     var status: GameStatus = .intro
+    var lastUpdate: TimeInterval = 0
+    
+    var difficultyManager: DifficultyManager!
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -49,6 +48,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupCamera()
         setupBackgrounds()
         setupSun()
+        setupDifficultyManager()
         
         setupIntro()
         runIntroStartAnimation()
@@ -59,6 +59,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.size = view.frame.size
         self.backgroundColor = UIColor(named: "backgroundColor") ?? .white
         self.anchorPoint = .init(x: 0.5, y: 0.5)
+    }
+    
+    func setupDifficultyManager() {
+        difficultyManager = DifficultyManager(frame: self.frame)
     }
     
     // Prepara a camera
@@ -120,6 +124,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             runIntroCutsceneAnimation()
             setupStartGame()
         case .playing:
+            modifyDifficulty(pressedIn: pos)
             setupTrunk(pos: pos)
             setupBranch(pos: pos)
             setupLittleBranch(pos: pos)
@@ -189,6 +194,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBoard.update()
     }
     
+    func modifyDifficulty(pressedIn pos: CGPoint) {
+        difficultyManager.gameScreenTapped(in: pos, at: lastUpdate)
+    }
+    
     // Funcao que cria um novo tronco vertical eposiciona na tela
     func setupTrunk(pos: CGPoint){
         
@@ -197,8 +206,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         trunk.node.position.x = lastTrunk.node.position.x
         self.addChild(trunk)
         trunk.attach(to: lastTrunk, on: self.physicsWorld)
-        trunk.node.anchorPoint = .zero
-         trunk.node.zRotation = 0.03 * (pos.x < frame.midX ? -1 : 1) + lastTrunk.node.zRotation
+        trunk.node.anchorPoint = .init(x: 0.5, y: 0)
+        trunk.node.zRotation = (0.02 * (pos.x < frame.midX ? -1 : 1) + lastTrunk.node.zRotation) * difficultyManager.trunkZRotationMultiplier
         trunk.node.anchorPoint = .init(x: 0.5, y: 0.5)
         lastTrunk = trunk
         treeNodesLoop.append(lastTrunk.node)
@@ -208,6 +217,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setupBranch(pos: CGPoint) {
         
         let branch = Branch.buildBranch()
+        
+        branch.node.physicsBody?.mass *= difficultyManager.branchWeightMultiplier
+        
         branch.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height/2
         branch.node.position.x = (pos.x < frame.midX ? lastTrunk.node.position.x - branch.node.frame.width/2 : lastTrunk.node.position.x + branch.node.frame.width/2)
         branch.node.anchorPoint = .init(x: 0.5, y: 0.5)
@@ -278,6 +290,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if status == .gameOver {
             return
         }
+        
+        animationRunning = true
+        
         gameSceneDelegate?.updateLeaderboardScore()
         status = .gameOver
         showGameOverOverlay(startsAnimationAt: collisionPos)
@@ -285,9 +300,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         removeTreeWithAnimation(delay: 4)
         
         self.run(.sequence([
-            .run {
-                self.animationRunning = true
-            },
             .wait(forDuration: 6),
             .run {
                 self.animationRunning = false
@@ -418,8 +430,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        if lastUpdate == 0 {
+            lastUpdate = currentTime
+            return
+        }
+        
+//        let deltaTime = currentTime - lastUpdate
+        lastUpdate = currentTime
+        
         if status == .gameOver {
-            background.updateBackwards(cameraPos: gameCamera.position, frame: self.frame)
+            background.updateBackwards(
+                cameraPos: gameCamera.position,
+                frame: self.frame
+            )
             
             return
         }

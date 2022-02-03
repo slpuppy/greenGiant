@@ -17,6 +17,7 @@
 		0C022BFF27A42CCC00B2E88A /* Trunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022BFE27A42CCC00B2E88A /* Trunk.swift */; };
 		0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */; };
 		0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */; };
+		0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D127AC118D0035EC39 /* DifficultyManager.swift */; };
 		0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DC99427AAC56600EE79E8 /* Intro.swift */; };
 		0C5DC99727AACD1700EE79E8 /* SKScene+Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DC99627AACD1700EE79E8 /* SKScene+Intro.swift */; };
 		75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5227A58769006ACB87 /* SKScene+Branch.swift */; };
@@ -45,6 +46,7 @@
 		0C022BFE27A42CCC00B2E88A /* Trunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trunk.swift; sourceTree = "<group>"; };
 		0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
 		0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameOverOverlay.swift"; sourceTree = "<group>"; };
+		0C4616D127AC118D0035EC39 /* DifficultyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyManager.swift; sourceTree = "<group>"; };
 		0C5DC99427AAC56600EE79E8 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
 		0C5DC99627AACD1700EE79E8 /* SKScene+Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Intro.swift"; sourceTree = "<group>"; };
 		75100A5227A58769006ACB87 /* SKScene+Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Branch.swift"; sourceTree = "<group>"; };
@@ -91,7 +93,6 @@
 		0C022BE327A42C7B00B2E88A /* the-seed-game */ = {
 			isa = PBXGroup;
 			children = (
-				757BBD4D27A9590F00827E15 /* Singletons */,
 				0C022BFB27A42CA300B2E88A /* Utils */,
 				0C022BE427A42C7B00B2E88A /* AppDelegate.swift */,
 				75100A5827A5B51F006ACB87 /* GameStatus.swift */,
@@ -108,6 +109,16 @@
 		0C022BFB27A42CA300B2E88A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				757BBD4D27A9590F00827E15 /* Singletons */,
+				0C4616D327AC11920035EC39 /* Managers */,
+				0C4616CF27AC10ED0035EC39 /* Extensions */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		0C4616CF27AC10ED0035EC39 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
 				0C022BFC27A42CB300B2E88A /* SKScene+Trunk.swift */,
 				75100A6127A5D2D3006ACB87 /* SKScene+LittleTrunk.swift */,
 				75100A6727A600CF006ACB87 /* SKScene+Sun.swift */,
@@ -116,7 +127,15 @@
 				0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */,
 				0C5DC99627AACD1700EE79E8 /* SKScene+Intro.swift */,
 			);
-			path = Utils;
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		0C4616D327AC11920035EC39 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				0C4616D127AC118D0035EC39 /* DifficultyManager.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		75100A5E27A5CF69006ACB87 /* Models */ = {
@@ -226,6 +245,7 @@
 				757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */,
 				0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */,
 				0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */,
+				0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */,
 				75100A6827A600CF006ACB87 /* SKScene+Sun.swift in Sources */,
 				75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */,
 				75100A5927A5B51F006ACB87 /* GameStatus.swift in Sources */,
@@ -384,7 +404,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.03;
-				DEVELOPMENT_TEAM = C7K95G5W2H;
+				DEVELOPMENT_TEAM = L5C36X97NN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -415,7 +435,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.03;
-				DEVELOPMENT_TEAM = C7K95G5W2H;
+				DEVELOPMENT_TEAM = L5C36X97NN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

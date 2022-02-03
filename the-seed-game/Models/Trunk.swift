@@ -46,7 +46,6 @@ class Trunk {
         nodePhysicsBody.angularDamping = 0.8
         nodePhysicsBody.mass = 10
         node.physicsBody = nodePhysicsBody
-        nodePhysicsBody.collisionBitMask = node.physicsBody!.collisionBitMask
         node.name = Names.trunk
         
         let trunk = Trunk(node: node)
