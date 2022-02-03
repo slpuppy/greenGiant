@@ -17,4 +17,8 @@ class Score {
          
         self.score = score
      }
+    
+    func resetScore() {
+        self.score = 0
+    }
 }
