@@ -37,12 +37,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         
-//#if DEBUG
-//       view.showsPhysics = true
-//       view.showsNodeCount = true
-//       view.showsFPS = true
-//       //        self.speed = -50
-//#endif
+#if DEBUG
+       view.showsPhysics = true
+       view.showsNodeCount = true
+       view.showsFPS = true
+       //        self.speed = -50
+#endif
         
         setupScene(view: view)
         setupCamera()
@@ -254,15 +254,32 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Funcao que cria um novo tronco vertical eposiciona na tela
     func setupTrunk(pos: CGPoint){
-        
         let trunk = Trunk.buildTrunk()
-        trunk.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height - 3
-        trunk.node.position.x = lastTrunk.node.position.x
+        trunk.node.zRotation = 0.01 * (getHorizontalScreenSide(in: pos) == .right ? -1 : 1)
+        trunk.node.zRotation *= difficultyManager.trunkZRotationMultiplier
+        
+        // cria novo tronco
+        // aplica rotacao
+        // ve diferenca do centro pro bottom do novo tronco
+        
+        let currentTrunkBottomRefPosition = self.convert(
+            trunk.bottomRefNode.position,
+            from: trunk.node
+        )
+        let currentTrunkCenterPosition = trunk.node.position
+        let currentTrunkCenterOffset = currentTrunkCenterPosition - currentTrunkBottomRefPosition
+        let previousTrunkTopRefPosition = self.convert(
+            lastTrunk.topRefNode.position,
+            from: lastTrunk.node
+        )
+        let newPosition = previousTrunkTopRefPosition + currentTrunkCenterOffset
+        // posiciona novo tronco com centro em topo do anterior mais a diferenca acima
+        
+        trunk.node.position = newPosition
+        
         self.addChild(trunk)
         trunk.attach(to: lastTrunk, on: self.physicsWorld)
-        trunk.node.anchorPoint = .init(x: 0.5, y: 0)
-        trunk.node.zRotation = (0.02 * (pos.x < frame.midX ? -1 : 1) + lastTrunk.node.zRotation) * difficultyManager.trunkZRotationMultiplier
-        trunk.node.anchorPoint = .init(x: 0.5, y: 0.5)
+        
         lastTrunk = trunk
         treeNodesLoop.append(lastTrunk.node)
     }
@@ -273,11 +290,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let branch = Branch.buildBranch()
         
         branch.node.physicsBody?.mass *= difficultyManager.branchWeightMultiplier
-        
-        branch.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height/2
-        branch.node.position.x = (pos.x < frame.midX ? lastTrunk.node.position.x - branch.node.frame.width/2 : lastTrunk.node.position.x + branch.node.frame.width/2)
+        branch.node.physicsBody?.mass *= CGFloat.random(in: 1...4)
+        branch.node.position.y = lastTrunk.node.position.y + lastTrunk.node.frame.height/2 - 15
         branch.node.anchorPoint = .init(x: 0.5, y: 0.5)
-        branch.node.zRotation = (pos.x < frame.midX ? (-0.33) : (0.33))
+        
+        switch getHorizontalScreenSide(in: pos) {
+        case .left:
+            branch.node.position.x = lastTrunk.node.position.x - branch.node.frame.width/2
+            branch.node.zRotation = -0.33
+        case .right:
+            branch.node.position.x = lastTrunk.node.position.x + branch.node.frame.width/2
+            branch.node.zRotation = 0.33
+        }
+        
         self.addChild(branch)
         branch.attach(to: lastTrunk, on: self.physicsWorld)
         treeNodesLoop.append(branch.node)
@@ -292,6 +317,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(littleBranch)
         littleBranch.attach(to: lastTrunk, on: self.physicsWorld)
         treeNodesLoop.append(littleBranch.node)
+    }
+    
+    func getHorizontalScreenSide(in pos: CGPoint) -> HorizontalScreenSide {
+        if pos.x > self.frame.midX {
+            return .right
+        }
+        
+        return .left
     }
     
     func updateGameCamera() {
@@ -388,7 +421,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func checkUselessElement(_ element: SKSpriteNode) -> Bool {
-        if element.position.y < (self.gameCamera.position.y - self.frame.height - 50 ) {
+        if element.position.y < (self.gameCamera.position.y - self.frame.height) {
             return true
         }
         return false

@@ -10,8 +10,31 @@ import SpriteKit
 class Trunk {
     let node: SKSpriteNode
     
+    let topRefNode: SKNode
+    let bottomRefNode: SKNode
+    let branchLeftRefNode: SKNode
+    let branchRightRefNode: SKNode
+    let littleBranchLeftRefNode: SKNode
+    let littleBranchRightRefNode: SKNode
+    
     init(node: SKSpriteNode) {
         self.node = node
+        
+        self.topRefNode = Trunk.buildNode()
+        self.topRefNode.name = "topRef"
+        self.bottomRefNode = Trunk.buildNode()
+        self.bottomRefNode.name = "bottomRef"
+        self.branchLeftRefNode = Trunk.buildNode()
+        self.branchLeftRefNode.name = "branchLeftRef"
+        self.branchRightRefNode = Trunk.buildNode()
+        self.branchRightRefNode.name = "branchRightRef"
+        self.littleBranchLeftRefNode = Trunk.buildNode()
+        self.littleBranchLeftRefNode.name = "littleBranchLeftRef"
+        self.littleBranchRightRefNode = Trunk.buildNode()
+        self.littleBranchRightRefNode.name = "littleBranchRightRef"
+        
+        addRefNodesToNode()
+        positionRefNodes()
     }
     
     func attach(to otherTrunk: Trunk, on physicsWorld: SKPhysicsWorld) {
@@ -22,26 +45,21 @@ class Trunk {
         
         let anchorPosition = CGPoint(
             x: node.frame.midX,
-            y: node.frame.minY + 5
+            y: node.frame.maxY + 5
         )
         
         let joint = SKPhysicsJointFixed.joint(
             withBodyA: bodyA,
             bodyB: bodyB,
-            anchor: anchorPosition)
-        
-      
-        
-//        joint.lowerAngleLimit = 0.2
-//        joint.upperAngleLimit = 0.2
-        
+            anchor: anchorPosition
+        )
+    
         physicsWorld.add(joint)
-      
     }
     
     static func buildTrunk() -> Trunk {
         let node = SKSpriteNode(imageNamed: "trunk")
-        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 12, height: 160))
+        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: node.frame.width, height: node.frame.height))
         node.zPosition = 1
         nodePhysicsBody.angularDamping = 0.8
         nodePhysicsBody.mass = 10
@@ -50,6 +68,42 @@ class Trunk {
         
         let trunk = Trunk(node: node)
         return trunk
+    }
+    
+    private static func buildNode() -> SKNode {
+        return SKNode()
+    }
+    
+    private func addRefNodesToNode() {
+        self.node.addChild(self.topRefNode)
+        self.node.addChild(self.bottomRefNode)
+        self.node.addChild(self.branchLeftRefNode)
+        self.node.addChild(self.branchRightRefNode)
+        self.node.addChild(self.littleBranchLeftRefNode)
+        self.node.addChild(self.littleBranchRightRefNode)
+    }
+    
+    private func positionRefNodes() {
+        self.topRefNode.position.y = self.node.frame.maxY - 5
+        self.bottomRefNode.position.y = self.node.frame.minY + 5
+        
+        self.branchLeftRefNode.position = CGPoint(
+            x: self.node.frame.minX + 3,
+            y: self.node.frame.maxY - 25
+        )
+        self.branchRightRefNode.position = CGPoint(
+            x: self.node.frame.maxX - 3,
+            y: self.node.frame.maxY - 25
+        )
+        
+        self.littleBranchLeftRefNode.position = CGPoint(
+            x: self.node.frame.minX + 3,
+            y: self.node.frame.minY + 25
+        )
+        self.littleBranchRightRefNode.position = CGPoint(
+            x: self.node.frame.maxX - 3,
+            y: self.node.frame.minY + 25
+        )
     }
     
     enum Names {

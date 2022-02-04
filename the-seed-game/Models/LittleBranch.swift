@@ -12,10 +12,18 @@ import SpriteKit
 class LittleBranch {
     
     let node: SKSpriteNode
+    let leftRefNode: SKNode
+    let rightRefNode: SKNode
     
     
     init(node: SKSpriteNode) {
         self.node = node
+        
+        self.leftRefNode = LittleBranch.buildNode()
+        self.rightRefNode = LittleBranch.buildNode()
+        
+        addRefNodesToNode()
+        positionRefNodes()
     }
     
     func attach(to otherTrunk: Trunk, on physicsWorld: SKPhysicsWorld) {
@@ -38,19 +46,33 @@ class LittleBranch {
         physicsWorld.add(joint)
     }
     
-   static func buildLittleBranch() -> LittleBranch {
+    static func buildLittleBranch() -> LittleBranch {
         
         let node = SKSpriteNode(imageNamed: "littleBranch")
         let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 66, height: 40))
         nodePhysicsBody.mass = 10
-       node.physicsBody?.angularDamping = 0.2
+        node.physicsBody?.angularDamping = 0.2
         node.physicsBody = nodePhysicsBody
         node.zPosition = 1
-       node.name = Names.littleBranch
+        node.name = Names.littleBranch
         
         let littleBranch = LittleBranch(node: node)
         return littleBranch
         
+    }
+    
+    private static func buildNode() -> SKNode {
+        return SKNode()
+    }
+    
+    private func addRefNodesToNode() {
+        self.node.addChild(self.leftRefNode)
+        self.node.addChild(self.rightRefNode)
+    }
+    
+    private func positionRefNodes() {
+        self.leftRefNode.position.x = self.node.frame.minX + 5
+        self.rightRefNode.position.x = self.node.frame.maxX - 5
     }
     
     enum Names {

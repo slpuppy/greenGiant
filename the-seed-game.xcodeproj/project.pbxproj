@@ -18,8 +18,10 @@
 		0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */; };
 		0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */; };
 		0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D127AC118D0035EC39 /* DifficultyManager.swift */; };
+		0C4616D527AC5E890035EC39 /* HorizontalScreenSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */; };
 		0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DC99427AAC56600EE79E8 /* Intro.swift */; };
 		0C5DC99727AACD1700EE79E8 /* SKScene+Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DC99627AACD1700EE79E8 /* SKScene+Intro.swift */; };
+		0C9603E027AD55BF000F31E1 /* CGPoint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603DF27AD55BF000F31E1 /* CGPoint+.swift */; };
 		75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5227A58769006ACB87 /* SKScene+Branch.swift */; };
 		75100A5527A5AA81006ACB87 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5427A5AA81006ACB87 /* Background.swift */; };
 		75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5627A5AD51006ACB87 /* SKScene+Background.swift */; };
@@ -47,8 +49,10 @@
 		0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
 		0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameOverOverlay.swift"; sourceTree = "<group>"; };
 		0C4616D127AC118D0035EC39 /* DifficultyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyManager.swift; sourceTree = "<group>"; };
+		0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScreenSide.swift; sourceTree = "<group>"; };
 		0C5DC99427AAC56600EE79E8 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
 		0C5DC99627AACD1700EE79E8 /* SKScene+Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Intro.swift"; sourceTree = "<group>"; };
+		0C9603DF27AD55BF000F31E1 /* CGPoint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+.swift"; sourceTree = "<group>"; };
 		75100A5227A58769006ACB87 /* SKScene+Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Branch.swift"; sourceTree = "<group>"; };
 		75100A5427A5AA81006ACB87 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		75100A5627A5AD51006ACB87 /* SKScene+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Background.swift"; sourceTree = "<group>"; };
@@ -126,6 +130,7 @@
 				75100A5227A58769006ACB87 /* SKScene+Branch.swift */,
 				0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */,
 				0C5DC99627AACD1700EE79E8 /* SKScene+Intro.swift */,
+				0C9603DF27AD55BF000F31E1 /* CGPoint+.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -150,6 +155,7 @@
 				0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */,
 				757BBD4E27A9592300827E15 /* Scoreboard.swift */,
 				0C5DC99427AAC56600EE79E8 /* Intro.swift */,
+				0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -236,10 +242,12 @@
 				758812BA27A81E5C00CB693A /* Score.swift in Sources */,
 				0C022BFD27A42CB300B2E88A /* SKScene+Trunk.swift in Sources */,
 				75100A6027A5CF80006ACB87 /* LittleBranch.swift in Sources */,
+				0C4616D527AC5E890035EC39 /* HorizontalScreenSide.swift in Sources */,
 				75100A6627A60054006ACB87 /* Sun.swift in Sources */,
 				7549C06127A574CE009E993B /* Branch.swift in Sources */,
 				0C022BFF27A42CCC00B2E88A /* Trunk.swift in Sources */,
 				75100A5527A5AA81006ACB87 /* Background.swift in Sources */,
+				0C9603E027AD55BF000F31E1 /* CGPoint+.swift in Sources */,
 				75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */,
 				0C022BEB27A42C7B00B2E88A /* GameScene.swift in Sources */,
 				757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */,

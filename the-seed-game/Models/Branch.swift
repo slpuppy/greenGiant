@@ -12,10 +12,18 @@ import SpriteKit
 class Branch {
     
     let node: SKSpriteNode
+    let leftRefNode: SKNode
+    let rightRefNode: SKNode
     
     
     init(node: SKSpriteNode) {
         self.node = node
+        
+        self.leftRefNode = Branch.buildNode()
+        self.rightRefNode = Branch.buildNode()
+        
+        addRefNodesToNode()
+        positionRefNodes()
     }
     
     func attach(to otherTrunk: Trunk, on physicsWorld: SKPhysicsWorld) {
@@ -53,6 +61,19 @@ class Branch {
         
     }
     
+    private static func buildNode() -> SKNode {
+        return SKNode()
+    }
+    
+    private func addRefNodesToNode() {
+        self.node.addChild(self.leftRefNode)
+        self.node.addChild(self.rightRefNode)
+    }
+    
+    private func positionRefNodes() {
+        self.leftRefNode.position.x = self.node.frame.minX + 5
+        self.rightRefNode.position.x = self.node.frame.maxX - 5
+    }
     
     enum Names {
         static let branch: String = "branch"
