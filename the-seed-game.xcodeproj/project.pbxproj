@@ -22,6 +22,8 @@
 		0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DC99427AAC56600EE79E8 /* Intro.swift */; };
 		0C5DC99727AACD1700EE79E8 /* SKScene+Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DC99627AACD1700EE79E8 /* SKScene+Intro.swift */; };
 		0C9603E027AD55BF000F31E1 /* CGPoint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603DF27AD55BF000F31E1 /* CGPoint+.swift */; };
+		0C9603E427AEC21D000F31E1 /* GameInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603E327AEC21D000F31E1 /* GameInstructions.swift */; };
+		0C9603E627AECE27000F31E1 /* SKScene+GameInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603E527AECE27000F31E1 /* SKScene+GameInstructions.swift */; };
 		75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5227A58769006ACB87 /* SKScene+Branch.swift */; };
 		75100A5527A5AA81006ACB87 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5427A5AA81006ACB87 /* Background.swift */; };
 		75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5627A5AD51006ACB87 /* SKScene+Background.swift */; };
@@ -53,6 +55,8 @@
 		0C5DC99427AAC56600EE79E8 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
 		0C5DC99627AACD1700EE79E8 /* SKScene+Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Intro.swift"; sourceTree = "<group>"; };
 		0C9603DF27AD55BF000F31E1 /* CGPoint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+.swift"; sourceTree = "<group>"; };
+		0C9603E327AEC21D000F31E1 /* GameInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructions.swift; sourceTree = "<group>"; };
+		0C9603E527AECE27000F31E1 /* SKScene+GameInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameInstructions.swift"; sourceTree = "<group>"; };
 		75100A5227A58769006ACB87 /* SKScene+Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Branch.swift"; sourceTree = "<group>"; };
 		75100A5427A5AA81006ACB87 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		75100A5627A5AD51006ACB87 /* SKScene+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Background.swift"; sourceTree = "<group>"; };
@@ -130,6 +134,7 @@
 				75100A5227A58769006ACB87 /* SKScene+Branch.swift */,
 				0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */,
 				0C5DC99627AACD1700EE79E8 /* SKScene+Intro.swift */,
+				0C9603E527AECE27000F31E1 /* SKScene+GameInstructions.swift */,
 				0C9603DF27AD55BF000F31E1 /* CGPoint+.swift */,
 			);
 			path = Extensions;
@@ -156,6 +161,7 @@
 				757BBD4E27A9592300827E15 /* Scoreboard.swift */,
 				0C5DC99427AAC56600EE79E8 /* Intro.swift */,
 				0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */,
+				0C9603E327AEC21D000F31E1 /* GameInstructions.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -248,6 +254,7 @@
 				0C022BFF27A42CCC00B2E88A /* Trunk.swift in Sources */,
 				75100A5527A5AA81006ACB87 /* Background.swift in Sources */,
 				0C9603E027AD55BF000F31E1 /* CGPoint+.swift in Sources */,
+				0C9603E427AEC21D000F31E1 /* GameInstructions.swift in Sources */,
 				75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */,
 				0C022BEB27A42C7B00B2E88A /* GameScene.swift in Sources */,
 				757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */,
@@ -263,6 +270,7 @@
 				75100A5B27A5B5A5006ACB87 /* Walls.swift in Sources */,
 				0C022BE527A42C7B00B2E88A /* AppDelegate.swift in Sources */,
 				75100A6227A5D2D3006ACB87 /* SKScene+LittleTrunk.swift in Sources */,
+				0C9603E627AECE27000F31E1 /* SKScene+GameInstructions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,7 +420,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.04;
-				DEVELOPMENT_TEAM = C7K95G5W2H;
+				DEVELOPMENT_TEAM = L5C36X97NN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -443,7 +451,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.04;
-				DEVELOPMENT_TEAM = C7K95G5W2H;
+				DEVELOPMENT_TEAM = L5C36X97NN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

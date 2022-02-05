@@ -178,60 +178,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lastTrunk = firstTrunk
         
         // Setup da label e icons das instrucoes do game
-        let gameInstructionsLabel = SKLabelNode(text: "Tap right or left to grow")
-        gameInstructionsLabel
-            .fontSize = 18
-        gameInstructionsLabel
-            .fontName = "HelveticaNeue"
-        gameInstructionsLabel
-            .position = CGPoint(x: 0, y: self.frame.minY + 45)
-        gameInstructionsLabel
-            .fontColor = UIColor(named: "backgroundColor")
-        gameInstructionsLabel
-            .zPosition = 5
-        self.addChild(gameInstructionsLabel)
+        let gameInstructions = GameInstructions(frame: self.frame)
+        self.addChild(gameInstructions)
         
-        let gameInstructionsLeftIcon = SKShapeNode(circleOfRadius: 20)
-        let gameInstructionsRightIcon = SKShapeNode(circleOfRadius: 20)
-        gameInstructionsLeftIcon.fillColor = UIColor(named: "backgroundColor")!
-        gameInstructionsRightIcon.fillColor = UIColor(named: "backgroundColor")!
-        gameInstructionsLeftIcon.position = CGPoint(x: self.frame.minX + 40, y: self.frame.minY + 50)
-        gameInstructionsRightIcon.position = CGPoint(x: self.frame.maxX - 40, y: self.frame.minY + 50)
-        gameInstructionsLeftIcon.zPosition = 5
-        gameInstructionsRightIcon.zPosition = 5
-        gameInstructionsLeftIcon.xScale = 0
-        gameInstructionsLeftIcon.yScale = 0
-        gameInstructionsRightIcon.xScale = 0
-        gameInstructionsRightIcon.yScale = 0
-        
-        // setup das animações das instruções
-        
-        let instructionLabelAnimation = SKAction.fadeIn(withDuration: 0.8)
-      
-        let leftBallAnimationLoop = SKAction.sequence([
-            .group([
-                .scale(to: 1, duration: 0.5),
-                .fadeIn(withDuration: 0.5)]),
-            .fadeOut(withDuration: 0.5),
-            .group([.wait(forDuration: 0.1),
-                .scale(to: 0, duration: 0.1),
-                    ]),.wait(forDuration: 0.5)])
-        
-        let rightBallAnimationLoop = SKAction.sequence([
-            .wait(forDuration: 0.5),
-                .group([
-                .scale(to: 1, duration: 0.4),
-                .fadeIn(withDuration: 0.5)]),
-                .fadeOut(withDuration: 0.5),
-                .group([
-                .wait(forDuration: 0.1),
-                .scale(to: 0, duration: 0.1)])])
-        
-        self.addChild(gameInstructionsLeftIcon)
-        self.addChild(gameInstructionsRightIcon)
-        gameInstructionsLabel.run(instructionLabelAnimation)
-        gameInstructionsLeftIcon.run(.repeatForever(leftBallAnimationLoop))
-        gameInstructionsRightIcon.run(.repeatForever(rightBallAnimationLoop))
+        // Animações das instruções
+        gameInstructions.runAnimations()
 
         // Seta a posição o Scoreboard
         let scoreBoardLabel = Scoreboard.buildLabel()
