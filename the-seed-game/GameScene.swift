@@ -20,7 +20,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var firstTrunk: Trunk!
     var lastTrunk: Trunk!
     var lastBranch: Branch!
-    var gameCamera: SKCameraNode!
+    var gameCamera: GameCamera!
     var treeNodesLoop: [SKSpriteNode] = []
     var background: Background!
     var sun: Sun!
@@ -67,10 +67,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     // Prepara a camera
     func setupCamera() {
-        let camera = SKCameraNode()
-        self.gameCamera = camera
-        self.camera = camera
-        self.addChild(camera)
+        gameCamera = GameCamera()
+        self.camera = gameCamera.node
+        self.addChild(gameCamera)
     }
     
     // Prepara os backgrounds do jogo
@@ -161,8 +160,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Constroi as paredes
         let leftWall = Walls.buildLeftWall(frame: self.frame)
         let rightWall = Walls.buildRightWall(frame: self.frame)
-        self.gameCamera.addChild(leftWall)
-        self.gameCamera.addChild(rightWall)
+        gameCamera.node.addChild(leftWall)
+        gameCamera.node.addChild(rightWall)
         walls = Walls(rightWall: rightWall, leftWall: leftWall)
         
         // Constroi o primeiro tronco
@@ -187,7 +186,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Seta a posição o Scoreboard
         let scoreBoardLabel = Scoreboard.buildLabel()
         scoreBoardLabel.position = CGPoint(x: 0, y: self.frame.maxY - (self.view?.safeAreaInsets.top)! - 45)
-        camera!.addChild(scoreBoardLabel)
+        gameCamera.node.addChild(scoreBoardLabel)
         
         scoreBoard = Scoreboard(node: scoreBoardLabel)
         
@@ -208,10 +207,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let trunk = Trunk.buildTrunk()
         trunk.node.zRotation = 0.01 * (getHorizontalScreenSide(in: pos) == .right ? -1 : 1)
         trunk.node.zRotation *= difficultyManager.trunkZRotationMultiplier
-        
-        // cria novo tronco
-        // aplica rotacao
-        // ve diferenca do centro pro bottom do novo tronco
         
         let currentTrunkBottomRefPosition = self.convert(
             trunk.bottomRefNode.position,
@@ -280,14 +275,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func updateGameCamera() {
         if lastTrunk.node.position.y > self.frame.midY {
-            let action = SKAction.move(
-                to: CGPoint(x: 0, y: lastTrunk.node.position.y + 200),
-                duration: 0.4
-            )
-            action.timingMode = .easeOut
-            self.gameCamera?.run(action)
+            gameCamera.moveWithAnimation(to: CGPoint(
+                x: 0,
+                y: lastTrunk.node.position.y + 200
+            ))
             
-            self.sun.moveWithAnimation(
+            sun.moveWithAnimation(
                 to: CGPoint(x: 0, y: lastTrunk.node.position.y + 400 + self.frame.height/2)
             )
         }
@@ -347,7 +340,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func showGameOverOverlay(startsAnimationAt pos: CGPoint) {
         gameOverOverlay = GameOverOverlay(frame: self.frame)
-        gameCamera.addChild(gameOverOverlay.node)
+        gameCamera.node.addChild(gameOverOverlay.node)
         
         gameOverOverlay.runOnAppearAnimation(
             startPos: convert(pos, to: gameOverOverlay.node),
@@ -372,7 +365,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func checkUselessElement(_ element: SKSpriteNode) -> Bool {
-        if element.position.y < (self.gameCamera.position.y - self.frame.height) {
+        if element.position.y < (self.gameCamera.node.position.y - self.frame.height) {
             return true
         }
         return false
@@ -392,16 +385,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func resetCameraPosition(delay: TimeInterval) {
-        let cameraAnimation: SKAction = .move(
+        gameCamera.resetPositionWithAnimation(
             to: CGPoint(x: self.frame.midX, y: self.frame.midY),
-            duration: 3
+            delay: delay
         )
-        cameraAnimation.timingMode = .easeOut
-        
-        gameCamera.run(.sequence([
-            .wait(forDuration: delay),
-            cameraAnimation
-        ]))
     }
     
     func removeTreeWithAnimation(delay: TimeInterval) {
@@ -478,14 +465,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if status == .gameOver {
             background.updateBackwards(
-                cameraPos: gameCamera.position,
+                cameraPos: gameCamera.node.position,
                 frame: self.frame
             )
             
             return
         }
         
-        background.update(cameraPos: gameCamera.position)
+        background.update(cameraPos: gameCamera.node.position)
 //        sun.update(cameraPos: gameCamera.position)
     }
 }
