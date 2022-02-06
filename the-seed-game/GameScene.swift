@@ -17,6 +17,7 @@ protocol GameSceneDelegate: AnyObject {
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     weak var gameSceneDelegate: GameSceneDelegate?
+    var gameInstructions: GameInstructions!
     var firstTrunk: Trunk!
     var lastTrunk: Trunk!
     var lastBranch: Branch!
@@ -37,12 +38,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         
-#if DEBUG
-       view.showsPhysics = true
-       view.showsNodeCount = true
-       view.showsFPS = true
-       //        self.speed = -50
-#endif
+//#if DEBUG
+//       view.showsPhysics = true
+//       view.showsNodeCount = true
+//       view.showsFPS = true
+//       //        self.speed = -50
+//#endif
         
         setupScene(view: view)
         setupCamera()
@@ -118,11 +119,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if animationRunning {
             return
         }
+        
         switch status {
         case .intro:
             runIntroCutsceneAnimation()
             setupStartGame()
         case .playing:
+            removeGameInstructions()
             modifyDifficulty(pressedIn: pos)
             setupTrunk(pos: pos)
             setupBranch(pos: pos)
@@ -139,8 +142,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameSceneDelegate?.leaderboardTapped()
                 return
             }
-            gameOverOverlay.onTap()
-            resetGame()
+            
+            if gameOverOverlay.playAgainLabel.contains(pos) {
+                gameOverOverlay.onTapPlayAgain()
+                resetGame()
+            }
         }
     }
   
@@ -177,11 +183,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         lastTrunk = firstTrunk
         
         // Setup da label e icons das instrucoes do game
-        let gameInstructions = GameInstructions(frame: self.frame)
-        self.addChild(gameInstructions)
-        
-        // Animações das instruções
-        gameInstructions.runAnimations()
+        setupGameInstructions()
 
         // Seta a posição o Scoreboard
         let scoreBoardLabel = Scoreboard.buildLabel()
@@ -191,6 +193,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBoard = Scoreboard(node: scoreBoardLabel)
         
         treeNodesLoop.append(firstTrunk.node)
+    }
+    
+    func setupGameInstructions() {
+        gameInstructions = GameInstructions(frame: self.frame)
+        self.addChild(gameInstructions)
+        
+        // Animações das instruções
+        gameInstructions.runAnimations()
+    }
+    
+    func removeGameInstructions() {
+        gameInstructions.node.run(.sequence([
+            .fadeOut(withDuration: 1),
+            .run {
+                self.gameInstructions.node.removeFromParent()
+            }
+        ]))
     }
     
     func addScore() {
@@ -326,7 +345,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         gameSceneDelegate?.updateLeaderboardScore()
         status = .gameOver
-        showGameOverOverlay(startsAnimationAt: collisionPos)
+        showGameOverOverlay(startsAnimationAt: collisionPos, labelsAppearDelay: 3)
         resetCameraPosition(delay: 1)
         removeTreeWithAnimation(delay: 4)
         
@@ -338,13 +357,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         ]))
     }
     
-    func showGameOverOverlay(startsAnimationAt pos: CGPoint) {
+    func showGameOverOverlay(
+        startsAnimationAt pos: CGPoint,
+        labelsAppearDelay delay: TimeInterval
+    ) {
         gameOverOverlay = GameOverOverlay(frame: self.frame)
         gameCamera.node.addChild(gameOverOverlay.node)
         
         gameOverOverlay.runOnAppearAnimation(
             startPos: convert(pos, to: gameOverOverlay.node),
-            frame: self.frame
+            frame: self.frame,
+            labelsAppearDelay: 4
         )
     }
     
@@ -395,11 +418,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let allChildNodes = self.children
         var allTreeNodes: [SKNode] = []
         
+        let fadeOutAnimation: SKAction = .fadeOut(withDuration: 2)
+        fadeOutAnimation.timingMode = .easeOut
+        
         for childNode in allChildNodes.reversed() {
             if checkIfHasTreeElementName(node: childNode) {
                 childNode.run(.sequence([
                     .wait(forDuration: delay),
-                    .fadeOut(withDuration: 2)
+                    fadeOutAnimation
                 ]))
                 
                 allTreeNodes.append(childNode)

@@ -37,7 +37,7 @@ class GameOverOverlay {
         addChildsToNode()
     }
     
-    func runOnAppearAnimation(startPos: CGPoint, frame: CGRect) {
+    func runOnAppearAnimation(startPos: CGPoint, frame: CGRect, labelsAppearDelay: TimeInterval) {
         self.circleBackground.position = startPos
 
         let backgroundAnimationsGroup: [SKAction] = [
@@ -50,14 +50,14 @@ class GameOverOverlay {
         labelsFadeInAnimation.timingMode = .easeInEaseOut
         
         let labelsContainerAnimationSequence: [SKAction] = [
-            .wait(forDuration: 1.2),
+            .wait(forDuration: 1.2 + labelsAppearDelay),
             labelsFadeInAnimation
         ]
         
         self.labelsContainer.run(.sequence(labelsContainerAnimationSequence))
     }
     
-    func onTap() {
+    func onTapPlayAgain() {
         let animationSequence: [SKAction] = [
             .fadeOut(withDuration: 0.5),
             .run {
@@ -144,7 +144,6 @@ class GameOverOverlay {
         attributedString.endEditing()
         
         let leaderboardsLabelNode = SKLabelNode(attributedText: attributedString)
-
         
         return leaderboardsLabelNode
     }
