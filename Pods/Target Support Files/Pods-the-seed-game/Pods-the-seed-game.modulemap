@@ -1,0 +1,6 @@
+framework module Pods_the_seed_game {
+  umbrella header "Pods-the-seed-game-umbrella.h"
+
+  export *
+  module * { export * }
+}
