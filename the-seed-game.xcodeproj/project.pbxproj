@@ -38,6 +38,7 @@
 		7549C06127A574CE009E993B /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7549C06027A574CE009E993B /* Branch.swift */; };
 		757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757BBD4E27A9592300827E15 /* Scoreboard.swift */; };
 		758812BA27A81E5C00CB693A /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758812B927A81E5C00CB693A /* Score.swift */; };
+		9FB252E21A7E1355EB83ACF2 /* Pods_the_seed_game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940A4433604D922E5C27D433 /* Pods_the_seed_game.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +62,7 @@
 		0C9603E527AECE27000F31E1 /* SKScene+GameInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameInstructions.swift"; sourceTree = "<group>"; };
 		0C9603E727AF2837000F31E1 /* GameCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCamera.swift; sourceTree = "<group>"; };
 		0C9603E927AF2930000F31E1 /* SKScene+GameCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameCamera.swift"; sourceTree = "<group>"; };
+		4EC6E76C9C391AD77D7D8729 /* Pods-the-seed-game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-the-seed-game.release.xcconfig"; path = "Target Support Files/Pods-the-seed-game/Pods-the-seed-game.release.xcconfig"; sourceTree = "<group>"; };
 		75100A5227A58769006ACB87 /* SKScene+Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Branch.swift"; sourceTree = "<group>"; };
 		75100A5427A5AA81006ACB87 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		75100A5627A5AD51006ACB87 /* SKScene+Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Background.swift"; sourceTree = "<group>"; };
@@ -73,6 +75,8 @@
 		7549C06027A574CE009E993B /* Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
 		757BBD4E27A9592300827E15 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		758812B927A81E5C00CB693A /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		940A4433604D922E5C27D433 /* Pods_the_seed_game.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_the_seed_game.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B8F704CA60D0C1A95D98FB7B /* Pods-the-seed-game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-the-seed-game.debug.xcconfig"; path = "Target Support Files/Pods-the-seed-game/Pods-the-seed-game.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9FB252E21A7E1355EB83ACF2 /* Pods_the_seed_game.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,6 +96,8 @@
 			children = (
 				0C022BE327A42C7B00B2E88A /* the-seed-game */,
 				0C022BE227A42C7B00B2E88A /* Products */,
+				EA384D244D870DC8BCEEE9C2 /* Pods */,
+				177AFC5A85B58B7D77A42D11 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -153,6 +160,14 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		177AFC5A85B58B7D77A42D11 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				940A4433604D922E5C27D433 /* Pods_the_seed_game.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		75100A5E27A5CF69006ACB87 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +195,16 @@
 			path = Singletons;
 			sourceTree = "<group>";
 		};
+		EA384D244D870DC8BCEEE9C2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B8F704CA60D0C1A95D98FB7B /* Pods-the-seed-game.debug.xcconfig */,
+				4EC6E76C9C391AD77D7D8729 /* Pods-the-seed-game.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -187,9 +212,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0C022BF827A42C7D00B2E88A /* Build configuration list for PBXNativeTarget "the-seed-game" */;
 			buildPhases = (
+				B4CF2FC3AD88EAE1D12B26FE /* [CP] Check Pods Manifest.lock */,
 				0C022BDD27A42C7B00B2E88A /* Sources */,
 				0C022BDE27A42C7B00B2E88A /* Frameworks */,
 				0C022BDF27A42C7B00B2E88A /* Resources */,
+				CB0BCF14650B7E9F32C5A3DA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -245,6 +272,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B4CF2FC3AD88EAE1D12B26FE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-the-seed-game-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CB0BCF14650B7E9F32C5A3DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-the-seed-game/Pods-the-seed-game-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-the-seed-game/Pods-the-seed-game-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-the-seed-game/Pods-the-seed-game-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		0C022BDD27A42C7B00B2E88A /* Sources */ = {
@@ -422,6 +491,7 @@
 		};
 		0C022BF927A42C7D00B2E88A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B8F704CA60D0C1A95D98FB7B /* Pods-the-seed-game.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -453,6 +523,7 @@
 		};
 		0C022BFA27A42C7D00B2E88A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4EC6E76C9C391AD77D7D8729 /* Pods-the-seed-game.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
