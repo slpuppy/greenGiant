@@ -26,6 +26,7 @@
 		0C9603E627AECE27000F31E1 /* SKScene+GameInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603E527AECE27000F31E1 /* SKScene+GameInstructions.swift */; };
 		0C9603E827AF2837000F31E1 /* GameCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603E727AF2837000F31E1 /* GameCamera.swift */; };
 		0C9603EA27AF2930000F31E1 /* SKScene+GameCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603E927AF2930000F31E1 /* SKScene+GameCamera.swift */; };
+		0C9603FC27B2BA74000F31E1 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603FB27B2BA74000F31E1 /* MenuView.swift */; };
 		75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5227A58769006ACB87 /* SKScene+Branch.swift */; };
 		75100A5527A5AA81006ACB87 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5427A5AA81006ACB87 /* Background.swift */; };
 		75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5627A5AD51006ACB87 /* SKScene+Background.swift */; };
@@ -62,6 +63,7 @@
 		0C9603E527AECE27000F31E1 /* SKScene+GameInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameInstructions.swift"; sourceTree = "<group>"; };
 		0C9603E727AF2837000F31E1 /* GameCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCamera.swift; sourceTree = "<group>"; };
 		0C9603E927AF2930000F31E1 /* SKScene+GameCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameCamera.swift"; sourceTree = "<group>"; };
+		0C9603FB27B2BA74000F31E1 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		4EC6E76C9C391AD77D7D8729 /* Pods-the-seed-game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-the-seed-game.release.xcconfig"; path = "Target Support Files/Pods-the-seed-game/Pods-the-seed-game.release.xcconfig"; sourceTree = "<group>"; };
 		75100A5227A58769006ACB87 /* SKScene+Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Branch.swift"; sourceTree = "<group>"; };
 		75100A5427A5AA81006ACB87 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
@@ -113,10 +115,9 @@
 			isa = PBXGroup;
 			children = (
 				0C022BFB27A42CA300B2E88A /* Utils */,
+				0C9603FA27B2BA63000F31E1 /* Views */,
 				0C022BE427A42C7B00B2E88A /* AppDelegate.swift */,
 				75100A5827A5B51F006ACB87 /* GameStatus.swift */,
-				0C022BEA27A42C7B00B2E88A /* GameScene.swift */,
-				0C022BEC27A42C7B00B2E88A /* GameViewController.swift */,
 				0C022BEE27A42C7B00B2E88A /* Main.storyboard */,
 				0C022BF127A42C7D00B2E88A /* Assets.xcassets */,
 				0C022BF327A42C7D00B2E88A /* LaunchScreen.storyboard */,
@@ -158,6 +159,16 @@
 				0C4616D127AC118D0035EC39 /* DifficultyManager.swift */,
 			);
 			path = Managers;
+			sourceTree = "<group>";
+		};
+		0C9603FA27B2BA63000F31E1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0C022BEA27A42C7B00B2E88A /* GameScene.swift */,
+				0C022BEC27A42C7B00B2E88A /* GameViewController.swift */,
+				0C9603FB27B2BA74000F31E1 /* MenuView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		177AFC5A85B58B7D77A42D11 /* Frameworks */ = {
@@ -336,6 +347,7 @@
 				0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */,
 				0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */,
 				0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */,
+				0C9603FC27B2BA74000F31E1 /* MenuView.swift in Sources */,
 				75100A6827A600CF006ACB87 /* SKScene+Sun.swift in Sources */,
 				75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */,
 				75100A5927A5B51F006ACB87 /* GameStatus.swift in Sources */,

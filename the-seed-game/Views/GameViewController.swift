@@ -9,39 +9,24 @@ import UIKit
 import SpriteKit
 import GameplayKit
 import GameKit
+import SnapKit
 
 
 class GameViewController: UIViewController, GKGameCenterControllerDelegate, GameSceneDelegate {
-    
-    
-    func updateLeaderboardScore() {
-        updateScore(with: Score.shared.score)
+    func dismissMenuView() {
+        menuView.removeFromSuperview()
     }
-    
-    
-    func leaderboardTapped() {
-          let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
-          GameCenterVC.gameCenterDelegate = self
-          present(GameCenterVC, animated: true, completion: nil)
-   }
-    
-    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
-        gameCenterViewController.dismiss(animated:true)
-    }
-    
-    func updateScore(with value: Double)
-       {
-           if (self.gcEnabled)
-           {
-               GKLeaderboard.submitScore(Int(value), context:0, player: GKLocalPlayer.local, leaderboardIDs: [self.gcDefaultLeaderBoard], completionHandler: {error in})
-           }
-       }
-    
-  
     
     
     var gcEnabled = Bool() // Check if the user has Game Center enabled
     var gcDefaultLeaderBoard = String() // Check the default leaderboardID
+    
+    lazy var menuView: MenuView = {
+        let view = MenuView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,21 +37,84 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
             scene.scaleMode = .aspectFit
             view.presentScene(scene)
             authenticateLocalPlayer()
+            
         }
+        
+        
+        
+        
         let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
-            GameCenterVC.gameCenterDelegate = self
-            present(GameCenterVC, animated: true, completion: nil)
+        GameCenterVC.gameCenterDelegate = self
+        present(GameCenterVC, animated: true, completion: nil)
+        //
+    }
+    
+    func setupMenuBar(){
+        view.addSubview(menuView)
+        menuView.layer.zPosition = 10
+        menuView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
+            make.leading.equalToSuperview().offset(24)
+        }
+        print(menuView.frame)
+        menuView.muteButton.addTarget(self, action: #selector(muteTapped), for: .touchDown)
+        menuView.gameCenterButton.addTarget(self, action: #selector(gameCenterTapped), for: .touchDown)
+    }
+    
+    @objc func muteTapped() {
+        print("tapped")
         
     }
     
-  
+    @objc func gameCenterTapped() {
         
-      
+        gameCenterToggled()
+        
+    }
     
+    func gameCenterToggled() {
+        switch gcEnabled {
+        case true: gcEnabled = false
+        case false: gcEnabled = true
+        }
+    }
+    
+    func muteSong() {
+        return
+    }
+    
+    func pauseGame() {
+        return
+    }
+    
+    
+    
+    func updateLeaderboardScore() {
+        updateScore(with: Score.shared.score)
+    }
+    
+    
+    func leaderboardTapped() {
+        let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
+        GameCenterVC.gameCenterDelegate = self
+        present(GameCenterVC, animated: true, completion: nil)
+    }
+    
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated:true)
+    }
+    
+    func updateScore(with value: Double)
+    {
+        if (self.gcEnabled)
+        {
+            GKLeaderboard.submitScore(Int(value), context:0, player: GKLocalPlayer.local, leaderboardIDs: [self.gcDefaultLeaderBoard], completionHandler: {error in})
+        }
+    }
     
     func authenticateLocalPlayer() {
         let localPlayer: GKLocalPlayer = GKLocalPlayer.local
-
+        
         localPlayer.authenticateHandler = {(ViewController, error) -> Void in
             if ((ViewController) != nil) {
                 // Show game center login if player is not logged in
@@ -76,7 +124,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
                 
                 // Player is already authenticated and logged in
                 self.gcEnabled = true
-
+                
                 // Get the default leaderboard ID
                 localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
                     if error != nil {
@@ -85,7 +133,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
                     else {
                         self.gcDefaultLeaderBoard = leaderboardIdentifer!
                     }
-                 })
+                })
             }
             else {
                 // Game center is not enabled on the user's device
@@ -95,11 +143,13 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
             }
         }
     }
-
+    
+    
+    
     override var shouldAutorotate: Bool {
         return true
     }
-
+    
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
             return .allButUpsideDown
@@ -107,7 +157,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
             return .all
         }
     }
-
+    
     override var prefersStatusBarHidden: Bool {
         return true
     }
