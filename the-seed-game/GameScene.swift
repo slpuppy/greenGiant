@@ -40,12 +40,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         
-//#if DEBUG
-//       view.showsPhysics = true
-//       view.showsNodeCount = true
-//       view.showsFPS = true
-//       //        self.speed = -50
-//#endif
+#if DEBUG
+       view.showsPhysics = true
+       view.showsNodeCount = true
+       view.showsFPS = true
+       //        self.speed = -50
+#endif
         
         setupScene(view: view)
         setupCamera()
@@ -134,7 +134,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             setupLittleBranch(pos: pos)
             addScore()
             discardUselessElements()
-            gameCameraMovementVelocity += 5
             startGameCameraMovement()
             
         case .paused:
@@ -216,7 +215,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addScore() {
-        Score.shared.score += 0.8
+        if Score.shared.score.truncatingRemainder(dividingBy: 10) + 1.2 >= 10 {
+            gameCameraMovementVelocity += 5
+        }
+        Score.shared.score += 1.2
         scoreBoard.update()
     }
     
@@ -397,13 +399,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func checkUselessElement(_ element: SKSpriteNode) -> Bool {
-        if element.position.y < (self.gameCamera.node.position.y - self.frame.height) {
+        if element.position.y < (self.gameCamera.node.position.y - self.frame.height+100) {
             return true
         }
         return false
     }
     
     func resetGame() {
+        gameCameraMovementVelocity = 60
         intro.removeIntro()
         walls.removeWalls()
         scoreBoard.removeScoreBoard()
@@ -496,6 +499,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
+        if status == .playing && checkIfTreeIsBelowCamera() {
+            let bottomPosition = self.convert(lastTrunk.topRefNode.position, from: lastTrunk.node)
+            gameOver(collisionPos: bottomPosition)
+            return
+        }
+        
 //        let deltaTime = currentTime - lastUpdate
         lastUpdate = currentTime
         
@@ -510,6 +519,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         background.update(cameraPos: gameCamera.node.position)
 //        sun.update(cameraPos: gameCamera.position)
+    }
+    
+    func checkIfTreeIsBelowCamera() -> Bool {
+        let topPositionY = self.convert(lastTrunk.topRefNode.position, from: lastTrunk.node).y
+        let cameraBottomPositionY = gameCamera.node.position.y - self.frame.height/2
+        
+        if topPositionY < cameraBottomPositionY {
+            return true
+        }
+        
+        return false
     }
 }
 

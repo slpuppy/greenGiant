@@ -49,9 +49,10 @@ class Branch {
     static func buildBranch() -> Branch {
         
         let node = SKSpriteNode(imageNamed: "branch")
-//        node.scale(to: CGSize(width: node.size.width*0.8, height: node.size.height*0.8))
-        let nodePhysicsBody = SKPhysicsBody(rectangleOf: node.size)
-        nodePhysicsBody.mass = 35
+        node.scale(to: CGSize(width: node.size.width*0.8, height: node.size.height*0.8))
+//        let nodePhysicsBody = SKPhysicsBody(rectangleOf: node.size)
+        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: node.size.width, height: 5))
+        nodePhysicsBody.mass = 10
         nodePhysicsBody.angularDamping = 0.3
         node.physicsBody = nodePhysicsBody
         node.zPosition = 1

@@ -59,6 +59,7 @@ class Trunk {
     
     static func buildTrunk() -> Trunk {
         let node = SKSpriteNode(imageNamed: "trunk")
+//        node.scale(to: CGSize(width: node.size.width*0.8, height: node.size.height*0.8))
         let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: node.frame.width, height: node.frame.height))
         node.zPosition = 1
         nodePhysicsBody.angularDamping = 0.8
@@ -84,8 +85,8 @@ class Trunk {
     }
     
     private func positionRefNodes() {
-        self.topRefNode.position.y = self.node.frame.maxY - 5
-        self.bottomRefNode.position.y = self.node.frame.minY + 5
+        self.topRefNode.position.y = self.node.frame.maxY
+        self.bottomRefNode.position.y = self.node.frame.minY
         
         self.branchLeftRefNode.position = CGPoint(
             x: self.node.frame.minX + 3,
