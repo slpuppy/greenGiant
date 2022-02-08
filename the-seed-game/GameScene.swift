@@ -35,6 +35,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var difficultyManager: DifficultyManager!
     
+    var gameCameraMovementVelocity: CGFloat = 60
+    
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         
@@ -100,7 +102,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         sun.node.anchorPoint = .init(x: 0.5, y: 1)
         sun.node.position = CGPoint(x: 0, y: -20)
-        self.addChild(sun)
+        gameCamera.node.addChild(sun.node)
     }
     
     // Prepara a cena de introdução do jogo
@@ -131,8 +133,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             setupBranch(pos: pos)
             setupLittleBranch(pos: pos)
             addScore()
-            updateGameCamera()
             discardUselessElements()
+            gameCameraMovementVelocity += 5
+            startGameCameraMovement()
             
         case .paused:
             break
@@ -293,16 +296,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updateGameCamera() {
-        if lastTrunk.node.position.y > self.frame.midY {
-            gameCamera.moveWithAnimation(to: CGPoint(
-                x: 0,
-                y: lastTrunk.node.position.y + 200
-            ))
-            
-            sun.moveWithAnimation(
-                to: CGPoint(x: 0, y: lastTrunk.node.position.y + 400 + self.frame.height/2)
-            )
-        }
+//        if lastTrunk.node.position.y > self.frame.midY {
+//            gameCamera.moveWithAnimation(to: CGPoint(
+//                x: 0,
+//                y: lastTrunk.node.position.y + 200
+//            ))
+//
+//            sun.moveWithAnimation(
+//                to: CGPoint(x: 0, y: lastTrunk.node.position.y + 400 + self.frame.height/2)
+//            )
+//        }
+    }
+    
+    func startGameCameraMovement() {
+        gameCamera.node.removeAllActions()
+        gameCamera.startGameCameraMovement(velocity: gameCameraMovementVelocity)
+        
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -408,6 +417,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func resetCameraPosition(delay: TimeInterval) {
+        gameCamera.node.removeAllActions()
         gameCamera.resetPositionWithAnimation(
             to: CGPoint(x: self.frame.midX, y: self.frame.midY),
             delay: delay

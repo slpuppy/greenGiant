@@ -24,6 +24,14 @@ class GameCamera {
         self.node.run(action)
     }
     
+    func startGameCameraMovement(velocity: CGFloat) {
+        self.node.run(
+            .repeatForever(
+                .move(by: CGVector(dx: 0, dy: velocity), duration: 1)
+            )
+        )
+    }
+    
     func resetPositionWithAnimation(to pos: CGPoint, delay: TimeInterval = 0) {
         let cameraAnimation: SKAction = .move(
             to: pos,

@@ -49,7 +49,8 @@ class LittleBranch {
     static func buildLittleBranch() -> LittleBranch {
         
         let node = SKSpriteNode(imageNamed: "littleBranch")
-        let nodePhysicsBody = SKPhysicsBody(rectangleOf: CGSize(width: 66, height: 40))
+//        node.scale(to: CGSize(width: node.size.width*0.8, height: node.size.height*0.8))
+        let nodePhysicsBody = SKPhysicsBody(rectangleOf: node.size)
         nodePhysicsBody.mass = 10
         node.physicsBody?.angularDamping = 0.2
         node.physicsBody = nodePhysicsBody
