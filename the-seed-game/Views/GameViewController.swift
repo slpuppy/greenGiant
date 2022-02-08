@@ -12,12 +12,15 @@ import GameKit
 import SnapKit
 
 
+
+
 class GameViewController: UIViewController, GKGameCenterControllerDelegate, GameSceneDelegate {
+    
     func dismissMenuView() {
         menuView.removeFromSuperview()
     }
     
-    
+   
     var gcEnabled = Bool() // Check if the user has Game Center enabled
     var gcDefaultLeaderBoard = String() // Check the default leaderboardID
     
@@ -30,6 +33,9 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        MusicPlayer.shared.startBackgroundMusic()
+        MusicPlayer.shared.audioPlayer?.volume = 0.3
+        
         
         if let view = self.view as! SKView? {
             let scene = GameScene()
@@ -58,26 +64,51 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         }
         print(menuView.frame)
         menuView.muteButton.addTarget(self, action: #selector(muteTapped), for: .touchDown)
-        menuView.gameCenterButton.addTarget(self, action: #selector(gameCenterTapped), for: .touchDown)
+        menuView.pauseButton.addTarget(self, action: #selector(pauseTapped), for: .touchDown)
+        
     }
     
     @objc func muteTapped() {
-        print("tapped")
-        
-    }
-    
-    @objc func gameCenterTapped() {
-        
-        gameCenterToggled()
-        
-    }
-    
-    func gameCenterToggled() {
-        switch gcEnabled {
-        case true: gcEnabled = false
-        case false: gcEnabled = true
+        if MusicPlayer.shared.audioPlayer?.volume != 0 {
+           MusicPlayer.shared.audioPlayer?.volume = 0
+           menuView.muteButton.tintColor = UIColor(named: "scoreColor")
+        } else {
+            menuView.muteButton.tintColor = .systemGray2
+            MusicPlayer.shared.audioPlayer?.volume = 0.3
         }
+        
     }
+    
+    @objc func pauseTapped() {
+        
+        
+         if let view = self.view as! SKView?,
+         let gameScene = view.scene as? GameScene {
+            gameScene.isPaused.toggle()
+            playOrPause()
+             if gameScene.isPaused == true {
+                 menuView.pauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                 menuView.pauseButton.tintColor = UIColor(named: "scoreColor")
+             } else {
+                 menuView.pauseButton.setImage(UIImage(systemName: "pause"), for: .normal)
+                 menuView.pauseButton.tintColor = .systemGray2
+             }
+        }
+        
+       
+        
+    }
+    
+    func playOrPause() {
+        if MusicPlayer.shared.audioPlayer?.volume == 0.3 {
+            MusicPlayer.shared.audioPlayer?.setVolume(0.03, fadeDuration: 0.3)
+        } else {
+            MusicPlayer.shared.audioPlayer?.setVolume(0.3, fadeDuration: 0.3)
+        }
+        
+    }
+    
+    
     
     func muteSong() {
         return

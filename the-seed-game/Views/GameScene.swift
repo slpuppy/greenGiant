@@ -10,6 +10,7 @@ import GameplayKit
 import GameKit
 
 protocol GameSceneDelegate: AnyObject {
+    
     func leaderboardTapped()
     func updateLeaderboardScore()
     func dismissMenuView()
@@ -17,6 +18,8 @@ protocol GameSceneDelegate: AnyObject {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+   
+    
     
     weak var gameSceneDelegate: GameSceneDelegate?
     var gameInstructions: GameInstructions!
@@ -54,10 +57,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupBackgrounds()
         setupSun()
         setupDifficultyManager()
-        
         setupIntro()
         runIntroStartAnimation()
     }
+    
+    
     
     // Prepara a cena
     func setupScene(view: SKView) {
@@ -123,13 +127,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if animationRunning {
             return
         }
-        
         switch status {
         case .intro:
             runIntroCutsceneAnimation()
             setupStartGame()
             gameSceneDelegate?.setupMenuBar()
         case .playing:
+            if self.scene?.isPaused != true {
             removeGameInstructions()
             modifyDifficulty(pressedIn: pos)
             setupTrunk(pos: pos)
@@ -138,6 +142,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             addScore()
             discardUselessElements()
             startGameCameraMovement()
+            } else {
+                break
+            }
             
         case .paused:
             break

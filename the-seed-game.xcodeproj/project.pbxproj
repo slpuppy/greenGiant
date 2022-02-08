@@ -39,6 +39,8 @@
 		7549C06127A574CE009E993B /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7549C06027A574CE009E993B /* Branch.swift */; };
 		757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757BBD4E27A9592300827E15 /* Scoreboard.swift */; };
 		758812BA27A81E5C00CB693A /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758812B927A81E5C00CB693A /* Score.swift */; };
+		75EAA84A27B2CD1E00FFC8EF /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */; };
+		75EAA84C27B2CD8600FFC8EF /* background.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 75EAA84B27B2CD8600FFC8EF /* background.mp3 */; };
 		9FB252E21A7E1355EB83ACF2 /* Pods_the_seed_game.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 940A4433604D922E5C27D433 /* Pods_the_seed_game.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +79,8 @@
 		7549C06027A574CE009E993B /* Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
 		757BBD4E27A9592300827E15 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		758812B927A81E5C00CB693A /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
+		75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
+		75EAA84B27B2CD8600FFC8EF /* background.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = background.mp3; sourceTree = "<group>"; };
 		940A4433604D922E5C27D433 /* Pods_the_seed_game.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_the_seed_game.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8F704CA60D0C1A95D98FB7B /* Pods-the-seed-game.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-the-seed-game.debug.xcconfig"; path = "Target Support Files/Pods-the-seed-game/Pods-the-seed-game.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -120,6 +124,7 @@
 				75100A5827A5B51F006ACB87 /* GameStatus.swift */,
 				0C022BEE27A42C7B00B2E88A /* Main.storyboard */,
 				0C022BF127A42C7D00B2E88A /* Assets.xcassets */,
+				75EAA84B27B2CD8600FFC8EF /* background.mp3 */,
 				0C022BF327A42C7D00B2E88A /* LaunchScreen.storyboard */,
 				75100A5E27A5CF69006ACB87 /* Models */,
 			);
@@ -202,6 +207,7 @@
 			isa = PBXGroup;
 			children = (
 				758812B927A81E5C00CB693A /* Score.swift */,
+				75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */,
 			);
 			path = Singletons;
 			sourceTree = "<group>";
@@ -275,6 +281,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75EAA84C27B2CD8600FFC8EF /* background.mp3 in Resources */,
 				0C022BF027A42C7B00B2E88A /* Main.storyboard in Resources */,
 				0C022BF227A42C7D00B2E88A /* Assets.xcassets in Resources */,
 				0C022BF527A42C7D00B2E88A /* LaunchScreen.storyboard in Resources */,
@@ -338,6 +345,7 @@
 				7549C06127A574CE009E993B /* Branch.swift in Sources */,
 				0C022BFF27A42CCC00B2E88A /* Trunk.swift in Sources */,
 				75100A5527A5AA81006ACB87 /* Background.swift in Sources */,
+				75EAA84A27B2CD1E00FFC8EF /* MusicPlayer.swift in Sources */,
 				0C9603E027AD55BF000F31E1 /* CGPoint+.swift in Sources */,
 				0C9603E427AEC21D000F31E1 /* GameInstructions.swift in Sources */,
 				75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */,
@@ -508,8 +516,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.04;
-				DEVELOPMENT_TEAM = L5C36X97NN;
+				CURRENT_PROJECT_VERSION = 1.07;
+				DEVELOPMENT_TEAM = C7K95G5W2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -540,8 +548,8 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.04;
-				DEVELOPMENT_TEAM = L5C36X97NN;
+				CURRENT_PROJECT_VERSION = 1.07;
+				DEVELOPMENT_TEAM = C7K95G5W2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

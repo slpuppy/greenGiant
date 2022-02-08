@@ -10,19 +10,11 @@ import SnapKit
 
 class MenuView: UIView {
     
-    lazy var gameCenterButton: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(systemName: "gamecontroller"), for: .normal)
-        button.tintColor = .black
-        button.imageView?.contentMode = .scaleAspectFit
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
     
     lazy var muteButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "speaker.slash"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = .systemGray2
         button.imageView?.contentMode = .scaleAspectFit
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -31,7 +23,7 @@ class MenuView: UIView {
     lazy var pauseButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "pause"), for: .normal)
-        button.tintColor = .black
+        button.tintColor = .systemGray2
         button.imageView?.contentMode = .scaleAspectFit
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -58,14 +50,14 @@ class MenuView: UIView {
     func setupMenuBarItems() {
        
         self.addSubview(muteButton)
-        self.addSubview(gameCenterButton)
+        self.addSubview(pauseButton)
       
         
         muteButton.imageView?.snp.makeConstraints({ make in
             make.size.equalTo(28)
         })
         
-        gameCenterButton.imageView?.snp.makeConstraints({ make in
+        pauseButton.imageView?.snp.makeConstraints({ make in
             make.size.equalTo(32)
         })
         
@@ -75,15 +67,15 @@ class MenuView: UIView {
             make.centerX.equalTo(self.snp_centerXWithinMargins)
 //            make.leading.equalTo(self.snp_leadingMargin).offset(6)
 //            make.trailing.equalTo(self.snp_trailingMargin).offset(-6)
-            make.size.equalTo(28)
+            make.size.equalTo(30)
         }
-        gameCenterButton.snp.makeConstraints { make in
+        pauseButton.snp.makeConstraints { make in
             make.top.equalTo(muteButton.snp_bottomMargin).offset(32)
             make.centerX.equalTo(self.snp_centerXWithinMargins)
             make.bottom.equalTo(self.snp_bottomMargin).offset(-6)
             make.leading.equalTo(self.snp_leadingMargin).offset(6)
             make.trailing.equalTo(self.snp_trailingMargin).offset(-6)
-            make.size.equalTo(32)
+            make.size.equalTo(30)
         }
         
     }
