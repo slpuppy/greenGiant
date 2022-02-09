@@ -225,8 +225,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addScore() {
-        if Score.shared.score.truncatingRemainder(dividingBy: 10) + 1.2 >= 10 {
-            gameCameraMovementVelocity += 5
+        if Score.shared.score.truncatingRemainder(dividingBy: 5) + 1.2 >= 5 {
+            gameCameraMovementVelocity += 7
         }
         Score.shared.score += 1.2
         scoreBoard.update()

@@ -62,7 +62,6 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
             make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
             make.leading.equalToSuperview().offset(24)
         }
-        print(menuView.frame)
         menuView.muteButton.addTarget(self, action: #selector(muteTapped), for: .touchDown)
         menuView.pauseButton.addTarget(self, action: #selector(pauseTapped), for: .touchDown)
         
