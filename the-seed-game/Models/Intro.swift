@@ -13,6 +13,7 @@ class Intro {
     let seed: SKSpriteNode
     let title: SKSpriteNode
     let subtitle: SKLabelNode
+    let upBranch: Branch
     
     init(frame: CGRect) {
         // criação dos elementos
@@ -21,6 +22,7 @@ class Intro {
         self.seed = Intro.buildSeed(from: frame)
         self.title = Intro.buildTitle(from: frame)
         self.subtitle = Intro.buildSubtitle(from: frame)
+        self.upBranch = Intro.buildBranch()
         
         addChildsToNode()
     }
@@ -33,11 +35,13 @@ class Intro {
         runSeedCutsceneAnimation()
         runTitleCutsceneAnimation()
         runSubtitleCutsceneAnimation()
+        runUpBranchCutsceneAnimation()
     }
     
     func removeIntro() {
         self.node.removeFromParent()
     }
+    
     
     static private func buildGround(from frame: CGRect) -> SKSpriteNode {
         let groundNode = SKSpriteNode(imageNamed: "ground")
@@ -81,12 +85,27 @@ class Intro {
         return subtitleNode
     }
     
+    static private func buildBranch() -> Branch {
+        let branch = Branch.buildBranch()
+        let scaleMultiplier = 3.0
+        branch.node.scale(to: CGSize(width: (branch.node.size.width * scaleMultiplier), height: (branch.node.size.height * scaleMultiplier)))
+        branch.node.position.y = 180
+        branch.node.physicsBody = nil
+        return branch
+    }
+    
     private func addChildsToNode() {
         self.node.addChild(self.ground)
         self.node.addChild(self.seed)
         self.node.addChild(self.title)
         self.node.addChild(self.subtitle)
+        self.node.addChild(self.upBranch.node)
     }
+    
+    private func runUpBranchCutsceneAnimation() {
+        let upBranchAnimation = SKAction.fadeOut(withDuration: 0.8)
+        upBranch.node.run(upBranchAnimation)
+   }
     
     private func runSeedAnimation() {
         let seedAnimation = SKAction.sequence([.scale(by: 1.1, duration: 0.5), .scale(by: 1/1.1, duration: 0.5)])

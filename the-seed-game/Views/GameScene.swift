@@ -115,6 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func setupIntro() {
         intro = Intro(frame: self.frame)
         self.addChild(intro)
+        
     }
     
     // Roda as animações do começo do jogo
