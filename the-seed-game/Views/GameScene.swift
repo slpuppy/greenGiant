@@ -8,7 +8,6 @@
 import SpriteKit
 import GameplayKit
 import GameKit
-import FirebaseCrashlytics
 
 protocol GameSceneDelegate: AnyObject {
     
@@ -124,6 +123,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         GameCrashlytics.shared.logTap(at: pos, at: lastUpdate)
         
         if animationRunning {
+            GameAnalytics.shared.logTappedWhenAnimationWasRunning(at: pos, gameState: status)
             return
         }
         
@@ -333,12 +333,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let bodyBName = contact.bodyB.node!.name!
         let collisionPos = contact.contactPoint
         
-        let wallsCollision = checkWallsCollision(
+        let isWallsCollision = checkWallsCollision(
             bodyAName: bodyAName,
             bodyBName: bodyBName
         )
         
-        if wallsCollision && status != .gameOver {
+        if isWallsCollision && status != .gameOver {
+            GameAnalytics.shared.logGameOver(cause: .wallCrash)
+            
             gameOver(collisionPos: collisionPos)
         }
     }
@@ -508,9 +510,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        GameCrashlytics.shared.updateValueKeys(gameState: status)
+        GameCrashlytics.shared.updateKeysValues(gameState: status)
         
         if status == .playing && checkIfTreeIsBelowCamera() {
+            GameAnalytics.shared.logGameOver(cause: .bottomOverlaps)
+            
             let bottomPosition = self.convert(lastTrunk.topRefNode.position, from: lastTrunk.node)
             gameOver(collisionPos: bottomPosition)
             return
@@ -528,7 +532,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         background.update(cameraPos: gameCamera.node.position)
-//        sun.update(cameraPos: gameCamera.position)
     }
     
     func checkIfTreeIsBelowCamera() -> Bool {
