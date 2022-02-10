@@ -8,6 +8,7 @@
 import SpriteKit
 import GameplayKit
 import GameKit
+import FirebaseCrashlytics
 
 protocol GameSceneDelegate: AnyObject {
     
@@ -18,9 +19,6 @@ protocol GameSceneDelegate: AnyObject {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-   
-    
-    
     weak var gameSceneDelegate: GameSceneDelegate?
     var gameInstructions: GameInstructions!
     var firstTrunk: Trunk!
@@ -60,8 +58,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupIntro()
         runIntroStartAnimation()
     }
-    
-    
     
     // Prepara a cena
     func setupScene(view: SKView) {
@@ -125,9 +121,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchDown(atPoint pos : CGPoint) {
+        GameCrashlytics.shared.logTap(at: pos, at: lastUpdate)
+        
         if animationRunning {
             return
         }
+        
         switch status {
         case .intro:
             runIntroCutsceneAnimation()
@@ -135,16 +134,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameSceneDelegate?.setupMenuBar()
         case .playing:
             if self.scene?.isPaused != true {
-            removeGameInstructions()
-            modifyDifficulty(pressedIn: pos)
-            setupTrunk(pos: pos)
-            setupBranch(pos: pos)
-            setupLittleBranch(pos: pos)
-            addScore()
-            discardUselessElements()
-            startGameCameraMovement()
-            } else {
-                break
+                removeGameInstructions()
+                modifyDifficulty(pressedIn: pos)
+                setupTrunk(pos: pos)
+                setupBranch(pos: pos)
+                setupLittleBranch(pos: pos)
+                addScore()
+                discardUselessElements()
+                startGameCameraMovement()
             }
             
         case .paused:
@@ -511,13 +508,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
+        GameCrashlytics.shared.updateValueKeys(gameState: status)
+        
         if status == .playing && checkIfTreeIsBelowCamera() {
             let bottomPosition = self.convert(lastTrunk.topRefNode.position, from: lastTrunk.node)
             gameOver(collisionPos: bottomPosition)
             return
         }
         
-//        let deltaTime = currentTime - lastUpdate
         lastUpdate = currentTime
         
         if status == .gameOver {

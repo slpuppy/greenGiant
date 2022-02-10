@@ -9,10 +9,8 @@ import Foundation
 
 
 enum GameStatus {
-    
     case intro
     case playing
     case paused
     case gameOver
-    
 }
