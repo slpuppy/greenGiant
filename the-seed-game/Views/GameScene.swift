@@ -10,7 +10,6 @@ import GameplayKit
 import GameKit
 
 protocol GameSceneDelegate: AnyObject {
-    
     func leaderboardTapped()
     func updateLeaderboardScore()
     func dismissMenuView()
@@ -18,9 +17,6 @@ protocol GameSceneDelegate: AnyObject {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
-   
-    
-    
     weak var gameSceneDelegate: GameSceneDelegate?
     var gameInstructions: GameInstructions!
     var firstTrunk: Trunk!
@@ -41,16 +37,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var difficultyManager: DifficultyManager!
     
     var gameCameraMovementVelocity: CGFloat = 60
+    var playerCanPlay: Bool = true
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         
-//#if DEBUG
-//       view.showsPhysics = true
-//       view.showsNodeCount = true
-//       view.showsFPS = true
-//       //        self.speed = -50
-//#endif
+        //#if DEBUG
+        //       view.showsPhysics = true
+        //       view.showsNodeCount = true
+        //       view.showsFPS = true
+        //       //        self.speed = -50
+        //#endif
         
         setupScene(view: view)
         setupCamera()
@@ -60,8 +57,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupIntro()
         runIntroStartAnimation()
     }
-    
-    
     
     // Prepara a cena
     func setupScene(view: SKView) {
@@ -135,14 +130,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             gameSceneDelegate?.setupMenuBar()
         case .playing:
             if self.scene?.isPaused != true {
-            removeGameInstructions()
-            modifyDifficulty(pressedIn: pos)
-            setupTrunk(pos: pos)
-            setupBranch(pos: pos)
-            setupLittleBranch(pos: pos)
-            addScore()
-            discardUselessElements()
-            startGameCameraMovement()
+                if !playerCanPlay {
+                    break
+                }
+                
+                removeGameInstructions()
+                modifyDifficulty(pressedIn: pos)
+                setupTrunk(pos: pos)
+                setupBranch(pos: pos)
+                setupLittleBranch(pos: pos)
+                addScore()
+                discardUselessElements()
+                startGameCameraMovement()
             } else {
                 break
             }
@@ -162,7 +161,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-  
     
     func runIntroCutsceneAnimation() {
         intro.runCutsceneAnimation()
@@ -188,7 +186,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         firstTrunk.node.position.y = self.frame.minY
         firstTrunk.node.physicsBody?.isDynamic = false
         firstTrunk.node.zPosition = 2
-       
+        
         let firstTrunkAnimation = SKAction.move(to: CGPoint(x: 0, y: self.frame.minY + 80), duration: 0.5)
         firstTrunkAnimation.timingMode = .easeIn
         firstTrunk.node.run(.sequence([.wait(forDuration: 0.5), firstTrunkAnimation]))
@@ -197,7 +195,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         // Setup da label e icons das instrucoes do game
         setupGameInstructions()
-
+        
         // Seta a posição o Scoreboard
         let scoreBoardLabel = Scoreboard.buildLabel()
         scoreBoardLabel.position = CGPoint(x: 0, y: self.frame.maxY - (self.view?.safeAreaInsets.top)! - 45)
@@ -233,12 +231,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBoard.update()
     }
     
+    func decreaseScore(by value: Double) {
+        Score.shared.score -= value
+        scoreBoard.update()
+    }
+    
     func modifyDifficulty(pressedIn pos: CGPoint) {
         difficultyManager.gameScreenTapped(in: pos, at: lastUpdate)
     }
     
     // Funcao que cria um novo tronco vertical eposiciona na tela
-    func setupTrunk(pos: CGPoint){
+    func setupTrunk(pos: CGPoint) {
         let trunk = Trunk.buildTrunk()
         trunk.node.zRotation = 0.01 * (getHorizontalScreenSide(in: pos) == .right ? -1 : 1)
         trunk.node.zRotation *= difficultyManager.trunkZRotationMultiplier
@@ -306,19 +309,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         return .left
-    }
-    
-    func updateGameCamera() {
-//        if lastTrunk.node.position.y > self.frame.midY {
-//            gameCamera.moveWithAnimation(to: CGPoint(
-//                x: 0,
-//                y: lastTrunk.node.position.y + 200
-//            ))
-//
-//            sun.moveWithAnimation(
-//                to: CGPoint(x: 0, y: lastTrunk.node.position.y + 400 + self.frame.height/2)
-//            )
-//        }
     }
     
     func startGameCameraMovement() {
@@ -517,7 +507,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-//        let deltaTime = currentTime - lastUpdate
+        if status == .playing && Score.shared.score > 0 && checkIfReachedSun() {
+            reachedSunPenality()
+        }
+
+        if status == .playing && !playerCanPlay && checkIfCanRemoveSunPenality() {
+            removeSunPenality()
+        }
+        
         lastUpdate = currentTime
         
         if status == .gameOver {
@@ -530,18 +527,45 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         background.update(cameraPos: gameCamera.node.position)
-//        sun.update(cameraPos: gameCamera.position)
     }
     
     func checkIfTreeIsBelowCamera() -> Bool {
         let topPositionY = self.convert(lastTrunk.topRefNode.position, from: lastTrunk.node).y
         let cameraBottomPositionY = gameCamera.node.position.y - self.frame.height/2
         
-        if topPositionY < cameraBottomPositionY {
-            return true
+        return topPositionY < cameraBottomPositionY
+    }
+    
+    func checkIfReachedSun() -> Bool {
+        let topPositionSceneCoordinates = self.convert(
+            lastTrunk.topRefNode.position,
+            from: lastTrunk.node
+        )
+        let topPositionCameraCoordinates = gameCamera.node.convert(
+            topPositionSceneCoordinates,
+            from: self
+        )
+        
+        return sun.node.contains(topPositionCameraCoordinates)
+    }
+    
+    func checkIfCanRemoveSunPenality() -> Bool {
+        let trunkTopPosition = self.convert(lastTrunk.topRefNode.position, from: lastTrunk.node)
+        
+        return trunkTopPosition.y <= gameCamera.node.position.y
+    }
+    
+    func reachedSunPenality() {
+        if !playerCanPlay {
+            return
         }
         
-        return false
+        decreaseScore(by: 3.6)
+        playerCanPlay = false
+    }
+    
+    func removeSunPenality() {
+        playerCanPlay = true
     }
 }
 
