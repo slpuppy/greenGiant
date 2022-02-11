@@ -15,6 +15,7 @@ protocol GameSceneDelegate: AnyObject {
     func updateLeaderboardScore()
     func dismissMenuView()
     func setupMenuBar()
+    func displayAd()
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -375,6 +376,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.run(.sequence([
             .wait(forDuration: 6),
             .run {
+                self.gameSceneDelegate?.displayAd()
                 self.animationRunning = false
             }
         ]))

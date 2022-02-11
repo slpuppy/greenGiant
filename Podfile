@@ -8,4 +8,5 @@ target 'the-seed-game' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Crashlytics'
   pod 'SnapKit', '~> 5.0.0' 
+  pod 'Google-Mobile-Ads-SDK'
 end

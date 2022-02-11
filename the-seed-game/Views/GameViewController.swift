@@ -10,17 +10,17 @@ import SpriteKit
 import GameplayKit
 import GameKit
 import SnapKit
-
-
-
+import GoogleMobileAds
 
 class GameViewController: UIViewController, GKGameCenterControllerDelegate, GameSceneDelegate {
+    
+    
+    let adManager = AdManager()
     
     func dismissMenuView() {
         menuView.removeFromSuperview()
     }
     
-   
     var gcEnabled = Bool() // Check if the user has Game Center enabled
     var gcDefaultLeaderBoard = String() // Check the default leaderboardID
     
@@ -30,12 +30,10 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         return view
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         MusicPlayer.shared.startBackgroundMusic()
         MusicPlayer.shared.audioPlayer?.volume = 0.3
-        
         
         if let view = self.view as! SKView? {
             let scene = GameScene()
@@ -43,17 +41,17 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
             scene.scaleMode = .aspectFit
             view.presentScene(scene)
             authenticateLocalPlayer()
-            
         }
-        
-        
-        
-        
         let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
         GameCenterVC.gameCenterDelegate = self
         present(GameCenterVC, animated: true, completion: nil)
-        //
+        
+        // Ad resquest
+        
+        adManager.initialize()
+        
     }
+    
     
     func setupMenuBar(){
         view.addSubview(menuView)
@@ -64,38 +62,37 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         }
         menuView.muteButton.addTarget(self, action: #selector(muteTapped), for: .touchDown)
         menuView.pauseButton.addTarget(self, action: #selector(pauseTapped), for: .touchDown)
-        
     }
     
     @objc func muteTapped() {
         if MusicPlayer.shared.audioPlayer?.volume != 0 {
-           MusicPlayer.shared.audioPlayer?.volume = 0
-           menuView.muteButton.tintColor = UIColor(named: "scoreColor")
+            MusicPlayer.shared.audioPlayer?.volume = 0
+            menuView.muteButton.tintColor = UIColor(named: "scoreColor")
         } else {
             menuView.muteButton.tintColor = .systemGray2
             MusicPlayer.shared.audioPlayer?.volume = 0.3
         }
-        
     }
     
+    func displayAd(){
+        adManager.presentInterstitialAd(in: self)
+    }
+    
+    
     @objc func pauseTapped() {
-        
-        
-         if let view = self.view as! SKView?,
-         let gameScene = view.scene as? GameScene {
+   
+        if let view = self.view as! SKView?,
+           let gameScene = view.scene as? GameScene {
             gameScene.isPaused.toggle()
             playOrPause()
-             if gameScene.isPaused == true {
-                 menuView.pauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-                 menuView.pauseButton.tintColor = UIColor(named: "scoreColor")
-             } else {
-                 menuView.pauseButton.setImage(UIImage(systemName: "pause"), for: .normal)
-                 menuView.pauseButton.tintColor = .systemGray2
-             }
+            if gameScene.isPaused == true {
+                menuView.pauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                menuView.pauseButton.tintColor = UIColor(named: "scoreColor")
+            } else {
+                menuView.pauseButton.setImage(UIImage(systemName: "pause"), for: .normal)
+                menuView.pauseButton.tintColor = .systemGray2
+            }
         }
-        
-       
-        
     }
     
     func playOrPause() {
@@ -104,10 +101,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         } else {
             MusicPlayer.shared.audioPlayer?.setVolume(0.3, fadeDuration: 0.3)
         }
-        
     }
-    
-    
     
     func muteSong() {
         return
@@ -117,12 +111,9 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         return
     }
     
-    
-    
     func updateLeaderboardScore() {
         updateScore(with: Score.shared.score)
     }
-    
     
     func leaderboardTapped() {
         let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
@@ -174,7 +165,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         }
     }
     
-    
+   
     
     override var shouldAutorotate: Bool {
         return true
