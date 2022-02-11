@@ -86,7 +86,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let backgroundIntro = SKSpriteNode(imageNamed: "bgIntro")
         backgroundIntro.position.y = self.frame.midY
         backgroundIntro.zPosition = 0
-        self.addChild(backgroundIntro)
+        gameCamera.node.addChild(backgroundIntro)
     }
     
     func setupBackground() {
@@ -507,13 +507,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-        if status == .playing && Score.shared.score > 0 && checkIfReachedSun() {
-            reachedSunPenality()
-        }
-
-        if status == .playing && !playerCanPlay && checkIfCanRemoveSunPenality() {
-            removeSunPenality()
-        }
+//        if status == .playing && Score.shared.score > 0 && checkIfReachedSun() {
+//            reachedSunPenality()
+//        }
+//
+//        if status == .playing && !playerCanPlay && checkIfCanRemoveSunPenality() {
+//            removeSunPenality()
+//        }
         
         lastUpdate = currentTime
         
