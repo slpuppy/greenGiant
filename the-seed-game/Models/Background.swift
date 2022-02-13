@@ -39,7 +39,6 @@ class Background {
     }
   
     static func buildBackground(frame: CGRect) -> SKSpriteNode {
-        
         let background = SKSpriteNode(texture: SKTexture(image: UIImage(named: "bg") ?? UIImage()))
         background.scale(to: CGSize(width: background.frame.width*1.1, height: background.frame.height*1.1))
         background.zPosition = 0
