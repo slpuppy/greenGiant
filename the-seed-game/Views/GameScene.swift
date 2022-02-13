@@ -83,7 +83,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func setupBeginingBackground() {
-        let backgroundIntro = SKSpriteNode(imageNamed: "bgIntro")
+        let backgroundIntro = SKSpriteNode(
+            texture: SKTexture(image: UIImage(named: "bgIntro") ?? UIImage())
+        )
         backgroundIntro.position.y = self.frame.midY
         backgroundIntro.zPosition = 0
         gameCamera.node.addChild(backgroundIntro)

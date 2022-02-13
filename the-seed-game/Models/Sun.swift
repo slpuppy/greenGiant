@@ -39,7 +39,7 @@ class Sun {
   
     static func buildSun(frame: CGRect) -> SKSpriteNode {
         
-        let sun = SKSpriteNode(imageNamed: "sun")
+        let sun = SKSpriteNode(texture: SKTexture(image: UIImage(named: "sun") ?? UIImage()))
         sun.scale(to: CGSize(width: sun.size.width*0.3, height: sun.size.height*0.3))
         sun.zPosition = 1
         sun.anchorPoint = .init(x: 0.5, y: 0.5)
