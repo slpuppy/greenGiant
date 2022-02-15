@@ -10,11 +10,12 @@ import SpriteKit
 import GameplayKit
 import GameKit
 import SnapKit
-
-
-
+import GoogleMobileAds
 
 class GameViewController: UIViewController, GKGameCenterControllerDelegate, GameSceneDelegate {
+    
+    
+    let adManager = AdManager()
     
     func dismissMenuView() {
         menuView.removeFromSuperview()
@@ -45,8 +46,13 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
         GameCenterVC.gameCenterDelegate = self
         present(GameCenterVC, animated: true, completion: nil)
-        //
+        
+        // Ad resquest
+        
+        adManager.initialize()
+        
     }
+    
     
     func setupMenuBar(){
         view.addSubview(menuView)
@@ -57,21 +63,24 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         }
         menuView.muteButton.addTarget(self, action: #selector(muteTapped), for: .touchDown)
         menuView.pauseButton.addTarget(self, action: #selector(pauseTapped), for: .touchDown)
-        
     }
     
     @objc func muteTapped() {
         GameAnalytics.shared.logTappedMuteButton()
         
         if MusicPlayer.shared.audioPlayer?.volume != 0 {
-           MusicPlayer.shared.audioPlayer?.volume = 0
-           menuView.muteButton.tintColor = UIColor(named: "scoreColor")
+            MusicPlayer.shared.audioPlayer?.volume = 0
+            menuView.muteButton.tintColor = UIColor(named: "scoreColor")
         } else {
             menuView.muteButton.tintColor = .systemGray2
             MusicPlayer.shared.audioPlayer?.volume = 0.3
         }
-        
     }
+    
+    func displayAd(){
+        adManager.presentInterstitialAd(in: self)
+    }
+    
     
     @objc func pauseTapped() {
         if let view = self.view as! SKView?,
@@ -97,7 +106,6 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         } else {
             MusicPlayer.shared.audioPlayer?.setVolume(0.3, fadeDuration: 0.3)
         }
-        
     }
     
     func muteSong() {
