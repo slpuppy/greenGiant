@@ -11,7 +11,7 @@ import SpriteKit
 class Sun {
     let node: SKSpriteNode
    
-    init(node: SKSpriteNode){
+    init(node: SKSpriteNode) {
         self.node = node
     }
     
@@ -40,10 +40,20 @@ class Sun {
     static func buildSun(frame: CGRect) -> SKSpriteNode {
         
         let sun = SKSpriteNode(texture: SKTexture(image: UIImage(named: "sun") ?? UIImage()))
-        sun.scale(to: CGSize(width: sun.size.width*0.3, height: sun.size.height*0.3))
-        sun.zPosition = 1
+        sun.scale(to: CGSize(width: sun.size.width*1.4, height: sun.size.height*1.4))
+        sun.zPosition = 2
         sun.anchorPoint = .init(x: 0.5, y: 0.5)
         sun.position.y = frame.maxY
+        sun.name = Names.sun
+        
+        let sunOverlay = SKSpriteNode(
+            texture: SKTexture(image: UIImage(named: "sunOverlay") ?? UIImage())
+        )
+        sunOverlay.zPosition = 1
+        sunOverlay.anchorPoint = .init(x: 0.5, y: 0.5)
+        sunOverlay.name = Names.sunOverlay
+        
+        sun.addChild(sunOverlay)
         
         return sun
     }
@@ -63,5 +73,10 @@ class Sun {
         
         
         self.node.run(sunAnimation)
+    }
+    
+    enum Names {
+        static let sun: String = "sun"
+        static let sunOverlay: String = "sunOverlay"
     }
 }

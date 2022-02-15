@@ -1,7 +1,7 @@
 {
   "images" : [
     {
-      "filename" : "seedgameAsset 31x.png",
+      "filename" : "sun@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -12,12 +12,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "seedgameAsset 41x.png",
+      "filename" : "darkSun@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "seedgameAsset 3@2x.png",
+      "filename" : "sun@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -28,12 +28,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "seedgameAsset 4@2x.png",
+      "filename" : "darkSun@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "seedgameAsset 3@3x.png",
+      "filename" : "sun@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
@@ -44,7 +44,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "seedgameAsset 4@3x.png",
+      "filename" : "darkSun@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

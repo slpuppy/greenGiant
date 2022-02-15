@@ -509,13 +509,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
-//        if status == .playing && Score.shared.score > 0 && checkIfReachedSun() {
-//            reachedSunPenality()
-//        }
-//
-//        if status == .playing && !playerCanPlay && checkIfCanRemoveSunPenality() {
-//            removeSunPenality()
-//        }
+        if status == .playing && Score.shared.score > 0 && checkIfReachedSun() {
+            reachedSunPenality()
+        }
+
+        if status == .playing && !playerCanPlay && checkIfCanRemoveSunPenality() {
+            removeSunPenality()
+        }
         
         lastUpdate = currentTime
         
@@ -543,12 +543,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             lastTrunk.topRefNode.position,
             from: lastTrunk.node
         )
-        let topPositionCameraCoordinates = gameCamera.node.convert(
+        let pos = gameCamera.node.convert(
             topPositionSceneCoordinates,
             from: self
         )
         
-        return sun.node.contains(topPositionCameraCoordinates)
+        let reachSunYPosition = (self.frame.height/2) * 0.7
+        
+        return pos.y > reachSunYPosition
     }
     
     func checkIfCanRemoveSunPenality() -> Bool {
@@ -563,10 +565,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         decreaseScore(by: 3.6)
+        
+        let fire = Fire()
+        lastTrunk.topRefNode.addChild(fire.node)
+        
         playerCanPlay = false
     }
     
     func removeSunPenality() {
+        let fire = lastTrunk.topRefNode.childNode(
+            withName: Fire.Names.fire
+        ) as! SKSpriteNode
+        
+        Fire.removeFire(node: fire)
+        
         playerCanPlay = true
     }
 }

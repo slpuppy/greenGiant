@@ -27,6 +27,7 @@
 		0C9603E827AF2837000F31E1 /* GameCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603E727AF2837000F31E1 /* GameCamera.swift */; };
 		0C9603EA27AF2930000F31E1 /* SKScene+GameCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603E927AF2930000F31E1 /* SKScene+GameCamera.swift */; };
 		0C9603FC27B2BA74000F31E1 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603FB27B2BA74000F31E1 /* MenuView.swift */; };
+		0C98113127BB129D00E3F0F3 /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C98113027BB129D00E3F0F3 /* Fire.swift */; };
 		75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5227A58769006ACB87 /* SKScene+Branch.swift */; };
 		75100A5527A5AA81006ACB87 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5427A5AA81006ACB87 /* Background.swift */; };
 		75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5627A5AD51006ACB87 /* SKScene+Background.swift */; };
@@ -66,6 +67,7 @@
 		0C9603E727AF2837000F31E1 /* GameCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCamera.swift; sourceTree = "<group>"; };
 		0C9603E927AF2930000F31E1 /* SKScene+GameCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameCamera.swift"; sourceTree = "<group>"; };
 		0C9603FB27B2BA74000F31E1 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		0C98113027BB129D00E3F0F3 /* Fire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fire.swift; sourceTree = "<group>"; };
 		4EC6E76C9C391AD77D7D8729 /* Pods-the-seed-game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-the-seed-game.release.xcconfig"; path = "Target Support Files/Pods-the-seed-game/Pods-the-seed-game.release.xcconfig"; sourceTree = "<group>"; };
 		75100A5227A58769006ACB87 /* SKScene+Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Branch.swift"; sourceTree = "<group>"; };
 		75100A5427A5AA81006ACB87 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
@@ -199,6 +201,7 @@
 				0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */,
 				0C9603E327AEC21D000F31E1 /* GameInstructions.swift */,
 				0C9603E727AF2837000F31E1 /* GameCamera.swift */,
+				0C98113027BB129D00E3F0F3 /* Fire.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -348,6 +351,7 @@
 				75EAA84A27B2CD1E00FFC8EF /* MusicPlayer.swift in Sources */,
 				0C9603E027AD55BF000F31E1 /* CGPoint+.swift in Sources */,
 				0C9603E427AEC21D000F31E1 /* GameInstructions.swift in Sources */,
+				0C98113127BB129D00E3F0F3 /* Fire.swift in Sources */,
 				75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */,
 				0C022BEB27A42C7B00B2E88A /* GameScene.swift in Sources */,
 				757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */,
