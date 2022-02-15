@@ -16,19 +16,20 @@ import SnapKit
 
 class GameViewController: UIViewController, GKGameCenterControllerDelegate, GameSceneDelegate {
     
+    var gcEnabled = Bool() // Check if the user has Game Center enabled
+    var gcDefaultLeaderBoard = String() // Check the default leaderboardID
+    var achievementManager = AchievementManager()
+    lazy var menuView: MenuView = {
+          let view = MenuView()
+          view.translatesAutoresizingMaskIntoConstraints = false
+          return view
+      }()
+    
     func dismissMenuView() {
         menuView.removeFromSuperview()
     }
     
-   
-    var gcEnabled = Bool() // Check if the user has Game Center enabled
-    var gcDefaultLeaderBoard = String() // Check the default leaderboardID
-    
-    lazy var menuView: MenuView = {
-        let view = MenuView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+ 
     
     
     override func viewDidLoad() {
@@ -51,7 +52,8 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
         GameCenterVC.gameCenterDelegate = self
         present(GameCenterVC, animated: true, completion: nil)
-        //
+        
+       
     }
     
     func setupMenuBar(){
@@ -114,6 +116,12 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     
     func pauseGame() {
         return
+    }
+    
+    func reportFirstAchievement() {
+        
+        achievementManager.reportFirstAchievement()
+        
     }
     
     
