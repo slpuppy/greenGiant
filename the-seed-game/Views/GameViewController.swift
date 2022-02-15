@@ -19,7 +19,6 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     func dismissMenuView() {
         menuView.removeFromSuperview()
     }
-    
    
     var gcEnabled = Bool() // Check if the user has Game Center enabled
     var gcDefaultLeaderBoard = String() // Check the default leaderboardID
@@ -30,12 +29,10 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         return view
     }()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         MusicPlayer.shared.startBackgroundMusic()
         MusicPlayer.shared.audioPlayer?.volume = 0.3
-        
         
         if let view = self.view as! SKView? {
             let scene = GameScene()
@@ -43,11 +40,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
             scene.scaleMode = .aspectFit
             view.presentScene(scene)
             authenticateLocalPlayer()
-            
         }
-        
-        
-        
         
         let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
         GameCenterVC.gameCenterDelegate = self
@@ -68,6 +61,8 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     }
     
     @objc func muteTapped() {
+        GameAnalytics.shared.logTappedMuteButton()
+        
         if MusicPlayer.shared.audioPlayer?.volume != 0 {
            MusicPlayer.shared.audioPlayer?.volume = 0
            menuView.muteButton.tintColor = UIColor(named: "scoreColor")
@@ -79,23 +74,21 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     }
     
     @objc func pauseTapped() {
-        
-        
-         if let view = self.view as! SKView?,
-         let gameScene = view.scene as? GameScene {
+        if let view = self.view as! SKView?,
+        let gameScene = view.scene as? GameScene {
+            GameAnalytics.shared.logTappedPauseButton(isPaused: gameScene.isPaused)
+            
             gameScene.isPaused.toggle()
             playOrPause()
-             if gameScene.isPaused == true {
-                 menuView.pauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-                 menuView.pauseButton.tintColor = UIColor(named: "scoreColor")
-             } else {
-                 menuView.pauseButton.setImage(UIImage(systemName: "pause"), for: .normal)
-                 menuView.pauseButton.tintColor = .systemGray2
-             }
+            
+            if gameScene.isPaused == true {
+                menuView.pauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                menuView.pauseButton.tintColor = UIColor(named: "scoreColor")
+            } else {
+                menuView.pauseButton.setImage(UIImage(systemName: "pause"), for: .normal)
+                menuView.pauseButton.tintColor = .systemGray2
+            }
         }
-        
-       
-        
     }
     
     func playOrPause() {
@@ -107,8 +100,6 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         
     }
     
-    
-    
     func muteSong() {
         return
     }
@@ -117,12 +108,9 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         return
     }
     
-    
-    
     func updateLeaderboardScore() {
         updateScore(with: Score.shared.score)
     }
-    
     
     func leaderboardTapped() {
         let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
@@ -136,9 +124,14 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     
     func updateScore(with value: Double)
     {
-        if (self.gcEnabled)
-        {
-            GKLeaderboard.submitScore(Int(value), context:0, player: GKLocalPlayer.local, leaderboardIDs: [self.gcDefaultLeaderBoard], completionHandler: {error in})
+        if (self.gcEnabled) {
+            GKLeaderboard.submitScore(
+                Int(value),
+                context:0,
+                player: GKLocalPlayer.local,
+                leaderboardIDs: [self.gcDefaultLeaderBoard],
+                completionHandler: {error in}
+            )
         }
     }
     
@@ -173,8 +166,6 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
             }
         }
     }
-    
-    
     
     override var shouldAutorotate: Bool {
         return true

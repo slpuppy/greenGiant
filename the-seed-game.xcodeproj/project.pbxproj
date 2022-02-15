@@ -21,6 +21,10 @@
 		0C4616D527AC5E890035EC39 /* HorizontalScreenSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */; };
 		0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DC99427AAC56600EE79E8 /* Intro.swift */; };
 		0C5DC99727AACD1700EE79E8 /* SKScene+Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DC99627AACD1700EE79E8 /* SKScene+Intro.swift */; };
+		0C810E3327B5344D00B9989E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0C810E3227B5344D00B9989E /* GoogleService-Info.plist */; };
+		0C810E3627B5405A00B9989E /* GameCrashlytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C810E3527B5405A00B9989E /* GameCrashlytics.swift */; };
+		0C810E3827B54BA700B9989E /* GameAnalytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C810E3727B54BA700B9989E /* GameAnalytics.swift */; };
+		0C810E3A27B5532700B9989E /* CauseOfGameOver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C810E3927B5532700B9989E /* CauseOfGameOver.swift */; };
 		0C9603E027AD55BF000F31E1 /* CGPoint+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603DF27AD55BF000F31E1 /* CGPoint+.swift */; };
 		0C9603E427AEC21D000F31E1 /* GameInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603E327AEC21D000F31E1 /* GameInstructions.swift */; };
 		0C9603E627AECE27000F31E1 /* SKScene+GameInstructions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603E527AECE27000F31E1 /* SKScene+GameInstructions.swift */; };
@@ -60,6 +64,10 @@
 		0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScreenSide.swift; sourceTree = "<group>"; };
 		0C5DC99427AAC56600EE79E8 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
 		0C5DC99627AACD1700EE79E8 /* SKScene+Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Intro.swift"; sourceTree = "<group>"; };
+		0C810E3227B5344D00B9989E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0C810E3527B5405A00B9989E /* GameCrashlytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCrashlytics.swift; sourceTree = "<group>"; };
+		0C810E3727B54BA700B9989E /* GameAnalytics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameAnalytics.swift; sourceTree = "<group>"; };
+		0C810E3927B5532700B9989E /* CauseOfGameOver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CauseOfGameOver.swift; sourceTree = "<group>"; };
 		0C9603DF27AD55BF000F31E1 /* CGPoint+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+.swift"; sourceTree = "<group>"; };
 		0C9603E327AEC21D000F31E1 /* GameInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInstructions.swift; sourceTree = "<group>"; };
 		0C9603E527AECE27000F31E1 /* SKScene+GameInstructions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameInstructions.swift"; sourceTree = "<group>"; };
@@ -118,6 +126,7 @@
 		0C022BE327A42C7B00B2E88A /* the-seed-game */ = {
 			isa = PBXGroup;
 			children = (
+				0C810E3227B5344D00B9989E /* GoogleService-Info.plist */,
 				0C022BFB27A42CA300B2E88A /* Utils */,
 				0C9603FA27B2BA63000F31E1 /* Views */,
 				0C022BE427A42C7B00B2E88A /* AppDelegate.swift */,
@@ -196,9 +205,10 @@
 				0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */,
 				757BBD4E27A9592300827E15 /* Scoreboard.swift */,
 				0C5DC99427AAC56600EE79E8 /* Intro.swift */,
-				0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */,
 				0C9603E327AEC21D000F31E1 /* GameInstructions.swift */,
 				0C9603E727AF2837000F31E1 /* GameCamera.swift */,
+				0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */,
+				0C810E3927B5532700B9989E /* CauseOfGameOver.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -208,6 +218,8 @@
 			children = (
 				758812B927A81E5C00CB693A /* Score.swift */,
 				75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */,
+				0C810E3527B5405A00B9989E /* GameCrashlytics.swift */,
+				0C810E3727B54BA700B9989E /* GameAnalytics.swift */,
 			);
 			path = Singletons;
 			sourceTree = "<group>";
@@ -233,6 +245,7 @@
 				0C022BDE27A42C7B00B2E88A /* Frameworks */,
 				0C022BDF27A42C7B00B2E88A /* Resources */,
 				CB0BCF14650B7E9F32C5A3DA /* [CP] Embed Pods Frameworks */,
+				0C810E3427B537D800B9989E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -283,6 +296,7 @@
 			files = (
 				75EAA84C27B2CD8600FFC8EF /* background.mp3 in Resources */,
 				0C022BF027A42C7B00B2E88A /* Main.storyboard in Resources */,
+				0C810E3327B5344D00B9989E /* GoogleService-Info.plist in Resources */,
 				0C022BF227A42C7D00B2E88A /* Assets.xcassets in Resources */,
 				0C022BF527A42C7D00B2E88A /* LaunchScreen.storyboard in Resources */,
 			);
@@ -291,6 +305,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0C810E3427B537D800B9989E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		B4CF2FC3AD88EAE1D12B26FE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -341,6 +374,7 @@
 				0C022BFD27A42CB300B2E88A /* SKScene+Trunk.swift in Sources */,
 				75100A6027A5CF80006ACB87 /* LittleBranch.swift in Sources */,
 				0C4616D527AC5E890035EC39 /* HorizontalScreenSide.swift in Sources */,
+				0C810E3A27B5532700B9989E /* CauseOfGameOver.swift in Sources */,
 				75100A6627A60054006ACB87 /* Sun.swift in Sources */,
 				7549C06127A574CE009E993B /* Branch.swift in Sources */,
 				0C022BFF27A42CCC00B2E88A /* Trunk.swift in Sources */,
@@ -353,10 +387,12 @@
 				757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */,
 				0C9603EA27AF2930000F31E1 /* SKScene+GameCamera.swift in Sources */,
 				0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */,
+				0C810E3827B54BA700B9989E /* GameAnalytics.swift in Sources */,
 				0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */,
 				0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */,
 				0C9603FC27B2BA74000F31E1 /* MenuView.swift in Sources */,
 				75100A6827A600CF006ACB87 /* SKScene+Sun.swift in Sources */,
+				0C810E3627B5405A00B9989E /* GameCrashlytics.swift in Sources */,
 				75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */,
 				75100A5927A5B51F006ACB87 /* GameStatus.swift in Sources */,
 				0C5DC99727AACD1700EE79E8 /* SKScene+Intro.swift in Sources */,
@@ -518,6 +554,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.11;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = L5C36X97NN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

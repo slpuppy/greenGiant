@@ -15,9 +15,6 @@ class MusicPlayer {
     static let shared = MusicPlayer()
     var audioPlayer: AVAudioPlayer?
     
-   
-    
-    
     func startBackgroundMusic() {
         if let bundle = Bundle.main.path(forResource: "background", ofType: "mp3") {
             let backgroundMusic = NSURL(fileURLWithPath: bundle)
