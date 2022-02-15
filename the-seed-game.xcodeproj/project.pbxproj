@@ -38,6 +38,7 @@
 		75100A6627A60054006ACB87 /* Sun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A6527A60054006ACB87 /* Sun.swift */; };
 		75100A6827A600CF006ACB87 /* SKScene+Sun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A6727A600CF006ACB87 /* SKScene+Sun.swift */; };
 		7549C06127A574CE009E993B /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7549C06027A574CE009E993B /* Branch.swift */; };
+		756C9F7A27BB2EEE00B011F0 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */; };
 		757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757BBD4E27A9592300827E15 /* Scoreboard.swift */; };
 		758812BA27A81E5C00CB693A /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758812B927A81E5C00CB693A /* Score.swift */; };
 		75EAA84A27B2CD1E00FFC8EF /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */; };
@@ -79,6 +80,7 @@
 		75100A6527A60054006ACB87 /* Sun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sun.swift; sourceTree = "<group>"; };
 		75100A6727A600CF006ACB87 /* SKScene+Sun.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Sun.swift"; sourceTree = "<group>"; };
 		7549C06027A574CE009E993B /* Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
+		756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementManager.swift; sourceTree = "<group>"; };
 		757BBD4E27A9592300827E15 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		758812B927A81E5C00CB693A /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				0C4616D127AC118D0035EC39 /* DifficultyManager.swift */,
+				756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -365,6 +368,7 @@
 				75100A5927A5B51F006ACB87 /* GameStatus.swift in Sources */,
 				0C5DC99727AACD1700EE79E8 /* SKScene+Intro.swift in Sources */,
 				0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */,
+				756C9F7A27BB2EEE00B011F0 /* AchievementManager.swift in Sources */,
 				0C022BED27A42C7B00B2E88A /* GameViewController.swift in Sources */,
 				75100A5B27A5B5A5006ACB87 /* Walls.swift in Sources */,
 				0C9603E827AF2837000F31E1 /* GameCamera.swift in Sources */,
@@ -522,7 +526,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.11;
-				DEVELOPMENT_TEAM = L5C36X97NN;
+				DEVELOPMENT_TEAM = C7K95G5W2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -556,7 +560,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.11;
-				DEVELOPMENT_TEAM = L5C36X97NN;
+				DEVELOPMENT_TEAM = C7K95G5W2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;

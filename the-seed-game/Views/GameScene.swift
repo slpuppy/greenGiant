@@ -14,6 +14,7 @@ protocol GameSceneDelegate: AnyObject {
     func updateLeaderboardScore()
     func dismissMenuView()
     func setupMenuBar()
+    func reportFirstAchievement()
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -33,6 +34,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var animationRunning: Bool = false
     var status: GameStatus = .intro
     var lastUpdate: TimeInterval = 0
+
     
     var difficultyManager: DifficultyManager!
     
@@ -119,6 +121,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func runIntroStartAnimation() {
         intro.runStartAnimation()
         sun.runIntroStartAnimation()
+        
+        
+        
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -127,6 +132,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         switch status {
         case .intro:
+            gameSceneDelegate?.reportFirstAchievement()
             runIntroCutsceneAnimation()
             setupStartGame()
             gameSceneDelegate?.setupMenuBar()
