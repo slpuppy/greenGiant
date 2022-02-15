@@ -57,7 +57,7 @@ class Intro {
         let seedNode = SKSpriteNode(imageNamed: "seed")
         
         // posicionamento
-        seedNode.position.y = frame.midY - 60
+        seedNode.position.y = frame.midY - 80
         seedNode.zPosition = 5
         
         return seedNode
@@ -88,6 +88,7 @@ class Intro {
     static private func buildBranch() -> Branch {
         let branch = Branch.buildBranch()
         let scaleMultiplier = 3.0
+        branch.node.zPosition = 3
         branch.node.scale(to: CGSize(width: (branch.node.size.width * scaleMultiplier), height: (branch.node.size.height * scaleMultiplier)))
         branch.node.position.y = 180
         branch.node.physicsBody = nil

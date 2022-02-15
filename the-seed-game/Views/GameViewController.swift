@@ -16,19 +16,20 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     
     
     let adManager = AdManager()
+    var gcEnabled = Bool() // Check if the user has Game Center enabled
+    var gcDefaultLeaderBoard = String() // Check the default leaderboardID
+    var achievementManager = AchievementManager()
+    lazy var menuView: MenuView = {
+          let view = MenuView()
+          view.translatesAutoresizingMaskIntoConstraints = false
+          return view
+      }()
     
     func dismissMenuView() {
         menuView.removeFromSuperview()
     }
-   
-    var gcEnabled = Bool() // Check if the user has Game Center enabled
-    var gcDefaultLeaderBoard = String() // Check the default leaderboardID
     
-    lazy var menuView: MenuView = {
-        let view = MenuView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+ 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,6 +116,14 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     func pauseGame() {
         return
     }
+    
+    func reportFirstAchievement() {
+        
+        achievementManager.reportFirstAchievement()
+        
+    }
+    
+    
     
     func updateLeaderboardScore() {
         updateScore(with: Score.shared.score)

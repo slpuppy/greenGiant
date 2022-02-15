@@ -31,6 +31,7 @@
 		0C9603E827AF2837000F31E1 /* GameCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603E727AF2837000F31E1 /* GameCamera.swift */; };
 		0C9603EA27AF2930000F31E1 /* SKScene+GameCamera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603E927AF2930000F31E1 /* SKScene+GameCamera.swift */; };
 		0C9603FC27B2BA74000F31E1 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9603FB27B2BA74000F31E1 /* MenuView.swift */; };
+		0C98113127BB129D00E3F0F3 /* Fire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C98113027BB129D00E3F0F3 /* Fire.swift */; };
 		75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5227A58769006ACB87 /* SKScene+Branch.swift */; };
 		75100A5527A5AA81006ACB87 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5427A5AA81006ACB87 /* Background.swift */; };
 		75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A5627A5AD51006ACB87 /* SKScene+Background.swift */; };
@@ -42,6 +43,7 @@
 		75100A6827A600CF006ACB87 /* SKScene+Sun.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75100A6727A600CF006ACB87 /* SKScene+Sun.swift */; };
 		7543750127B689120017A658 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7543750027B689120017A658 /* AdManager.swift */; };
 		7549C06127A574CE009E993B /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7549C06027A574CE009E993B /* Branch.swift */; };
+		756C9F7A27BB2EEE00B011F0 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */; };
 		757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757BBD4E27A9592300827E15 /* Scoreboard.swift */; };
 		758812BA27A81E5C00CB693A /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758812B927A81E5C00CB693A /* Score.swift */; };
 		75EAA84A27B2CD1E00FFC8EF /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */; };
@@ -75,6 +77,7 @@
 		0C9603E727AF2837000F31E1 /* GameCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCamera.swift; sourceTree = "<group>"; };
 		0C9603E927AF2930000F31E1 /* SKScene+GameCamera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameCamera.swift"; sourceTree = "<group>"; };
 		0C9603FB27B2BA74000F31E1 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
+		0C98113027BB129D00E3F0F3 /* Fire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fire.swift; sourceTree = "<group>"; };
 		4EC6E76C9C391AD77D7D8729 /* Pods-the-seed-game.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-the-seed-game.release.xcconfig"; path = "Target Support Files/Pods-the-seed-game/Pods-the-seed-game.release.xcconfig"; sourceTree = "<group>"; };
 		75100A5227A58769006ACB87 /* SKScene+Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+Branch.swift"; sourceTree = "<group>"; };
 		75100A5427A5AA81006ACB87 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 		754374FE27B685FF0017A658 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7543750027B689120017A658 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		7549C06027A574CE009E993B /* Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
+		756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementManager.swift; sourceTree = "<group>"; };
 		757BBD4E27A9592300827E15 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		758812B927A81E5C00CB693A /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
 		75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
@@ -176,6 +180,7 @@
 			children = (
 				754374FF27B688FF0017A658 /* GoogleAds */,
 				0C4616D127AC118D0035EC39 /* DifficultyManager.swift */,
+				756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 				0C9603E727AF2837000F31E1 /* GameCamera.swift */,
 				0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */,
 				0C810E3927B5532700B9989E /* CauseOfGameOver.swift */,
+				0C98113027BB129D00E3F0F3 /* Fire.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -395,6 +401,7 @@
 				75EAA84A27B2CD1E00FFC8EF /* MusicPlayer.swift in Sources */,
 				0C9603E027AD55BF000F31E1 /* CGPoint+.swift in Sources */,
 				0C9603E427AEC21D000F31E1 /* GameInstructions.swift in Sources */,
+				0C98113127BB129D00E3F0F3 /* Fire.swift in Sources */,
 				75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */,
 				0C022BEB27A42C7B00B2E88A /* GameScene.swift in Sources */,
 				757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */,
@@ -410,6 +417,7 @@
 				75100A5927A5B51F006ACB87 /* GameStatus.swift in Sources */,
 				0C5DC99727AACD1700EE79E8 /* SKScene+Intro.swift in Sources */,
 				0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */,
+				756C9F7A27BB2EEE00B011F0 /* AchievementManager.swift in Sources */,
 				0C022BED27A42C7B00B2E88A /* GameViewController.swift in Sources */,
 				75100A5B27A5B5A5006ACB87 /* Walls.swift in Sources */,
 				0C9603E827AF2837000F31E1 /* GameCamera.swift in Sources */,
