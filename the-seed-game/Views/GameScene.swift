@@ -589,11 +589,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func removeSunPenality() {
-        let fire = lastTrunk.topRefNode.childNode(
-            withName: Fire.Names.fire
-        ) as! SKSpriteNode
+        let childNodes = lastTrunk.topRefNode.children
         
-        Fire.removeFire(node: fire)
+        let fireNode = childNodes.first(where: { child in
+            return child.name == Fire.Names.fire
+        }) as? SKSpriteNode
+        
+        if let fire = fireNode {
+            Fire.removeFire(node: fire)
+        }
         
         playerCanPlay = true
     }
