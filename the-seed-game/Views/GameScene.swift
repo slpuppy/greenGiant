@@ -16,6 +16,7 @@ protocol GameSceneDelegate: AnyObject {
     func setupMenuBar()
     func displayAd()
     func reportFirstAchievement()
+    func reportScore()
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -45,12 +46,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         
-        //#if DEBUG
-        //       view.showsPhysics = true
-        //       view.showsNodeCount = true
-        //       view.showsFPS = true
-        //       //        self.speed = -50
-        //#endif
+//        #if DEBUG
+//           view.showsPhysics = true
+//           view.showsNodeCount = true
+//           view.showsFPS = true
+//           //        self.speed = -50
+//        #endif
         
         setupScene(view: view)
         setupCamera()
@@ -153,6 +154,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 setupBranch(pos: pos)
                 setupLittleBranch(pos: pos)
                 addScore()
+                gameSceneDelegate?.reportScore()
                 discardUselessElements()
                 startGameCameraMovement()
             }
