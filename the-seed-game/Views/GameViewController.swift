@@ -59,7 +59,8 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         view.addSubview(menuView)
         menuView.layer.zPosition = 10
         menuView.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
+            
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin).offset(10)
             make.leading.equalToSuperview().offset(24)
         }
         menuView.muteButton.addTarget(self, action: #selector(muteTapped), for: .touchDown)

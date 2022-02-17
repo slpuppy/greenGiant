@@ -16,8 +16,8 @@ class GameOverOverlay {
     let subtitle: SKLabelNode
     let scoreTitle: SKLabelNode
     let scoreLabel: SKLabelNode
-    let playAgainLabel: SKLabelNode
-    let leaderboardsLabel: SKLabelNode
+    let playAgainLabel: SKSpriteNode
+    let leaderboardsLabel: SKSpriteNode
     
     init(frame: CGRect) {
         self.node = SKNode()
@@ -30,7 +30,7 @@ class GameOverOverlay {
         self.scoreTitle = GameOverOverlay.buildScoreTitle()
         self.scoreLabel = GameOverOverlay.buildScoreLabel()
         self.playAgainLabel = GameOverOverlay.buildPlayAgainLabel()
-        self.leaderboardsLabel = GameOverOverlay.buildLeaderboardsLabel()
+        self.leaderboardsLabel = GameOverOverlay.buildLeaderboardsNode()
         
         setupNodesPositions(frame: frame)
         addChildsToLabelsContainer()
@@ -118,34 +118,14 @@ class GameOverOverlay {
         return scoreLabelNode
     }
     
-    static private func buildPlayAgainLabel() -> SKLabelNode {
-        let playAgainLabelNode = SKLabelNode(text: "Play Again")
-        playAgainLabelNode.fontSize = 28
-        playAgainLabelNode.fontName = FontNames.medium
-        playAgainLabelNode.fontColor = .white
-        
-        return playAgainLabelNode
+    static private func buildPlayAgainLabel() -> SKSpriteNode {
+        let playAgainNode = SKSpriteNode(imageNamed: "growagain")
+        return playAgainNode
     }
     
-    static private func buildLeaderboardsLabel() -> SKLabelNode {
-        let attributedString = NSMutableAttributedString(string: "View Leaderboards")
-        let strRange = NSMakeRange(0, attributedString.length)
-        
-        attributedString.beginEditing()
-        attributedString.addAttributes(
-            [
-//                .underlineStyle: 1,
-                .font: UIFont(name: FontNames.regular, size: 18) as Any,
-                .foregroundColor: UIColor.white,
-                .underlineColor: UIColor.white,
-            ],
-            range: strRange
-        )
-        attributedString.endEditing()
-        
-        let leaderboardsLabelNode = SKLabelNode(attributedText: attributedString)
-        
-        return leaderboardsLabelNode
+    static private func buildLeaderboardsNode() -> SKSpriteNode {
+        let node = SKSpriteNode(imageNamed: "leaderboards")
+       return node
     }
     
     private func setupNodesPositions(frame: CGRect) {
@@ -153,8 +133,8 @@ class GameOverOverlay {
         self.subtitle.position.y = self.gameOverTitle.position.y - 95
         self.scoreTitle.position.y = frame.midY + 40
         self.scoreLabel.position.y = frame.midY - 20
-        self.leaderboardsLabel.position.y = frame.minY + 120
-        self.playAgainLabel.position.y = self.leaderboardsLabel.position.y + 65
+        self.leaderboardsLabel.position.y = frame.minY + 150
+        self.playAgainLabel.position.y = self.leaderboardsLabel.position.y + 80
     }
     
     private func addChildsToLabelsContainer() {
