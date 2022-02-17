@@ -17,6 +17,8 @@
 		0C022BFF27A42CCC00B2E88A /* Trunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022BFE27A42CCC00B2E88A /* Trunk.swift */; };
 		0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */; };
 		0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */; };
+		0C3B078C27BEDCE1008D2E6B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078A27BEDC71008D2E6B /* AdSupport.framework */; };
+		0C3B078E27BEDCE8008D2E6B /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */; };
 		0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D127AC118D0035EC39 /* DifficultyManager.swift */; };
 		0C4616D527AC5E890035EC39 /* HorizontalScreenSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */; };
 		0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DC99427AAC56600EE79E8 /* Intro.swift */; };
@@ -63,6 +65,8 @@
 		0C022BFE27A42CCC00B2E88A /* Trunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trunk.swift; sourceTree = "<group>"; };
 		0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
 		0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameOverOverlay.swift"; sourceTree = "<group>"; };
+		0C3B078A27BEDC71008D2E6B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		0C4616D127AC118D0035EC39 /* DifficultyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyManager.swift; sourceTree = "<group>"; };
 		0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScreenSide.swift; sourceTree = "<group>"; };
 		0C5DC99427AAC56600EE79E8 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
@@ -105,7 +109,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C3B078E27BEDCE8008D2E6B /* AppTrackingTransparency.framework in Frameworks */,
 				9FB252E21A7E1355EB83ACF2 /* Pods_the_seed_game.framework in Frameworks */,
+				0C3B078C27BEDCE1008D2E6B /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -198,6 +204,8 @@
 		177AFC5A85B58B7D77A42D11 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */,
+				0C3B078A27BEDC71008D2E6B /* AdSupport.framework */,
 				940A4433604D922E5C27D433 /* Pods_the_seed_game.framework */,
 			);
 			name = Frameworks;

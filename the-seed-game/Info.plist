@@ -169,5 +169,12 @@
       <string>1406089779822202</string>
       <key>FacebookDisplayName</key>
       <string>GGiant</string>
+      
+      <key>FacebookAdvertiserIDCollectionEnabled</key>
+      <string>FALSE</string>
+      <key>FacebookAutoLogAppEventsEnabled</key>
+      <string>FALSE</string>
+      <key>NSUserTrackingUsageDescription</key>
+      <string>Need tracking for analytics and to deliver custom ads</string>
 </dict>
 </plist>
