@@ -119,15 +119,23 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     }
     
     func reportFirstAchievement() {
-        
-        achievementManager.reportFirstAchievement()
-        
+        Task {
+            await achievementManager.reportFirst()
+        }
     }
     
-    
+    func reportScore() {
+        Task {
+           await achievementManager.reportFourTwenty()
+        }
+    }
     
     func updateLeaderboardScore() {
         updateScore(with: Score.shared.score)
+        
+        Task {
+            await achievementManager.reportTimesPlayed()
+        }
     }
     
     func leaderboardTapped() {
