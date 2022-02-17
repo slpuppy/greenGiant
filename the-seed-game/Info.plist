@@ -155,5 +155,19 @@
           <string>3qcr597p9d.skadnetwork</string>
         </dict>
       </array>
+      
+      <key>CFBundleURLTypes</key>
+      <array>
+        <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>fb1406089779822202</string>
+        </array>
+        </dict>
+      </array>
+      <key>FacebookAppID</key>
+      <string>1406089779822202</string>
+      <key>FacebookDisplayName</key>
+      <string>GGiant</string>
 </dict>
 </plist>
