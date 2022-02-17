@@ -21,7 +21,7 @@ class AdManager: NSObject, GADFullScreenContentDelegate {
     
     private func requestInterstitialAd() {
         let request = GADRequest()
-        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-3940256099942544/4411468910",
+        GADInterstitialAd.load(withAdUnitID:"ca-app-pub-1833918678590844/9410353523",
                                request: request,
                                completionHandler: { [self] ad, error in
             if let error = error {
