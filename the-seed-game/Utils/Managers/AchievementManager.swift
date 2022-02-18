@@ -36,36 +36,42 @@ class AchievementManager {
     func reportTimesPlayed() async {
         do {
             let achievements = try await GKAchievement.loadAchievements()
+            var achievementsToReport: [GKAchievement] = []
             
             let fiveTree = getAchievement(
                 userAchievements: achievements,
                 identifier: AchievementIds.fiveTree
             )
+            if !fiveTree.isCompleted {
+                fiveTree.showsCompletionBanner = true
+                fiveTree.percentComplete += 100/5
+                
+                achievementsToReport.append(fiveTree)
+            }
+            
             let twentyFiveTree = getAchievement(
                 userAchievements: achievements,
                 identifier: AchievementIds.twentyFiveTree
             )
+            if !twentyFiveTree.isCompleted {
+                twentyFiveTree.showsCompletionBanner = true
+                twentyFiveTree.percentComplete += 100/25
+                
+                achievementsToReport.append(twentyFiveTree)
+            }
+            
             let fiftyTree = getAchievement(
                 userAchievements: achievements,
                 identifier: AchievementIds.fiftyTree
             )
-            
-            if fiveTree.isCompleted &&
-                twentyFiveTree.isCompleted &&
-                fiftyTree.isCompleted {
-                return
+            if !fiftyTree.isCompleted {
+                fiftyTree.showsCompletionBanner = true
+                fiftyTree.percentComplete += 100/50
+                
+                achievementsToReport.append(fiftyTree)
             }
             
-            fiveTree.showsCompletionBanner = true
-            fiveTree.percentComplete += 100/5
-            
-            twentyFiveTree.showsCompletionBanner = true
-            twentyFiveTree.percentComplete += 100/25
-            
-            fiftyTree.showsCompletionBanner = true
-            fiftyTree.percentComplete += 100/50
-            
-            try await GKAchievement.report([fiveTree, twentyFiveTree, fiftyTree])
+            achievementsToReport.isEmpty ? nil : (try await GKAchievement.report(achievementsToReport))
         } catch {
             print(
                 "Error updating \(AchievementIds.fiveTree) and/or \(AchievementIds.twentyFiveTree) and/or \(AchievementIds.fiftyTree)"
