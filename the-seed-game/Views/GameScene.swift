@@ -246,6 +246,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func decreaseScore(by value: Double) {
         Score.shared.score -= value
+        Score.shared.timesDecreased += 1
         scoreBoard.update()
     }
     
