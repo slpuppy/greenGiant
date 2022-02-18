@@ -15,24 +15,19 @@ class AchievementManager {
         do {
             let achievements = try await GKAchievement.loadAchievements()
 
-            let firstAchievement = findAchievement(
-                in: achievements,
-                id: AchievementIds.firstTimeGrower
+            let firstAchievement = getAchievement(
+                userAchievements: achievements,
+                identifier: AchievementIds.firstTimeGrower
             )
 
-            guard let achievement = firstAchievement else {
-                print("Achievement \(AchievementIds.firstTimeGrower) not found")
+            if firstAchievement.isCompleted {
                 return
             }
 
-            if achievement.isCompleted {
-                return
-            }
+            firstAchievement.showsCompletionBanner = true
+            firstAchievement.percentComplete = 100
 
-            achievement.showsCompletionBanner = true
-            achievement.percentComplete = 100
-
-            try await GKAchievement.report([achievement])
+            try await GKAchievement.report([firstAchievement])
         } catch {
             print("Error updating \(AchievementIds.firstTimeGrower)")
         }
@@ -42,107 +37,123 @@ class AchievementManager {
         do {
             let achievements = try await GKAchievement.loadAchievements()
             
-            let fiveTree = findAchievement(
-                in: achievements,
-                id: AchievementIds.fiveTree
+            let fiveTree = getAchievement(
+                userAchievements: achievements,
+                identifier: AchievementIds.fiveTree
             )
-            let twentyFiveTree = findAchievement(
-                in: achievements,
-                id: AchievementIds.twentyFiveTree
+            let twentyFiveTree = getAchievement(
+                userAchievements: achievements,
+                identifier: AchievementIds.twentyFiveTree
             )
-            let fiftyTree = findAchievement(
-                in: achievements,
-                id: AchievementIds.fiftyTree
+            let fiftyTree = getAchievement(
+                userAchievements: achievements,
+                identifier: AchievementIds.fiftyTree
             )
             
-            guard let fiveTreeAchievement = fiveTree else {
-                print("Achievement \(AchievementIds.fiveTree) not found")
+            if fiveTree.isCompleted &&
+                twentyFiveTree.isCompleted &&
+                fiftyTree.isCompleted {
                 return
             }
             
-            guard let twentyFiveTreeAchievement = twentyFiveTree else {
-                print("Achievement \(AchievementIds.twentyFiveTree) not found")
-                return
-            }
+            fiveTree.showsCompletionBanner = true
+            fiveTree.percentComplete += 100/5
             
-            guard let fiftyTreeAchievement = fiftyTree else {
-                print("Achievement \(AchievementIds.fiftyTree) not found")
-                return
-            }
+            twentyFiveTree.showsCompletionBanner = true
+            twentyFiveTree.percentComplete += 100/25
             
-            if fiveTreeAchievement.isCompleted &&
-                twentyFiveTreeAchievement.isCompleted &&
-                fiftyTreeAchievement.isCompleted {
-                return
-            }
+            fiftyTree.showsCompletionBanner = true
+            fiftyTree.percentComplete += 100/50
             
-            fiveTreeAchievement.showsCompletionBanner = true
-            fiveTreeAchievement.percentComplete += 100/5
-            
-            twentyFiveTreeAchievement.showsCompletionBanner = true
-            twentyFiveTreeAchievement.percentComplete += 100/25
-            
-            fiftyTreeAchievement.showsCompletionBanner = true
-            fiftyTreeAchievement.percentComplete += 100/50
-            
-            try await GKAchievement.report(
-                [fiveTreeAchievement, twentyFiveTreeAchievement, fiftyTreeAchievement]
-            )
+            try await GKAchievement.report([fiveTree, twentyFiveTree, fiftyTree])
         } catch {
-            print("Error updating \(AchievementIds.fiveTree) and \(AchievementIds.twentyFiveTree) and \(AchievementIds.fiftyTree)")
+            print(
+                "Error updating \(AchievementIds.fiveTree) and/or \(AchievementIds.twentyFiveTree) and/or \(AchievementIds.fiftyTree)"
+            )
         }
     }
     
-    func reportFourTwenty() async {
-        if !checkFourTwentyMark() {
+    func reportGameProgress() async {
+        let reachedFourTwentyMark = checkFourTwentyMark()
+        let reachedSweetspot = checkSweetspot()
+        
+        if !reachedFourTwentyMark && !reachedSweetspot {
             return
         }
         
         do {
             let achievements = try await GKAchievement.loadAchievements()
+            var achievementsToReport: [GKAchievement] = []
             
-            let fourTwenty = findAchievement(
-                in: achievements,
-                id: AchievementIds.fourTwenty
-            )
-            
-            guard let fourTwentyAchievement = fourTwenty else {
-                print("Achievement \(AchievementIds.fourTwenty) not found")
-                return
+            if reachedFourTwentyMark {
+                let fourTwentyAchievement = getAchievement(
+                    userAchievements: achievements,
+                    identifier: AchievementIds.fourTwenty
+                )
+                
+                if !fourTwentyAchievement.isCompleted {
+                    fourTwentyAchievement.showsCompletionBanner = true
+                    fourTwentyAchievement.percentComplete = 100
+                    
+                    achievementsToReport.append(fourTwentyAchievement)
+                }
             }
             
-            if fourTwentyAchievement.isCompleted {
-                return
+            if reachedSweetspot {
+                let sweetspotAchievement = getAchievement(
+                    userAchievements: achievements,
+                    identifier: AchievementIds.sweetspot
+                )
+                
+                if !sweetspotAchievement.isCompleted {
+                    sweetspotAchievement.showsCompletionBanner = true
+                    sweetspotAchievement.percentComplete = 100
+                    
+                    achievementsToReport.append(sweetspotAchievement)
+                }
             }
             
-            fourTwentyAchievement.showsCompletionBanner = true
-            fourTwentyAchievement.percentComplete = 100
-            try await GKAchievement.report([fourTwentyAchievement])
+            achievements.isEmpty ? nil : (try await GKAchievement.report(achievements))
         } catch {
-            print("Error updating first achievement")
+            print("Error updating \(AchievementIds.fourTwenty) and/or \(AchievementIds.sweetspot)")
         }
     }
     
-    private func findAchievement(in achievements: [GKAchievement], id: String) -> GKAchievement? {
-        return achievements.first(where: { achievement in
-            return achievement.identifier == id
+    private func getAchievement(
+        userAchievements: [GKAchievement],
+        identifier: String
+    ) -> GKAchievement {
+        var achievement = userAchievements.first(where: {
+            return $0.identifier == identifier
         })
+        
+        if achievement == nil {
+            achievement = GKAchievement(identifier: identifier)
+        }
+        
+        return achievement!
     }
     
     private func checkFourTwentyMark() -> Bool {
         return Score.shared.score >= 420
     }
     
+    private func checkSweetspot() -> Bool {
+        let score = Score.shared.score
+        let timesDecreased = Score.shared.timesDecreased
+        
+        return score >= 100 && timesDecreased == 0
+    }
+    
     enum AchievementIds {
         static let firstTimeGrower: String = "ggiant001"
-        
-        static let fourTwenty: String = "420bro"
         
         static let fiveTree: String = "5trees"
         static let twentyFiveTree: String = "25trees"
         static let fiftyTree: String = "50trees"
+        
+        static let fourTwenty: String = "420bro"
+        
+        static let sweetspot: String = "sweetspot"
     }
 }
-
-
-

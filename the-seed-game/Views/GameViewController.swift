@@ -126,7 +126,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     
     func reportScore() {
         Task {
-           await achievementManager.reportFourTwenty()
+           await achievementManager.reportGameProgress()
         }
     }
     
