@@ -43,6 +43,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameCameraMovementVelocity: CGFloat = 60
     var playerCanPlay: Bool = true
     
+    let coinManager = CoinManager()
+    
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         
@@ -148,6 +150,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     break
                 }
                 
+                randomlySpawnCoin()
                 removeGameInstructions()
                 modifyDifficulty(pressedIn: pos)
                 setupTrunk(pos: pos)
@@ -490,12 +493,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return false
     }
     
+    func randomlySpawnCoin() {
+        let actualCoin = self.childNode(withName: Coin.Names.coin)
+        
+        if actualCoin != nil {
+            return
+        }
+        
+        let randomValue = Int.random(in: 1...10)
+        
+        if randomValue <= 3 {
+            spawnCoin()
+        }
+    }
+    
     func spawnCoin() {
         let coin = Coin()
         
-        var horizontalDistanceFromCenter = self.frame.width/2 - coin.node.frame.width
+        let horizontalDistanceFromCenter = self.frame.width/2 - coin.node.frame.width
         
-        coin.node.position.y = gameCamera.node.position.y + self.frame.height/2
+        coin.node.position.y = gameCamera.node.position.y + self.frame.height
         coin.node.position.x = CGFloat.random(
             in: -horizontalDistanceFromCenter...horizontalDistanceFromCenter
         )
@@ -547,6 +564,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         if status == .playing && !playerCanPlay && checkIfCanRemoveSunPenality() {
             removeSunPenality()
+        }
+        
+        if status == .playing {
+            detectContactWithCoin()
         }
         
         lastUpdate = currentTime
@@ -616,6 +637,60 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         playerCanPlay = true
+    }
+    
+    func detectContactWithCoin() {
+        let coinNode = self.childNode(withName: Coin.Names.coin)
+        
+        guard let coin = coinNode as? SKSpriteNode else {
+            return
+        }
+        
+        if checkIfTreeTouchedCoin(coin) {
+            addCoinToUserInventary()
+            removeCoin(coin)
+        }
+        
+        if checkIfBottomTouchedCoin(coin) {
+            removeCoin(coin)
+        }
+    }
+    
+    func checkIfTreeTouchedCoin(_ coin: SKSpriteNode) -> Bool {
+        let coinTopPosition = CGPoint(x: coin.position.x, y: coin.position.y+coin.frame.height/2)
+        let coinBottomPosition = CGPoint(x: coin.position.x, y: coin.position.y-coin.frame.height/2)
+        let coinLeftPosition = CGPoint(x: coin.position.x-coin.frame.width/2, y: coin.position.y)
+        let coinRightPosition = CGPoint(x: coin.position.x+coin.frame.width/2, y: coin.position.y)
+        
+        for treeNode in treeNodesLoop {
+            if treeNode.contains(coinTopPosition) ||
+                treeNode.contains(coinBottomPosition) ||
+                treeNode.contains(coinLeftPosition) ||
+                treeNode.contains(coinRightPosition) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func checkIfBottomTouchedCoin(_ coin: SKSpriteNode) -> Bool {
+        let coinTopPosition = coin.position.y + coin.frame.height/2
+        let gameCameraBottomPosition = gameCamera.node.position.y - self.frame.height/2
+        
+        if coinTopPosition <= gameCameraBottomPosition {
+            return true
+        }
+        
+        return false
+    }
+    
+    func addCoinToUserInventary() {
+        coinManager.add(5)
+    }
+    
+    func removeCoin(_ coin: SKSpriteNode) {
+        coin.removeFromParent()
     }
 }
 

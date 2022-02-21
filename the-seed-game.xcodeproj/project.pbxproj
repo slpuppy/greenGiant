@@ -18,6 +18,7 @@
 		0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */; };
 		0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */; };
 		0C244F5C27C41AE500541B36 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C244F5B27C41AE500541B36 /* Coin.swift */; };
+		0C244F5E27C441C900541B36 /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C244F5D27C441C900541B36 /* CoinManager.swift */; };
 		0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D127AC118D0035EC39 /* DifficultyManager.swift */; };
 		0C4616D527AC5E890035EC39 /* HorizontalScreenSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */; };
 		0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DC99427AAC56600EE79E8 /* Intro.swift */; };
@@ -66,6 +67,7 @@
 		0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
 		0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameOverOverlay.swift"; sourceTree = "<group>"; };
 		0C244F5B27C41AE500541B36 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		0C244F5D27C441C900541B36 /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
 		0C4616D127AC118D0035EC39 /* DifficultyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyManager.swift; sourceTree = "<group>"; };
 		0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScreenSide.swift; sourceTree = "<group>"; };
 		0C5DC99427AAC56600EE79E8 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 				754374FF27B688FF0017A658 /* GoogleAds */,
 				0C4616D127AC118D0035EC39 /* DifficultyManager.swift */,
 				756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */,
+				0C244F5D27C441C900541B36 /* CoinManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */,
 				0C9603EA27AF2930000F31E1 /* SKScene+GameCamera.swift in Sources */,
 				0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */,
+				0C244F5E27C441C900541B36 /* CoinManager.swift in Sources */,
 				0C810E3827B54BA700B9989E /* GameAnalytics.swift in Sources */,
 				0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */,
 				0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */,
