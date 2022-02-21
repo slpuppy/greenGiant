@@ -657,10 +657,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func checkIfTreeTouchedCoin(_ coin: SKSpriteNode) -> Bool {
-        let coinTopPosition = CGPoint(x: coin.position.x, y: coin.position.y+coin.frame.height/2)
-        let coinBottomPosition = CGPoint(x: coin.position.x, y: coin.position.y-coin.frame.height/2)
-        let coinLeftPosition = CGPoint(x: coin.position.x-coin.frame.width/2, y: coin.position.y)
-        let coinRightPosition = CGPoint(x: coin.position.x+coin.frame.width/2, y: coin.position.y)
+        let coinTopPosition = CGPoint(x: coin.position.x, y: coin.position.y+coin.frame.height/2-15)
+        let coinBottomPosition = CGPoint(x: coin.position.x, y: coin.position.y-coin.frame.height/2+15)
+        let coinLeftPosition = CGPoint(x: coin.position.x-coin.frame.width/2+15, y: coin.position.y)
+        let coinRightPosition = CGPoint(x: coin.position.x+coin.frame.width/2-15, y: coin.position.y)
         
         for treeNode in treeNodesLoop {
             if treeNode.contains(coinTopPosition) ||
