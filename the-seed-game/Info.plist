@@ -176,5 +176,11 @@
       <string>FALSE</string>
       <key>NSUserTrackingUsageDescription</key>
       <string>Need tracking for analytics and to deliver custom ads</string>
+      
+      <key>GOOGLE_ANALYTICS_IDFV_COLLECTION_ENABLED</key>
+      <false/>
+      
+      <key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
+      <false/>
 </dict>
 </plist>

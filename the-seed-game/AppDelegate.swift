@@ -71,18 +71,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 case .authorized:
                     // Tracking authorization dialog was shown
                     // and we are authorized
-                    Settings.setAdvertiserTrackingEnabled(true)
-                    Settings.isAutoLogAppEventsEnabled = true
-                    Settings.isAdvertiserIDCollectionEnabled = true
+                    Settings.shared.isAdvertiserTrackingEnabled = true
+                    Settings.shared.isAutoLogAppEventsEnabled = true
+                    Settings.shared.isAdvertiserIDCollectionEnabled = true
+                    
+                    Analytics.setUserProperty(
+                        "true",
+                        forName: AnalyticsUserPropertyAllowAdPersonalizationSignals
+                    )
+                    Analytics.setAnalyticsCollectionEnabled(true)
                     
                     print("Authorized")
                 case .denied:
                     // Tracking authorization dialog was
                     // shown and permission is denied
                     
-                    Settings.setAdvertiserTrackingEnabled(false)
-                    Settings.isAutoLogAppEventsEnabled = false
-                    Settings.isAdvertiserIDCollectionEnabled = false
+                    Settings.shared.isAdvertiserTrackingEnabled = false
+                    Settings.shared.isAutoLogAppEventsEnabled = false
+                    Settings.shared.isAdvertiserIDCollectionEnabled = false
+                    
+                    Analytics.setUserProperty(
+                        "false",
+                        forName: AnalyticsUserPropertyAllowAdPersonalizationSignals
+                    )
+                    Analytics.setAnalyticsCollectionEnabled(false)
+                    
                     print("Denied")
                 case .notDetermined:
                     // Tracking authorization dialog has not been shown
