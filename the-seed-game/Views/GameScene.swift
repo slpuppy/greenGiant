@@ -490,6 +490,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return false
     }
     
+    func spawnCoin() {
+        let coin = Coin()
+        
+        var horizontalDistanceFromCenter = self.frame.width/2 - coin.node.frame.width
+        
+        coin.node.position.y = gameCamera.node.position.y + self.frame.height/2
+        coin.node.position.x = CGFloat.random(
+            in: -horizontalDistanceFromCenter...horizontalDistanceFromCenter
+        )
+        
+        self.addChild(coin.node)
+    }
+    
     func touchMoved(toPoint pos : CGPoint) {
     }
     
