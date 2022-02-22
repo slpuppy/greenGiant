@@ -690,7 +690,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func removeCoin(_ coin: SKSpriteNode) {
-        coin.removeFromParent()
+        coin.run(.sequence([
+            .group([
+                .fadeOut(withDuration: 0.2),
+                .scale(to: 0, duration: 0.2),
+            ]),
+            .run {
+                coin.removeFromParent()
+            }
+        ]))
     }
 }
 
