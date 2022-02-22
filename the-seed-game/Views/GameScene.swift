@@ -108,9 +108,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let sunNode = Sun.buildSun(frame: self.frame)
         sun = Sun.init(node: sunNode)
         sun.node.zPosition = 1
-        
-        sun.node.anchorPoint = .init(x: 0.5, y: 1)
-        sun.node.position = CGPoint(x: 0, y: -20)
+        sun.node.position = CGPoint(x: 0, y: -sun.node.frame.height/2 + 100)
         gameCamera.node.addChild(sun.node)
     }
     
@@ -181,8 +179,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func runIntroCutsceneAnimation() {
         intro.runCutsceneAnimation()
         
-        sun.node.anchorPoint = .init(x: 0.5, y: 0.5)
-        sun.node.position.y -= sun.node.size.height/2
         sun.runIntroCutsceneAnimation(frame: self.frame)
     }
     
@@ -201,7 +197,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         firstTrunk = Trunk.buildTrunk()
         firstTrunk.node.position.y = self.frame.minY
         firstTrunk.node.physicsBody?.isDynamic = false
-        firstTrunk.node.zPosition = 2
+        firstTrunk.node.zPosition = 5
         
         let firstTrunkAnimation = SKAction.move(to: CGPoint(x: 0, y: self.frame.minY + 80), duration: 0.5)
         firstTrunkAnimation.timingMode = .easeIn

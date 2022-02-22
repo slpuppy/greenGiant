@@ -41,21 +41,19 @@ class Sun {
         
         let sun = SKSpriteNode(texture: SKTexture(image: UIImage(named: "sun") ?? UIImage()))
         sun.scale(to: CGSize(width: sun.size.width*1.4, height: sun.size.height*1.4))
-        sun.zPosition = 2
-        sun.anchorPoint = .init(x: 0.5, y: 0.5)
-        sun.position.y = frame.maxY
+        sun.zPosition = 1
         sun.name = Names.sun
         
         let sunOverlay = SKSpriteNode(
             texture: SKTexture(image: UIImage(named: "sunOverlay") ?? UIImage())
         )
-        sunOverlay.zPosition = 1
-        sunOverlay.anchorPoint = .init(x: 0.5, y: 0.5)
+        sunOverlay.setScale(1.2)
+        sunOverlay.zPosition = 0
         sunOverlay.name = Names.sunOverlay
         
-        sun.addChild(sunOverlay)
+        sunOverlay.addChild(sun)
         
-        return sun
+        return sunOverlay
     }
 
     func runIntroStartAnimation() {
@@ -68,7 +66,7 @@ class Sun {
     }
 
     func runIntroCutsceneAnimation(frame: CGRect) {
-        let sunAnimation = SKAction.move(to: CGPoint(x: 0.0, y: frame.maxY + 200), duration: 1.5)
+        let sunAnimation = SKAction.move(to: CGPoint(x: 0.0, y: frame.maxY + 250), duration: 1.5)
           sunAnimation.timingMode = .easeInEaseOut
         
         
