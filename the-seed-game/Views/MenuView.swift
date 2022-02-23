@@ -77,8 +77,35 @@ class MenuView: UIView {
             make.trailing.equalTo(self.snp_trailingMargin).offset(-6)
             make.size.equalTo(30)
         }
-        
     }
     
+    func changeMuteButtonColor(to type: MuteButtonType) {
+        switch type {
+        case .muted:
+            muteButton.tintColor = UIColor(named: "scoreColor")
+        case .playing:
+            muteButton.tintColor = .systemGray2
+        }
+    }
     
+    func changePauseButtonImage(to type: PauseButtonImage) {
+        switch type {
+        case .pause:
+            pauseButton.setImage(UIImage(systemName: "pause"), for: .normal)
+            pauseButton.tintColor = .systemGray2
+        case .play:
+            pauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
+            pauseButton.tintColor = UIColor(named: "scoreColor")
+        }
+    }
+    
+    enum MuteButtonType {
+        case muted
+        case playing
+    }
+    
+    enum PauseButtonImage {
+        case pause
+        case play
+    }
 }

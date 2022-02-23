@@ -34,7 +34,6 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     override func viewDidLoad() {
         super.viewDidLoad()
         MusicPlayer.shared.startBackgroundMusic()
-        MusicPlayer.shared.audioPlayer?.volume = 0.3
         
         if let view = self.view as! SKView? {
             let scene = GameScene()
@@ -67,37 +66,51 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         menuView.pauseButton.addTarget(self, action: #selector(pauseTapped), for: .touchDown)
     }
     
-    @objc func muteTapped() {
-        GameAnalytics.shared.logTappedMuteButton()
-        
-        if MusicPlayer.shared.audioPlayer?.volume != 0 {
-            MusicPlayer.shared.audioPlayer?.volume = 0
-            menuView.muteButton.tintColor = UIColor(named: "scoreColor")
-        } else {
-            menuView.muteButton.tintColor = .systemGray2
-            MusicPlayer.shared.audioPlayer?.volume = 0.3
-        }
-    }
-    
     func displayAd(){
         adManager.presentInterstitialAd(in: self)
     }
     
+    @objc func muteTapped() {
+        GameAnalytics.shared.logTappedMuteButton()
+        
+        if let view = self.view as! SKView?, let gameScene = view.scene as? GameScene {
+            if gameScene.isPaused && MusicPlayer.shared.status == .muted {
+                MusicPlayer.shared.setToLowVolume()
+                menuView.changeMuteButtonColor(to: .playing)
+                return
+            }
+        }
+        
+        if MusicPlayer.shared.status == .muted {
+            MusicPlayer.shared.unmute()
+            menuView.changeMuteButtonColor(to: .playing)
+            return
+        }
+        
+        MusicPlayer.shared.mute()
+        menuView.changeMuteButtonColor(to: .muted)
+    }
     
     @objc func pauseTapped() {
-        if let view = self.view as! SKView?,
-        let gameScene = view.scene as? GameScene {
+        if let view = self.view as! SKView?, let gameScene = view.scene as? GameScene {
             GameAnalytics.shared.logTappedPauseButton(isPaused: gameScene.isPaused)
             
             gameScene.isPaused.toggle()
-            playOrPause()
             
-            if gameScene.isPaused == true {
-                menuView.pauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-                menuView.pauseButton.tintColor = UIColor(named: "scoreColor")
-            } else {
-                menuView.pauseButton.setImage(UIImage(systemName: "pause"), for: .normal)
-                menuView.pauseButton.tintColor = .systemGray2
+            if gameScene.isPaused {
+                menuView.changePauseButtonImage(to: .play)
+                
+                if MusicPlayer.shared.status == .fullVolume {
+                    MusicPlayer.shared.setToLowVolume()
+                }
+                
+                return
+            }
+            
+            menuView.changePauseButtonImage(to: .pause)
+            
+            if MusicPlayer.shared.status == .lowVolume {
+                MusicPlayer.shared.unmute()
             }
         }
     }
