@@ -43,7 +43,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var gameCameraMovementVelocity: CGFloat = 60
     var playerCanPlay: Bool = true
     
-    let coinManager = CoinManager()
+    
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
@@ -682,9 +682,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addCoinToUserInventary() {
-        coinManager.add(5)
+        UserCoins.shared.add(5)
     }
-    
+     
     func removeCoin(_ coin: SKSpriteNode) {
         coin.run(.sequence([
             .group([
