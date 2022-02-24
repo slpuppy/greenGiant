@@ -10,7 +10,6 @@ import SnapKit
 
 class UserCoinsView: UIView {
     
-    
     lazy var coinImage: UIImageView = {
         let view = UIImageView(image: UIImage(named: "shopCoin"))
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -28,15 +27,16 @@ class UserCoinsView: UIView {
     lazy var userCoinsLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "\(UserCoins.shared.coins)"
         return label
     }()
     
-    override init(frame: CGRect = .zero) {
+    init(frame: CGRect = .zero, userCoins: Int) {
         super.init(frame: frame)
+        self.userCoinsLabel.text = "\(userCoins)"
         self.addSubview(coinImage)
         self.addSubview(userCoinsLabel)
         self.addSubview(label)
+        setupViewConstraints()
         
     }
     
@@ -44,16 +44,23 @@ class UserCoinsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
-    private func setupViewConstraints() {
+   private func setupViewConstraints() {
         self.label.snp.makeConstraints { make in
             make.leading.equalTo(self.snp.leading)
             make.centerY.equalTo(self.snp.centerY)
         }
         self.userCoinsLabel.snp.makeConstraints { make in
             make.leading.equalTo(label.snp.trailing).offset(15)
-            make.top.equalTo(self.snp.top)
+            
+     
         }
+        self.coinImage.snp.makeConstraints { make in
+            make.leading.equalTo(userCoinsLabel.snp.trailing).offset(15)
+            make.trailing.equalTo(self.snp.trailing)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+        }
+        
         
         
         

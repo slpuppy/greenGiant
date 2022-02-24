@@ -50,8 +50,10 @@
 		7569C3A127C6703500A509C3 /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A027C6703500A509C3 /* ShopItem.swift */; };
 		7569C3A327C6774700A509C3 /* UnderShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A227C6774700A509C3 /* UnderShopViewController.swift */; };
 		7569C3A627C6778400A509C3 /* UnderShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A527C6778300A509C3 /* UnderShopView.swift */; };
-		7569C3A827C6792F00A509C3 /* ShopItemFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A727C6792F00A509C3 /* ShopItemFrame.swift */; };
+		7569C3A827C6792F00A509C3 /* ShopItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A727C6792F00A509C3 /* ShopItemView.swift */; };
 		7569C3AA27C67A7000A509C3 /* UserCoinsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A927C67A7000A509C3 /* UserCoinsView.swift */; };
+		7569C3AC27C7AA3C00A509C3 /* PurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3AB27C7AA3C00A509C3 /* PurchaseButton.swift */; };
+		7569C3AF27C7B6DD00A509C3 /* Sketch.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7569C3AE27C7B6DD00A509C3 /* Sketch.ttf */; };
 		756C9F7A27BB2EEE00B011F0 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */; };
 		757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757BBD4E27A9592300827E15 /* Scoreboard.swift */; };
 		758812BA27A81E5C00CB693A /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758812B927A81E5C00CB693A /* Score.swift */; };
@@ -107,8 +109,10 @@
 		7569C3A027C6703500A509C3 /* ShopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
 		7569C3A227C6774700A509C3 /* UnderShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderShopViewController.swift; sourceTree = "<group>"; };
 		7569C3A527C6778300A509C3 /* UnderShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderShopView.swift; sourceTree = "<group>"; };
-		7569C3A727C6792F00A509C3 /* ShopItemFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemFrame.swift; sourceTree = "<group>"; };
+		7569C3A727C6792F00A509C3 /* ShopItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemView.swift; sourceTree = "<group>"; };
 		7569C3A927C67A7000A509C3 /* UserCoinsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoinsView.swift; sourceTree = "<group>"; };
+		7569C3AB27C7AA3C00A509C3 /* PurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseButton.swift; sourceTree = "<group>"; };
+		7569C3AE27C7B6DD00A509C3 /* Sketch.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sketch.ttf; sourceTree = "<group>"; };
 		756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementManager.swift; sourceTree = "<group>"; };
 		757BBD4E27A9592300827E15 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		758812B927A81E5C00CB693A /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 				75100A5827A5B51F006ACB87 /* GameStatus.swift */,
 				0C022BEE27A42C7B00B2E88A /* Main.storyboard */,
 				0C022BF127A42C7D00B2E88A /* Assets.xcassets */,
+				7569C3AE27C7B6DD00A509C3 /* Sketch.ttf */,
 				75EAA84B27B2CD8600FFC8EF /* background.mp3 */,
 				0C022BF327A42C7D00B2E88A /* LaunchScreen.storyboard */,
 			);
@@ -261,8 +266,9 @@
 			children = (
 				0C9603FB27B2BA74000F31E1 /* MenuView.swift */,
 				7569C3A527C6778300A509C3 /* UnderShopView.swift */,
+				7569C3AB27C7AA3C00A509C3 /* PurchaseButton.swift */,
 				7569C3A927C67A7000A509C3 /* UserCoinsView.swift */,
-				7569C3A727C6792F00A509C3 /* ShopItemFrame.swift */,
+				7569C3A727C6792F00A509C3 /* ShopItemView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -351,6 +357,7 @@
 			files = (
 				75EAA84C27B2CD8600FFC8EF /* background.mp3 in Resources */,
 				0C022BF027A42C7B00B2E88A /* Main.storyboard in Resources */,
+				7569C3AF27C7B6DD00A509C3 /* Sketch.ttf in Resources */,
 				0C810E3327B5344D00B9989E /* GoogleService-Info.plist in Resources */,
 				0C022BF227A42C7D00B2E88A /* Assets.xcassets in Resources */,
 				0C022BF527A42C7D00B2E88A /* LaunchScreen.storyboard in Resources */,
@@ -463,12 +470,13 @@
 				75100A5B27A5B5A5006ACB87 /* Walls.swift in Sources */,
 				0C9603E827AF2837000F31E1 /* GameCamera.swift in Sources */,
 				7543750127B689120017A658 /* AdManager.swift in Sources */,
+				7569C3AC27C7AA3C00A509C3 /* PurchaseButton.swift in Sources */,
 				0C022BE527A42C7B00B2E88A /* AppDelegate.swift in Sources */,
 				0C244F5C27C41AE500541B36 /* Coin.swift in Sources */,
 				7569C3AA27C67A7000A509C3 /* UserCoinsView.swift in Sources */,
 				75100A6227A5D2D3006ACB87 /* SKScene+LittleTrunk.swift in Sources */,
 				0C9603E627AECE27000F31E1 /* SKScene+GameInstructions.swift in Sources */,
-				7569C3A827C6792F00A509C3 /* ShopItemFrame.swift in Sources */,
+				7569C3A827C6792F00A509C3 /* ShopItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
