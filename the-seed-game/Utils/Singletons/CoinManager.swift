@@ -13,7 +13,7 @@ class UserCoins {
     static let shared = UserCoins.init()
     
    private init() {
-       UserDefaults().set(0, forKey: UserDefaultsKeys.coins)
+
        self.coins = UserDefaults().integer(forKey: UserDefaultsKeys.coins)
        
     }

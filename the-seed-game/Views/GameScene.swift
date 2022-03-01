@@ -227,7 +227,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         firstTrunk.node.physicsBody?.isDynamic = false
         firstTrunk.node.zPosition = 5
         
-        let firstTrunkAnimation = SKAction.move(to: CGPoint(x: 0, y: self.frame.minY + 80), duration: 0.5)
+        let firstTrunkAnimation = SKAction.move(to: CGPoint(x: 0, y: self.frame.minY + 120), duration: 0.5)
         firstTrunkAnimation.timingMode = .easeIn
         firstTrunk.node.run(.sequence([.wait(forDuration: 0.5), firstTrunkAnimation]))
         self.addChild(firstTrunk)
@@ -711,7 +711,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addCoinToUserInventary() {
-        UserCoins.shared.add(5)
+        UserCoins.shared.add(1)
     }
     
     func removeCoin(_ coin: SKSpriteNode) {
