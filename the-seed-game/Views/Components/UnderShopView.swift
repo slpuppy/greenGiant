@@ -59,7 +59,7 @@ class UnderShopView: UIView {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
+
     lazy var itemContainer: UIView = {
         let view = UIView()
         view.addSubview(leftArrow)
@@ -67,16 +67,16 @@ class UnderShopView: UIView {
         view.addSubview(shopItemView)
         view.translatesAutoresizingMaskIntoConstraints = false
         shopItemView.snp.makeConstraints { make in
-            make.centerY.equalTo(view.snp.centerY)
-            make.centerX.equalTo(view.snp.centerX)
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }
         leftArrow.snp.makeConstraints { make in
+            make.leading.equalToSuperview()
             make.centerY.equalTo(view.snp.centerY)
-            make.trailing.equalTo(shopItemView.snp.leading).offset(18)
+            make.trailing.equalTo(shopItemView.snp.leading).offset(-18)
         }
       rightArrow.snp.makeConstraints { make in
+            make.trailing.equalToSuperview()
             make.centerY.equalTo(view.snp.centerY)
             make.leading.equalTo(shopItemView.snp.trailing).offset(18)
         }
@@ -109,22 +109,27 @@ class UnderShopView: UIView {
         
     }
     
+    
     func setupSubviews(){
         self.addSubview(caveBackground)
+        self.addSubview(lightRay)
         self.addSubview(growLed)
         self.addSubview(title)
-        self.addSubview(lightRay)
         self.addSubview(itemContainer)
         self.addSubview(yourCoins)
-       // self.addSubview(purchaseButton)
+        self.addSubview(purchaseButton)
+        
     
     }
     
     func setupViewConstraints() {
         caveBackground.snp.makeConstraints { make in
-            make.centerY.equalTo(self.snp.centerY)
-            make.centerX.equalTo(self.snp.centerX)
+            make.top.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
         }
+      
         growLed.snp.makeConstraints { make in
             make.centerX.equalTo(caveBackground.snp.centerX)
             make.top.equalTo(caveBackground.snp.top).offset(-10)
@@ -142,10 +147,22 @@ class UnderShopView: UIView {
             make.top.equalTo(yourCoins.snp.bottom).offset(32)
             
         }
-//        purchaseButton.snp.makeConstraints { make in
-//            make.centerX.equalTo(caveBackground.snp.centerX)
-//            make.top.equalTo(itemContainer.snp.bottom).offset(24)
-//        }
+        purchaseButton.snp.makeConstraints { make in
+            make.centerX.equalTo(caveBackground.snp.centerX)
+            make.top.equalTo(itemContainer.snp.bottom).offset(24)
+        }
+        lightRay.snp.makeConstraints { make in
+            make.leading.equalTo(caveBackground.snp.leading)
+            make.trailing.equalTo(caveBackground.snp.trailing)
+            make.bottom.equalTo(caveBackground.snp.bottom).offset(-7)
+        }
+       
+         
+            
+            
+          
+        
+    
         
         
         

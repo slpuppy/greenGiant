@@ -54,6 +54,8 @@
 		7569C3AA27C67A7000A509C3 /* UserCoinsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A927C67A7000A509C3 /* UserCoinsView.swift */; };
 		7569C3AC27C7AA3C00A509C3 /* PurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3AB27C7AA3C00A509C3 /* PurchaseButton.swift */; };
 		7569C3AF27C7B6DD00A509C3 /* Sketch.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7569C3AE27C7B6DD00A509C3 /* Sketch.ttf */; };
+		7569C3B127C91E6900A509C3 /* HomeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3B027C91E6900A509C3 /* HomeButtons.swift */; };
+		7569C3B327CE72D600A509C3 /* ExitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3B227CE72D600A509C3 /* ExitButton.swift */; };
 		756C9F7A27BB2EEE00B011F0 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */; };
 		757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757BBD4E27A9592300827E15 /* Scoreboard.swift */; };
 		758812BA27A81E5C00CB693A /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758812B927A81E5C00CB693A /* Score.swift */; };
@@ -113,6 +115,8 @@
 		7569C3A927C67A7000A509C3 /* UserCoinsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoinsView.swift; sourceTree = "<group>"; };
 		7569C3AB27C7AA3C00A509C3 /* PurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseButton.swift; sourceTree = "<group>"; };
 		7569C3AE27C7B6DD00A509C3 /* Sketch.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sketch.ttf; sourceTree = "<group>"; };
+		7569C3B027C91E6900A509C3 /* HomeButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtons.swift; sourceTree = "<group>"; };
+		7569C3B227CE72D600A509C3 /* ExitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitButton.swift; sourceTree = "<group>"; };
 		756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementManager.swift; sourceTree = "<group>"; };
 		757BBD4E27A9592300827E15 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		758812B927A81E5C00CB693A /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 				0C98113027BB129D00E3F0F3 /* Fire.swift */,
 				0C244F5B27C41AE500541B36 /* Coin.swift */,
 				7569C3A027C6703500A509C3 /* ShopItem.swift */,
+				7569C3B027C91E6900A509C3 /* HomeButtons.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,6 +274,7 @@
 				7569C3AB27C7AA3C00A509C3 /* PurchaseButton.swift */,
 				7569C3A927C67A7000A509C3 /* UserCoinsView.swift */,
 				7569C3A727C6792F00A509C3 /* ShopItemView.swift */,
+				7569C3B227CE72D600A509C3 /* ExitButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -445,6 +451,7 @@
 				75100A5527A5AA81006ACB87 /* Background.swift in Sources */,
 				75EAA84A27B2CD1E00FFC8EF /* MusicPlayer.swift in Sources */,
 				0C9603E027AD55BF000F31E1 /* CGPoint+.swift in Sources */,
+				7569C3B327CE72D600A509C3 /* ExitButton.swift in Sources */,
 				0C9603E427AEC21D000F31E1 /* GameInstructions.swift in Sources */,
 				0C98113127BB129D00E3F0F3 /* Fire.swift in Sources */,
 				75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */,
@@ -459,6 +466,7 @@
 				0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */,
 				0C9603FC27B2BA74000F31E1 /* MenuView.swift in Sources */,
 				75100A6827A600CF006ACB87 /* SKScene+Sun.swift in Sources */,
+				7569C3B127C91E6900A509C3 /* HomeButtons.swift in Sources */,
 				0C810E3627B5405A00B9989E /* GameCrashlytics.swift in Sources */,
 				75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */,
 				75100A5927A5B51F006ACB87 /* GameStatus.swift in Sources */,
@@ -629,7 +637,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.11;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = L5C36X97NN;
+				DEVELOPMENT_TEAM = C7K95G5W2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "the-seed-game/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -646,7 +654,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiantt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiant;
 				PRODUCT_NAME = GGiant;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -665,7 +673,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.11;
-				DEVELOPMENT_TEAM = L5C36X97NN;
+				DEVELOPMENT_TEAM = C7K95G5W2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "the-seed-game/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -682,7 +690,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiantt;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiant;
 				PRODUCT_NAME = GGiant;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;

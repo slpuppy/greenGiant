@@ -13,7 +13,9 @@ class UserCoins {
     static let shared = UserCoins.init()
     
    private init() {
-        self.coins = UserDefaults().integer(forKey: UserDefaultsKeys.coins)
+       UserDefaults().set(0, forKey: UserDefaultsKeys.coins)
+       self.coins = UserDefaults().integer(forKey: UserDefaultsKeys.coins)
+       
     }
     
     func add(_ value: Int) {

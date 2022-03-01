@@ -24,18 +24,21 @@ class ShopItemView: UIView {
     
     lazy var itemName: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "Sketch", size: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var itemTypeLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "Sketch", size: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     lazy var itemEffectLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "Sketch", size: 14)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -55,8 +58,8 @@ class ShopItemView: UIView {
     func setupComponentsData(_ data: ShopItem){
         itemImage.image = data.image
         itemName.text = data.name
-        itemTypeLabel.text = data.type.rawValue
-        itemEffectLabel.text = data.effect
+        itemTypeLabel.text = "Type: \(data.type.rawValue)"
+        itemEffectLabel.text = "Effect: \(data.effect)"
    }
 
     func setupSubviews() {
@@ -72,6 +75,8 @@ class ShopItemView: UIView {
             make.centerX.equalTo(self.snp.centerX)
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             
         }
         itemImage.snp.makeConstraints { make in
@@ -79,7 +84,7 @@ class ShopItemView: UIView {
             make.centerY.equalTo(imageFrame.snp.centerY)
         }
         itemName.snp.makeConstraints { make in
-            make.top.equalTo(imageFrame.snp.top).offset(16)
+            make.top.equalTo(imageFrame.snp.top).offset(20)
             make.leading.equalTo(itemImage.snp.trailing).offset(10)
         }
         itemTypeLabel.snp.makeConstraints { make in
@@ -87,10 +92,14 @@ class ShopItemView: UIView {
             make.leading.equalTo(itemName.snp.leading)
             }
         itemEffectLabel.snp.makeConstraints { make in
-            make.top.equalTo(itemName.snp.bottom).offset(8)
+            make.top.equalTo(itemTypeLabel.snp.bottom).offset(8)
             make.leading.equalTo(itemName.snp.leading)
         }
         
+    }
+    
+    func update(_ data: ShopItem){
+        setupComponentsData(data)
     }
     
 }

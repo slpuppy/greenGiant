@@ -21,11 +21,13 @@ class UserCoinsView: UIView {
         let label = UILabel()
             label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Your Coins:"
+        label.font = UIFont(name: "Sketch", size: 22)
         return label
     }()
     
     lazy var userCoinsLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "Sketch", size: 22)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -60,14 +62,11 @@ class UserCoinsView: UIView {
             make.top.equalToSuperview()
             make.bottom.equalToSuperview()
         }
-        
-        
-        
-        
-        
+   }
+    
+    func update(userCoins: Int) {
+        self.userCoinsLabel.text = "\(userCoins)"
     }
-    
-    
     
     
 }
