@@ -18,7 +18,7 @@
 		0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */; };
 		0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */; };
 		0C244F5C27C41AE500541B36 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C244F5B27C41AE500541B36 /* Coin.swift */; };
-		0C244F5E27C441C900541B36 /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C244F5D27C441C900541B36 /* CoinManager.swift */; };
+		0C244F5E27C441C900541B36 /* UserCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C244F5D27C441C900541B36 /* UserCoins.swift */; };
 		0C3B078C27BEDCE1008D2E6B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078A27BEDC71008D2E6B /* AdSupport.framework */; };
 		0C3B078E27BEDCE8008D2E6B /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */; };
 		0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D127AC118D0035EC39 /* DifficultyManager.swift */; };
@@ -79,7 +79,7 @@
 		0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
 		0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameOverOverlay.swift"; sourceTree = "<group>"; };
 		0C244F5B27C41AE500541B36 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
-		0C244F5D27C441C900541B36 /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
+		0C244F5D27C441C900541B36 /* UserCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoins.swift; sourceTree = "<group>"; };
 		0C3B078A27BEDC71008D2E6B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		0C4616D127AC118D0035EC39 /* DifficultyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyManager.swift; sourceTree = "<group>"; };
@@ -290,7 +290,7 @@
 		757BBD4D27A9590F00827E15 /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
-				0C244F5D27C441C900541B36 /* CoinManager.swift */,
+				0C244F5D27C441C900541B36 /* UserCoins.swift */,
 				758812B927A81E5C00CB693A /* Score.swift */,
 				75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */,
 				0C810E3527B5405A00B9989E /* GameCrashlytics.swift */,
@@ -467,7 +467,7 @@
 				757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */,
 				0C9603EA27AF2930000F31E1 /* SKScene+GameCamera.swift in Sources */,
 				0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */,
-				0C244F5E27C441C900541B36 /* CoinManager.swift in Sources */,
+				0C244F5E27C441C900541B36 /* UserCoins.swift in Sources */,
 				0C810E3827B54BA700B9989E /* GameAnalytics.swift in Sources */,
 				0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */,
 				7569C39F27C6700000A509C3 /* ShopManager.swift in Sources */,
@@ -641,13 +641,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.11;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = C7K95G5W2H;
+				DEVELOPMENT_TEAM = L5C36X97NN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "the-seed-game/Info.plist";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Need tracking for analytics and to deliver custom ads";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -662,9 +663,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiant;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiantt;
 				PRODUCT_NAME = GGiant;
-				PROVISIONING_PROFILE_SPECIFIER = "Provisioning Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -678,12 +679,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.11;
-				DEVELOPMENT_TEAM = C7K95G5W2H;
+				DEVELOPMENT_TEAM = L5C36X97NN;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "the-seed-game/Info.plist";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Need tracking for analytics and to deliver custom ads";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -698,9 +700,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiant;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiantt;
 				PRODUCT_NAME = GGiant;
-				PROVISIONING_PROFILE_SPECIFIER = "Provisioning Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

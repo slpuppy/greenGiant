@@ -19,15 +19,17 @@ class UserCoinsView: UIView {
     
     lazy var label: UILabel = {
         let label = UILabel()
-            label.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Your Coins:"
         label.font = UIFont(name: "Sketch", size: 22)
+        label.textColor = .black
         return label
     }()
     
     lazy var userCoinsLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Sketch", size: 22)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

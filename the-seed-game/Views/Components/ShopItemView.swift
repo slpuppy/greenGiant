@@ -25,6 +25,7 @@ class ShopItemView: UIView {
     lazy var itemName: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Sketch", size: 22)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -32,6 +33,7 @@ class ShopItemView: UIView {
     lazy var itemTypeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Sketch", size: 14)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -39,6 +41,7 @@ class ShopItemView: UIView {
     lazy var itemEffectLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Sketch", size: 14)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

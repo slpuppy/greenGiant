@@ -36,6 +36,7 @@ class PurchaseButton: UIButton {
     lazy var priceLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Sketch", size: 20)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -43,6 +44,7 @@ class PurchaseButton: UIButton {
     lazy var unlockLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Sketch", size: 18)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
