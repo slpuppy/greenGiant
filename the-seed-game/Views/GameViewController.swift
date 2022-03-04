@@ -53,6 +53,10 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         
     }
     
+    func presentShop(){
+        print("presented")
+        self.present(UnderShopViewController(), animated: true, completion: nil)
+    }
     
     func setupMenuBar(){
         view.addSubview(menuView)

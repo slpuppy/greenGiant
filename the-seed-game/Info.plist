@@ -182,5 +182,10 @@
       
       <key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
       <false/>
+      
+      <key>UIAppFonts</key>
+      <array>
+        <string>Sketch.ttf</string>
+      </array>
 </dict>
 </plist>

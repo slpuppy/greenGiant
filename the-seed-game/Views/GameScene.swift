@@ -17,6 +17,7 @@ protocol GameSceneDelegate: AnyObject {
     func displayAd()
     func reportFirstAchievement()
     func reportScore()
+    func presentShop()
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -36,39 +37,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var animationRunning: Bool = false
     var status: GameStatus = .intro
     var lastUpdate: TimeInterval = 0
-
+    var homeButton: HomeButtons!
+    
     
     var difficultyManager: DifficultyManager!
     
     var gameCameraMovementVelocity: CGFloat = 60
     var playerCanPlay: Bool = true
     
-    let coinManager = CoinManager()
+    
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         
-//        #if DEBUG
-//           view.showsPhysics = true
-//           view.showsNodeCount = true
-//           view.showsFPS = true
-//           //        self.speed = -50
-//        #endif
+        //        #if DEBUG
+        //           view.showsPhysics = true
+        //           view.showsNodeCount = true
+        //           view.showsFPS = true
+        //           //        self.speed = -50
+        //        #endif
         
         setupScene(view: view)
         setupCamera()
         setupBackgrounds()
+        setupHomeButtons()
         setupSun()
         setupDifficultyManager()
         setupIntro()
         runIntroStartAnimation()
     }
     
+    
     // Prepara a cena
     func setupScene(view: SKView) {
         self.size = view.frame.size
-        self.backgroundColor = UIColor(named: "backgroundColor") ?? .white
+        self.backgroundColor = .black
         self.anchorPoint = .init(x: 0.5, y: 0.5)
+    }
+    
+    func setupHomeButtons() {
+        homeButton = HomeButtons(frame: self.frame)
+        homeButton.node.position.y = self.frame.minY + 85
+        self.addChild(homeButton.node)
     }
     
     func setupDifficultyManager() {
@@ -80,6 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameCamera = GameCamera()
         self.camera = gameCamera.node
         self.addChild(gameCamera)
+       // gameCamera.node.position.y -= 100
     }
     
     // Prepara os backgrounds do jogo
@@ -108,13 +119,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let sunNode = Sun.buildSun(frame: self.frame)
         sun = Sun.init(node: sunNode)
         sun.node.zPosition = 1
-        sun.node.position = CGPoint(x: 0, y: -sun.node.frame.height/2 + 100)
+        sun.node.position = CGPoint(x: 0, y: (-sun.node.frame.height/2) + 60 )
         gameCamera.node.addChild(sun.node)
     }
     
     // Prepara a cena de introdução do jogo
     func setupIntro() {
         intro = Intro(frame: self.frame)
+        
         self.addChild(intro)
         
     }
@@ -129,6 +141,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func touchDown(atPoint pos : CGPoint) {
+        
         GameCrashlytics.shared.logTap(at: pos, at: lastUpdate)
         
         if animationRunning {
@@ -138,16 +151,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch status {
         case .intro:
-            gameSceneDelegate?.reportFirstAchievement()
-            runIntroCutsceneAnimation()
-            setupStartGame()
-            gameSceneDelegate?.setupMenuBar()
+            let homeButtonCordinatePos = homeButton.node.convert(pos, from: self)
+            if homeButton.shopButton.contains(homeButtonCordinatePos) {
+                print("clicked shop")
+                gameSceneDelegate?.presentShop()
+                return
+                
+            }
+            if homeButton.leaderboardButton.contains(homeButtonCordinatePos){
+                print("clicked shop")
+                gameSceneDelegate?.leaderboardTapped()
+                return
+            }
+            let introCordinatePos = intro.node.convert(pos, from: self)
+            if intro.seed.contains(introCordinatePos) {
+                gameSceneDelegate?.reportFirstAchievement()
+                runIntroCutsceneAnimation()
+                setupStartGame()
+                gameSceneDelegate?.setupMenuBar()
+            }
         case .playing:
             if self.scene?.isPaused != true {
                 if !playerCanPlay {
                     break
                 }
-                
                 randomlySpawnCoin()
                 removeGameInstructions()
                 modifyDifficulty(pressedIn: pos)
@@ -193,13 +220,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameCamera.node.addChild(rightWall)
         walls = Walls(rightWall: rightWall, leftWall: leftWall)
         
+        homeButton.removeButtons()
         // Constroi o primeiro tronco
         firstTrunk = Trunk.buildTrunk()
         firstTrunk.node.position.y = self.frame.minY
         firstTrunk.node.physicsBody?.isDynamic = false
         firstTrunk.node.zPosition = 5
         
-        let firstTrunkAnimation = SKAction.move(to: CGPoint(x: 0, y: self.frame.minY + 80), duration: 0.5)
+        let firstTrunkAnimation = SKAction.move(to: CGPoint(x: 0, y: self.frame.minY + 120), duration: 0.5)
         firstTrunkAnimation.timingMode = .easeIn
         firstTrunk.node.run(.sequence([.wait(forDuration: 0.5), firstTrunkAnimation]))
         self.addChild(firstTrunk)
@@ -432,6 +460,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Score.shared.resetScore()
         
         setupIntro()
+        setupHomeButtons()
         setupSun()
         runIntroStartAnimation()
         status = .intro
@@ -557,7 +586,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if status == .playing && Score.shared.score > 0 && checkIfReachedSun() {
             reachedSunPenality()
         }
-
+        
         if status == .playing && !playerCanPlay && checkIfCanRemoveSunPenality() {
             removeSunPenality()
         }
@@ -682,7 +711,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func addCoinToUserInventary() {
-        coinManager.add(5)
+        UserCoins.shared.add(1)
     }
     
     func removeCoin(_ coin: SKSpriteNode) {

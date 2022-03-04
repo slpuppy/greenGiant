@@ -7,11 +7,15 @@
 
 import Foundation
 
-class CoinManager {
-    var coins: Int
+class UserCoins {
     
-    init() {
-        self.coins = UserDefaults().integer(forKey: UserDefaultsKeys.coins)
+    var coins: Int
+    static let shared = UserCoins.init()
+    
+   private init() {
+
+       self.coins = UserDefaults().integer(forKey: UserDefaultsKeys.coins)
+       
     }
     
     func add(_ value: Int) {

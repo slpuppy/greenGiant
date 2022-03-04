@@ -22,7 +22,7 @@ class Intro {
         self.seed = Intro.buildSeed(from: frame)
         self.title = Intro.buildTitle(from: frame)
         self.subtitle = Intro.buildSubtitle(from: frame)
-        self.upBranch = Intro.buildBranch()
+        self.upBranch = Intro.buildBranch(from: frame)
         
         addChildsToNode()
     }
@@ -47,7 +47,7 @@ class Intro {
         let groundNode = SKSpriteNode(imageNamed: "ground")
         
         // posicionamento
-        groundNode.position.y = frame.minY + 10
+        groundNode.position.y = frame.minY + 30
         groundNode.zPosition = 5
         
         return groundNode
@@ -57,7 +57,7 @@ class Intro {
         let seedNode = SKSpriteNode(imageNamed: "seed")
         
         // posicionamento
-        seedNode.position.y = frame.midY - 80
+        seedNode.position.y = frame.midY - 116
         seedNode.zPosition = 5
         
         return seedNode
@@ -67,7 +67,7 @@ class Intro {
         let titleNode = SKSpriteNode(imageNamed: "title")
         
         // posicionamento
-        titleNode.position.y = frame.midY + 40
+        titleNode.position.y = frame.midY + 64
         titleNode.zPosition = 4
         
         return titleNode
@@ -79,18 +79,18 @@ class Intro {
         subtitleNode.fontColor = .black
         
         // posicionamento
-        subtitleNode.position.y = frame.minY + 180
+        subtitleNode.position.y = frame.midY - 166
         subtitleNode.zPosition = 3
         
         return subtitleNode
     }
     
-    static private func buildBranch() -> Branch {
+    static private func buildBranch(from frame: CGRect) -> Branch {
         let branch = Branch.buildBranch()
         let scaleMultiplier = 3.0
         branch.node.zPosition = 3
         branch.node.scale(to: CGSize(width: (branch.node.size.width * scaleMultiplier), height: (branch.node.size.height * scaleMultiplier)))
-        branch.node.position.y = 180
+        branch.node.position.y = frame.midY + 200
         branch.node.physicsBody = nil
         return branch
     }
