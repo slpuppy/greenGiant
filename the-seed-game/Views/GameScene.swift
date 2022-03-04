@@ -44,7 +44,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var gameCameraMovementVelocity: CGFloat = 60
     var playerCanPlay: Bool = true
-    
+    var coinBeingTouched: Bool = false
     
     
     override func didMove(to view: SKView) {
@@ -591,7 +591,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             removeSunPenality()
         }
         
-        if status == .playing {
+        if status == .playing && !coinBeingTouched {
             detectContactWithCoin()
         }
         
@@ -672,6 +672,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if checkIfTreeTouchedCoin(coin) {
+            coinBeingTouched = true
             addCoinToUserInventary()
             removeCoin(coin)
         }
@@ -722,6 +723,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             ]),
             .run {
                 coin.removeFromParent()
+                self.coinBeingTouched = false
             }
         ]))
     }
