@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 
 class UnderShopViewController: UIViewController {
-    
     var underShopView: UnderShopView!
-    var shopManager = ShopManager()
     var backgroundView: UIView!
     var currentItemIndex = 0
     var exitButton: ExitButton!
     
+    var shopManager = ShopManager()
+    let hapticsManager = UnderShopHapticsManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +25,6 @@ class UnderShopViewController: UIViewController {
         setupConstraints()
         setupTouches()
         underShopView.backgroundColor = .black
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -51,14 +50,11 @@ class UnderShopViewController: UIViewController {
         animation.toValue = NSValue(cgPoint: CGPoint(x: underShopView.purchaseButton.center.x + 10, y: underShopView.purchaseButton.center.y))
         
         underShopView.purchaseButton.layer.add(animation, forKey: "position")
-        
     }
     
     func cantPurchaseAnimatition() {
         blinkLightAnimation()
         purchaseButtonAnimation()
-        
-        
     }
     
     func setupView(){
@@ -97,12 +93,12 @@ class UnderShopViewController: UIViewController {
             make.height.equalTo(60)
             make.leading.equalTo(self.view.snp.centerX).offset(16)
             make.trailing.equalTo(self.view.snp.trailing).offset(-36)
-            
-            
         }
     }
     
     @objc func nextItemPressed() {
+        hapticsManager.playTouchPattern()
+        
         let numberOfItems = shopManager.items.count
         if (numberOfItems - 1) == currentItemIndex {
             currentItemIndex = 0
@@ -113,6 +109,8 @@ class UnderShopViewController: UIViewController {
     }
     
     @objc func previousItemPressed() {
+        hapticsManager.playTouchPattern()
+        
         let numberOfItems = shopManager.items.count
         if 0 == currentItemIndex {
             currentItemIndex = (numberOfItems - 1)
@@ -125,21 +123,21 @@ class UnderShopViewController: UIViewController {
     @objc func purchaseItemPressed() {
         let item = shopManager.items[currentItemIndex]
         let purchased = shopManager.userItemsIds.contains(item.id)
+        
         if UserCoins.shared.coins >= item.price && !purchased {
+            hapticsManager.playUnlockPattern()
             shopManager.purchaseItem(id: item.id)
             updateYourCoins()
             updateCurrentItem()
         } else {
+            hapticsManager.playNotEnoughCoinsPattern()
             cantPurchaseAnimatition()
         }
-        
-        
     }
     
     @objc func exitShopButtonPressed() {
-        
+        hapticsManager.playTouchPattern()
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     func updateCurrentItem() {
@@ -151,7 +149,6 @@ class UnderShopViewController: UIViewController {
     }
     
     func updateYourCoins() {
-        
         underShopView.yourCoins.update(userCoins: UserCoins.shared.coins)
     }
     

@@ -19,6 +19,9 @@
 		0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */; };
 		0C244F5C27C41AE500541B36 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C244F5B27C41AE500541B36 /* Coin.swift */; };
 		0C244F5E27C441C900541B36 /* UserCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C244F5D27C441C900541B36 /* UserCoins.swift */; };
+		0C2A85A227D403A3006277B4 /* CoreHapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A127D403A3006277B4 /* CoreHapticsManager.swift */; };
+		0C2A85A427D40408006277B4 /* GameHapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A327D40408006277B4 /* GameHapticsManager.swift */; };
+		0C2A85A627D41095006277B4 /* UnderShopHapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A527D41095006277B4 /* UnderShopHapticsManager.swift */; };
 		0C3B078C27BEDCE1008D2E6B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078A27BEDC71008D2E6B /* AdSupport.framework */; };
 		0C3B078E27BEDCE8008D2E6B /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */; };
 		0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D127AC118D0035EC39 /* DifficultyManager.swift */; };
@@ -80,6 +83,9 @@
 		0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameOverOverlay.swift"; sourceTree = "<group>"; };
 		0C244F5B27C41AE500541B36 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		0C244F5D27C441C900541B36 /* UserCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoins.swift; sourceTree = "<group>"; };
+		0C2A85A127D403A3006277B4 /* CoreHapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreHapticsManager.swift; sourceTree = "<group>"; };
+		0C2A85A327D40408006277B4 /* GameHapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHapticsManager.swift; sourceTree = "<group>"; };
+		0C2A85A527D41095006277B4 /* UnderShopHapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderShopHapticsManager.swift; sourceTree = "<group>"; };
 		0C3B078A27BEDC71008D2E6B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		0C4616D127AC118D0035EC39 /* DifficultyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyManager.swift; sourceTree = "<group>"; };
@@ -216,6 +222,9 @@
 				0C4616D127AC118D0035EC39 /* DifficultyManager.swift */,
 				756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */,
 				7569C39E27C6700000A509C3 /* ShopManager.swift */,
+				0C2A85A127D403A3006277B4 /* CoreHapticsManager.swift */,
+				0C2A85A327D40408006277B4 /* GameHapticsManager.swift */,
+				0C2A85A527D41095006277B4 /* UnderShopHapticsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -459,6 +468,7 @@
 				75100A5527A5AA81006ACB87 /* Background.swift in Sources */,
 				75EAA84A27B2CD1E00FFC8EF /* MusicPlayer.swift in Sources */,
 				0C9603E027AD55BF000F31E1 /* CGPoint+.swift in Sources */,
+				0C2A85A627D41095006277B4 /* UnderShopHapticsManager.swift in Sources */,
 				7569C3B327CE72D600A509C3 /* ExitButton.swift in Sources */,
 				0C9603E427AEC21D000F31E1 /* GameInstructions.swift in Sources */,
 				0C98113127BB129D00E3F0F3 /* Fire.swift in Sources */,
@@ -481,6 +491,8 @@
 				7569C3A327C6774700A509C3 /* UnderShopViewController.swift in Sources */,
 				0C5DC99727AACD1700EE79E8 /* SKScene+Intro.swift in Sources */,
 				0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */,
+				0C2A85A227D403A3006277B4 /* CoreHapticsManager.swift in Sources */,
+				0C2A85A427D40408006277B4 /* GameHapticsManager.swift in Sources */,
 				756C9F7A27BB2EEE00B011F0 /* AchievementManager.swift in Sources */,
 				0C022BED27A42C7B00B2E88A /* GameViewController.swift in Sources */,
 				75100A5B27A5B5A5006ACB87 /* Walls.swift in Sources */,

@@ -13,12 +13,12 @@ import SnapKit
 import GoogleMobileAds
 
 class GameViewController: UIViewController, GKGameCenterControllerDelegate, GameSceneDelegate {
-    
-    
     let adManager = AdManager()
     var gcEnabled = Bool() // Check if the user has Game Center enabled
     var gcDefaultLeaderBoard = String() // Check the default leaderboardID
     var achievementManager = AchievementManager()
+    var hapticsManager = GameHapticsManager()
+    
     lazy var menuView: MenuView = {
           let view = MenuView()
           view.translatesAutoresizingMaskIntoConstraints = false
@@ -28,8 +28,6 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     func dismissMenuView() {
         menuView.removeFromSuperview()
     }
-    
- 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +74,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     
     @objc func muteTapped() {
         GameAnalytics.shared.logTappedMuteButton()
+        hapticsManager.playTouchPattern()
         
         if let view = self.view as! SKView?, let gameScene = view.scene as? GameScene {
             if gameScene.isPaused && MusicPlayer.shared.status == .muted {
@@ -96,6 +95,8 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     }
     
     @objc func pauseTapped() {
+        hapticsManager.playTouchPattern()
+        
         if let view = self.view as! SKView?, let gameScene = view.scene as? GameScene {
             GameAnalytics.shared.logTappedPauseButton(isPaused: gameScene.isPaused)
             
