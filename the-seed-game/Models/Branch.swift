@@ -55,7 +55,7 @@ class Branch {
         nodePhysicsBody.mass = 10
         nodePhysicsBody.angularDamping = 0.3
         node.physicsBody = nodePhysicsBody
-        node.zPosition = 1
+        node.zPosition = 5
         node.name = Names.branch
         
         let branch = Branch(node: node)

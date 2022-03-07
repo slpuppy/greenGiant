@@ -17,6 +17,7 @@ protocol GameSceneDelegate: AnyObject {
     func displayAd()
     func reportFirstAchievement()
     func reportScore()
+    func presentShop()
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -36,37 +37,48 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var animationRunning: Bool = false
     var status: GameStatus = .intro
     var lastUpdate: TimeInterval = 0
-
+    var homeButton: HomeButtons!
     
     var difficultyManager: DifficultyManager!
+    var hapticsManager = GameHapticsManager()
     
     var gameCameraMovementVelocity: CGFloat = 60
     var playerCanPlay: Bool = true
+    var coinBeingTouched: Bool = false
+    
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         
-//        #if DEBUG
-//           view.showsPhysics = true
-//           view.showsNodeCount = true
-//           view.showsFPS = true
-//           //        self.speed = -50
-//        #endif
+        //        #if DEBUG
+        //           view.showsPhysics = true
+        //           view.showsNodeCount = true
+        //           view.showsFPS = true
+        //           //        self.speed = -50
+        //        #endif
         
         setupScene(view: view)
         setupCamera()
         setupBackgrounds()
+        setupHomeButtons()
         setupSun()
         setupDifficultyManager()
         setupIntro()
         runIntroStartAnimation()
     }
     
+    
     // Prepara a cena
     func setupScene(view: SKView) {
         self.size = view.frame.size
-        self.backgroundColor = UIColor(named: "backgroundColor") ?? .white
+        self.backgroundColor = .black
         self.anchorPoint = .init(x: 0.5, y: 0.5)
+    }
+    
+    func setupHomeButtons() {
+        homeButton = HomeButtons(frame: self.frame)
+        homeButton.node.position.y = self.frame.minY + 85
+        self.addChild(homeButton.node)
     }
     
     func setupDifficultyManager() {
@@ -78,6 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameCamera = GameCamera()
         self.camera = gameCamera.node
         self.addChild(gameCamera)
+       // gameCamera.node.position.y -= 100
     }
     
     // Prepara os backgrounds do jogo
@@ -106,15 +119,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let sunNode = Sun.buildSun(frame: self.frame)
         sun = Sun.init(node: sunNode)
         sun.node.zPosition = 1
-        
-        sun.node.anchorPoint = .init(x: 0.5, y: 1)
-        sun.node.position = CGPoint(x: 0, y: -20)
+        sun.node.position = CGPoint(x: 0, y: (-sun.node.frame.height/2) + 60 )
         gameCamera.node.addChild(sun.node)
     }
     
     // Prepara a cena de introdução do jogo
     func setupIntro() {
         intro = Intro(frame: self.frame)
+        
         self.addChild(intro)
         
     }
@@ -123,9 +135,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func runIntroStartAnimation() {
         intro.runStartAnimation()
         sun.runIntroStartAnimation()
-        
-        
-        
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -138,37 +147,55 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch status {
         case .intro:
-            gameSceneDelegate?.reportFirstAchievement()
-            runIntroCutsceneAnimation()
-            setupStartGame()
-            gameSceneDelegate?.setupMenuBar()
-        case .playing:
-            if self.scene?.isPaused != true {
-                if !playerCanPlay {
-                    break
-                }
+            let homeButtonCordinatePos = homeButton.node.convert(pos, from: self)
+            if homeButton.shopButton.contains(homeButtonCordinatePos) {
+                hapticsManager.playTouchPattern()
+                gameSceneDelegate?.presentShop()
+                return
                 
-                removeGameInstructions()
-                modifyDifficulty(pressedIn: pos)
-                setupTrunk(pos: pos)
-                setupBranch(pos: pos)
-                setupLittleBranch(pos: pos)
-                addScore()
-                gameSceneDelegate?.reportScore()
-                discardUselessElements()
-                startGameCameraMovement()
             }
+            if homeButton.leaderboardButton.contains(homeButtonCordinatePos){
+                hapticsManager.playTouchPattern()
+                gameSceneDelegate?.leaderboardTapped()
+                return
+            }
+            let introCordinatePos = intro.node.convert(pos, from: self)
+            if intro.seed.contains(introCordinatePos) {
+                hapticsManager.playTouchPattern()
+                gameSceneDelegate?.reportFirstAchievement()
+                runIntroCutsceneAnimation()
+                setupStartGame()
+                gameSceneDelegate?.setupMenuBar()
+            }
+        case .playing:
+            if self.scene?.isPaused == true || !playerCanPlay {
+                break
+            }
+            
+            hapticsManager.playTreeGrowPattern()
+            randomlySpawnCoin()
+            removeGameInstructions()
+            modifyDifficulty(pressedIn: pos)
+            setupTrunk(pos: pos)
+            setupBranch(pos: pos)
+            setupLittleBranch(pos: pos)
+            addScore()
+            gameSceneDelegate?.reportScore()
+            discardUselessElements()
+            startGameCameraMovement()
             
         case .paused:
             break
             
         case .gameOver:
             if gameOverOverlay.leaderboardsLabel.contains(pos) {
+                hapticsManager.playTouchPattern()
                 gameSceneDelegate?.leaderboardTapped()
                 return
             }
             
             if gameOverOverlay.playAgainLabel.contains(pos) {
+                hapticsManager.playTouchPattern()
                 gameOverOverlay.onTapPlayAgain()
                 resetGame()
             }
@@ -178,8 +205,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func runIntroCutsceneAnimation() {
         intro.runCutsceneAnimation()
         
-        sun.node.anchorPoint = .init(x: 0.5, y: 0.5)
-        sun.node.position.y -= sun.node.size.height/2
         sun.runIntroCutsceneAnimation(frame: self.frame)
     }
     
@@ -194,13 +219,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameCamera.node.addChild(rightWall)
         walls = Walls(rightWall: rightWall, leftWall: leftWall)
         
+        homeButton.removeButtons()
         // Constroi o primeiro tronco
         firstTrunk = Trunk.buildTrunk()
         firstTrunk.node.position.y = self.frame.minY
         firstTrunk.node.physicsBody?.isDynamic = false
-        firstTrunk.node.zPosition = 2
+        firstTrunk.node.zPosition = 5
         
-        let firstTrunkAnimation = SKAction.move(to: CGPoint(x: 0, y: self.frame.minY + 80), duration: 0.5)
+        let firstTrunkAnimation = SKAction.move(to: CGPoint(x: 0, y: self.frame.minY + 120), duration: 0.5)
         firstTrunkAnimation.timingMode = .easeIn
         firstTrunk.node.run(.sequence([.wait(forDuration: 0.5), firstTrunkAnimation]))
         self.addChild(firstTrunk)
@@ -331,6 +357,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
     }
     
+    // MARK: detect collisions
     func didBegin(_ contact: SKPhysicsContact) {
         if contact.bodyA.node == nil || contact.bodyB.node == nil {
             return
@@ -347,7 +374,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if isWallsCollision && status != .gameOver {
             GameAnalytics.shared.logGameOver(cause: .wallCrash)
-            
+            hapticsManager.playCrashPattern()
             gameOver(collisionPos: collisionPos)
         }
     }
@@ -433,6 +460,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         Score.shared.resetScore()
         
         setupIntro()
+        setupHomeButtons()
         setupSun()
         runIntroStartAnimation()
         status = .intro
@@ -490,6 +518,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return false
     }
     
+    func randomlySpawnCoin() {
+        let actualCoin = self.childNode(withName: Coin.Names.coin)
+        
+        if actualCoin != nil {
+            return
+        }
+        
+        let randomValue = Int.random(in: 1...10)
+        
+        if randomValue <= 3 {
+            spawnCoin()
+        }
+    }
+    
+    func spawnCoin() {
+        let coin = Coin()
+        
+        let horizontalDistanceFromCenter = self.frame.width/2 - coin.node.frame.width
+        
+        coin.node.position.y = gameCamera.node.position.y + self.frame.height
+        coin.node.position.x = CGFloat.random(
+            in: -horizontalDistanceFromCenter...horizontalDistanceFromCenter
+        )
+        
+        self.addChild(coin.node)
+    }
+    
     func touchMoved(toPoint pos : CGPoint) {
     }
     
@@ -523,6 +578,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if status == .playing && checkIfTreeIsBelowCamera() {
             GameAnalytics.shared.logGameOver(cause: .bottomOverlaps)
             
+            hapticsManager.playCrashPattern()
             let bottomPosition = self.convert(lastTrunk.topRefNode.position, from: lastTrunk.node)
             gameOver(collisionPos: bottomPosition)
             return
@@ -531,9 +587,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if status == .playing && Score.shared.score > 0 && checkIfReachedSun() {
             reachedSunPenality()
         }
-
+        
         if status == .playing && !playerCanPlay && checkIfCanRemoveSunPenality() {
             removeSunPenality()
+        }
+        
+        if status == .playing && !coinBeingTouched {
+            detectContactWithCoin()
         }
         
         lastUpdate = currentTime
@@ -583,6 +643,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             return
         }
         
+        hapticsManager.playFirePattern()
+        
         decreaseScore(by: 3.6)
         
         let fire = Fire()
@@ -603,6 +665,71 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         playerCanPlay = true
+    }
+    
+    func detectContactWithCoin() {
+        let coinNode = self.childNode(withName: Coin.Names.coin)
+        
+        guard let coin = coinNode as? SKSpriteNode else {
+            return
+        }
+        
+        if checkIfTreeTouchedCoin(coin) {
+            coinBeingTouched = true
+            hapticsManager.playCoinPattern()
+            addCoinToUserInventary()
+            removeCoin(coin)
+        }
+        
+        if checkIfBottomTouchedCoin(coin) {
+            removeCoin(coin)
+        }
+    }
+    
+    func checkIfTreeTouchedCoin(_ coin: SKSpriteNode) -> Bool {
+        let coinTopPosition = CGPoint(x: coin.position.x, y: coin.position.y+coin.frame.height/2-15)
+        let coinBottomPosition = CGPoint(x: coin.position.x, y: coin.position.y-coin.frame.height/2+15)
+        let coinLeftPosition = CGPoint(x: coin.position.x-coin.frame.width/2+15, y: coin.position.y)
+        let coinRightPosition = CGPoint(x: coin.position.x+coin.frame.width/2-15, y: coin.position.y)
+        
+        for treeNode in treeNodesLoop {
+            if treeNode.contains(coinTopPosition) ||
+                treeNode.contains(coinBottomPosition) ||
+                treeNode.contains(coinLeftPosition) ||
+                treeNode.contains(coinRightPosition) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func checkIfBottomTouchedCoin(_ coin: SKSpriteNode) -> Bool {
+        let coinTopPosition = coin.position.y + coin.frame.height/2
+        let gameCameraBottomPosition = gameCamera.node.position.y - self.frame.height/2
+        
+        if coinTopPosition <= gameCameraBottomPosition {
+            return true
+        }
+        
+        return false
+    }
+    
+    func addCoinToUserInventary() {
+        UserCoins.shared.add(1)
+    }
+    
+    func removeCoin(_ coin: SKSpriteNode) {
+        coin.run(.sequence([
+            .group([
+                .fadeOut(withDuration: 0.2),
+                .scale(to: 0, duration: 0.2),
+            ]),
+            .run {
+                coin.removeFromParent()
+                self.coinBeingTouched = false
+            }
+        ]))
     }
 }
 

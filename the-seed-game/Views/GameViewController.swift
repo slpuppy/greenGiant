@@ -13,12 +13,12 @@ import SnapKit
 import GoogleMobileAds
 
 class GameViewController: UIViewController, GKGameCenterControllerDelegate, GameSceneDelegate {
-    
-    
     let adManager = AdManager()
     var gcEnabled = Bool() // Check if the user has Game Center enabled
     var gcDefaultLeaderBoard = String() // Check the default leaderboardID
     var achievementManager = AchievementManager()
+    var hapticsManager = GameHapticsManager()
+    
     lazy var menuView: MenuView = {
           let view = MenuView()
           view.translatesAutoresizingMaskIntoConstraints = false
@@ -29,12 +29,9 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         menuView.removeFromSuperview()
     }
     
- 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         MusicPlayer.shared.startBackgroundMusic()
-        MusicPlayer.shared.audioPlayer?.volume = 0.3
         
         if let view = self.view as! SKView? {
             let scene = GameScene()
@@ -54,6 +51,10 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         
     }
     
+    func presentShop(){
+        print("presented")
+        self.present(UnderShopViewController(), animated: true, completion: nil)
+    }
     
     func setupMenuBar(){
         view.addSubview(menuView)
@@ -67,37 +68,54 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         menuView.pauseButton.addTarget(self, action: #selector(pauseTapped), for: .touchDown)
     }
     
-    @objc func muteTapped() {
-        GameAnalytics.shared.logTappedMuteButton()
-        
-        if MusicPlayer.shared.audioPlayer?.volume != 0 {
-            MusicPlayer.shared.audioPlayer?.volume = 0
-            menuView.muteButton.tintColor = UIColor(named: "scoreColor")
-        } else {
-            menuView.muteButton.tintColor = .systemGray2
-            MusicPlayer.shared.audioPlayer?.volume = 0.3
-        }
-    }
-    
     func displayAd(){
         adManager.presentInterstitialAd(in: self)
     }
     
+    @objc func muteTapped() {
+        GameAnalytics.shared.logTappedMuteButton()
+        hapticsManager.playTouchPattern()
+        
+        if let view = self.view as! SKView?, let gameScene = view.scene as? GameScene {
+            if gameScene.isPaused && MusicPlayer.shared.status == .muted {
+                MusicPlayer.shared.setToLowVolume()
+                menuView.changeMuteButtonColor(to: .playing)
+                return
+            }
+        }
+        
+        if MusicPlayer.shared.status == .muted {
+            MusicPlayer.shared.unmute()
+            menuView.changeMuteButtonColor(to: .playing)
+            return
+        }
+        
+        MusicPlayer.shared.mute()
+        menuView.changeMuteButtonColor(to: .muted)
+    }
     
     @objc func pauseTapped() {
-        if let view = self.view as! SKView?,
-        let gameScene = view.scene as? GameScene {
+        hapticsManager.playTouchPattern()
+        
+        if let view = self.view as! SKView?, let gameScene = view.scene as? GameScene {
             GameAnalytics.shared.logTappedPauseButton(isPaused: gameScene.isPaused)
             
             gameScene.isPaused.toggle()
-            playOrPause()
             
-            if gameScene.isPaused == true {
-                menuView.pauseButton.setImage(UIImage(systemName: "play.fill"), for: .normal)
-                menuView.pauseButton.tintColor = UIColor(named: "scoreColor")
-            } else {
-                menuView.pauseButton.setImage(UIImage(systemName: "pause"), for: .normal)
-                menuView.pauseButton.tintColor = .systemGray2
+            if gameScene.isPaused {
+                menuView.changePauseButtonImage(to: .play)
+                
+                if MusicPlayer.shared.status == .fullVolume {
+                    MusicPlayer.shared.setToLowVolume()
+                }
+                
+                return
+            }
+            
+            menuView.changePauseButtonImage(to: .pause)
+            
+            if MusicPlayer.shared.status == .lowVolume {
+                MusicPlayer.shared.unmute()
             }
         }
     }

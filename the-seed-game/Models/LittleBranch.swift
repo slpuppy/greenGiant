@@ -55,7 +55,7 @@ class LittleBranch {
         nodePhysicsBody.mass = 10
         node.physicsBody?.angularDamping = 0.2
         node.physicsBody = nodePhysicsBody
-        node.zPosition = 1
+        node.zPosition = 5
         node.name = Names.littleBranch
         
         let littleBranch = LittleBranch(node: node)

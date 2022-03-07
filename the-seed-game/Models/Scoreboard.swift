@@ -17,14 +17,11 @@ class Scoreboard {
     }
     
     static func buildLabel() -> SKLabelNode {
-        
         let scoreBoard = SKLabelNode(text: "0m")
         scoreBoard.fontSize = 36
         scoreBoard.zPosition = 4
         scoreBoard.fontColor = UIColor(named: "scoreColor")
         scoreBoard.fontName = "HelveticaNeue-Bold"
-        
-        
         
         return scoreBoard
     }
@@ -41,12 +38,23 @@ class Scoreboard {
         var animationSequence: [SKAction]
         
         if isIncreasing {
+            changeScoreboardColor(to: .green)
             animationSequence = getIncreasingAnimationSequence()
         } else {
+            changeScoreboardColor(to: .red)
             animationSequence = getDecreasingAnimationSequence()
         }
         
         self.node.run(.sequence(animationSequence))
+    }
+    
+    private func changeScoreboardColor(to color: ColorNames) {
+        switch color {
+        case .green:
+            self.node.fontColor = UIColor(named: "scoreColor")
+        case .red:
+            self.node.fontColor = UIColor(named: "scoreRedColor")
+        }
     }
     
     private func getIncreasingAnimationSequence() -> [SKAction] {
@@ -97,5 +105,10 @@ class Scoreboard {
         })
         
         return animationSequence
+    }
+    
+    enum ColorNames {
+        case green
+        case red
     }
 }

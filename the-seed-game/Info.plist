@@ -2,6 +2,25 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1406089779822202</string>
+			</array>
+		</dict>
+	</array>
+	<key>FIREBASE_ANALYTICS_COLLECTION_ENABLED</key>
+	<false/>
+	<key>FacebookAdvertiserIDCollectionEnabled</key>
+	<string>FALSE</string>
+	<key>FacebookAppID</key>
+	<string>1406089779822202</string>
+	<key>FacebookAutoLogAppEventsEnabled</key>
+	<string>FALSE</string>
+	<key>FacebookDisplayName</key>
+	<string>GGiant</string>
 	<key>GADApplicationIdentifier</key>
 	<string>ca-app-pub-1833918678590844~1495655742</string>
 	<key>SKAdNetworkItems</key>
@@ -154,6 +173,10 @@
 			<key>SKAdNetworkIdentifier</key>
 			<string>3qcr597p9d.skadnetwork</string>
 		</dict>
+	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Sketch.ttf</string>
 	</array>
 </dict>
 </plist>

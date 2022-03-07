@@ -17,6 +17,13 @@
 		0C022BFF27A42CCC00B2E88A /* Trunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022BFE27A42CCC00B2E88A /* Trunk.swift */; };
 		0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */; };
 		0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */; };
+		0C244F5C27C41AE500541B36 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C244F5B27C41AE500541B36 /* Coin.swift */; };
+		0C244F5E27C441C900541B36 /* UserCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C244F5D27C441C900541B36 /* UserCoins.swift */; };
+		0C2A85A227D403A3006277B4 /* CoreHapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A127D403A3006277B4 /* CoreHapticsManager.swift */; };
+		0C2A85A427D40408006277B4 /* GameHapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A327D40408006277B4 /* GameHapticsManager.swift */; };
+		0C2A85A627D41095006277B4 /* UnderShopHapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A527D41095006277B4 /* UnderShopHapticsManager.swift */; };
+		0C3B078C27BEDCE1008D2E6B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078A27BEDC71008D2E6B /* AdSupport.framework */; };
+		0C3B078E27BEDCE8008D2E6B /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */; };
 		0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D127AC118D0035EC39 /* DifficultyManager.swift */; };
 		0C4616D527AC5E890035EC39 /* HorizontalScreenSide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */; };
 		0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C5DC99427AAC56600EE79E8 /* Intro.swift */; };
@@ -44,6 +51,16 @@
 		751C816727BBEF2E009F65E3 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 751C816627BBEF2E009F65E3 /* GameKit.framework */; };
 		7543750127B689120017A658 /* AdManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7543750027B689120017A658 /* AdManager.swift */; };
 		7549C06127A574CE009E993B /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7549C06027A574CE009E993B /* Branch.swift */; };
+		7569C39F27C6700000A509C3 /* ShopManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C39E27C6700000A509C3 /* ShopManager.swift */; };
+		7569C3A127C6703500A509C3 /* ShopItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A027C6703500A509C3 /* ShopItem.swift */; };
+		7569C3A327C6774700A509C3 /* UnderShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A227C6774700A509C3 /* UnderShopViewController.swift */; };
+		7569C3A627C6778400A509C3 /* UnderShopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A527C6778300A509C3 /* UnderShopView.swift */; };
+		7569C3A827C6792F00A509C3 /* ShopItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A727C6792F00A509C3 /* ShopItemView.swift */; };
+		7569C3AA27C67A7000A509C3 /* UserCoinsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3A927C67A7000A509C3 /* UserCoinsView.swift */; };
+		7569C3AC27C7AA3C00A509C3 /* PurchaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3AB27C7AA3C00A509C3 /* PurchaseButton.swift */; };
+		7569C3AF27C7B6DD00A509C3 /* Sketch.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7569C3AE27C7B6DD00A509C3 /* Sketch.ttf */; };
+		7569C3B127C91E6900A509C3 /* HomeButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3B027C91E6900A509C3 /* HomeButtons.swift */; };
+		7569C3B327CE72D600A509C3 /* ExitButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7569C3B227CE72D600A509C3 /* ExitButton.swift */; };
 		756C9F7A27BB2EEE00B011F0 /* AchievementManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */; };
 		757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757BBD4E27A9592300827E15 /* Scoreboard.swift */; };
 		758812BA27A81E5C00CB693A /* Score.swift in Sources */ = {isa = PBXBuildFile; fileRef = 758812B927A81E5C00CB693A /* Score.swift */; };
@@ -64,6 +81,13 @@
 		0C022BFE27A42CCC00B2E88A /* Trunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trunk.swift; sourceTree = "<group>"; };
 		0C022C0027A61DF200B2E88A /* GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverOverlay.swift; sourceTree = "<group>"; };
 		0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameOverOverlay.swift"; sourceTree = "<group>"; };
+		0C244F5B27C41AE500541B36 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
+		0C244F5D27C441C900541B36 /* UserCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoins.swift; sourceTree = "<group>"; };
+		0C2A85A127D403A3006277B4 /* CoreHapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreHapticsManager.swift; sourceTree = "<group>"; };
+		0C2A85A327D40408006277B4 /* GameHapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHapticsManager.swift; sourceTree = "<group>"; };
+		0C2A85A527D41095006277B4 /* UnderShopHapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderShopHapticsManager.swift; sourceTree = "<group>"; };
+		0C3B078A27BEDC71008D2E6B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		0C4616D127AC118D0035EC39 /* DifficultyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyManager.swift; sourceTree = "<group>"; };
 		0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalScreenSide.swift; sourceTree = "<group>"; };
 		0C5DC99427AAC56600EE79E8 /* Intro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intro.swift; sourceTree = "<group>"; };
@@ -93,6 +117,16 @@
 		754374FE27B685FF0017A658 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		7543750027B689120017A658 /* AdManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdManager.swift; sourceTree = "<group>"; };
 		7549C06027A574CE009E993B /* Branch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Branch.swift; sourceTree = "<group>"; };
+		7569C39E27C6700000A509C3 /* ShopManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopManager.swift; sourceTree = "<group>"; };
+		7569C3A027C6703500A509C3 /* ShopItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItem.swift; sourceTree = "<group>"; };
+		7569C3A227C6774700A509C3 /* UnderShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderShopViewController.swift; sourceTree = "<group>"; };
+		7569C3A527C6778300A509C3 /* UnderShopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderShopView.swift; sourceTree = "<group>"; };
+		7569C3A727C6792F00A509C3 /* ShopItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopItemView.swift; sourceTree = "<group>"; };
+		7569C3A927C67A7000A509C3 /* UserCoinsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoinsView.swift; sourceTree = "<group>"; };
+		7569C3AB27C7AA3C00A509C3 /* PurchaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseButton.swift; sourceTree = "<group>"; };
+		7569C3AE27C7B6DD00A509C3 /* Sketch.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sketch.ttf; sourceTree = "<group>"; };
+		7569C3B027C91E6900A509C3 /* HomeButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeButtons.swift; sourceTree = "<group>"; };
+		7569C3B227CE72D600A509C3 /* ExitButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExitButton.swift; sourceTree = "<group>"; };
 		756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AchievementManager.swift; sourceTree = "<group>"; };
 		757BBD4E27A9592300827E15 /* Scoreboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scoreboard.swift; sourceTree = "<group>"; };
 		758812B927A81E5C00CB693A /* Score.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Score.swift; sourceTree = "<group>"; };
@@ -107,8 +141,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C3B078E27BEDCE8008D2E6B /* AppTrackingTransparency.framework in Frameworks */,
 				9FB252E21A7E1355EB83ACF2 /* Pods_the_seed_game.framework in Frameworks */,
 				751C816727BBEF2E009F65E3 /* GameKit.framework in Frameworks */,
+				0C3B078C27BEDCE1008D2E6B /* AdSupport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,13 +176,14 @@
 				754374FE27B685FF0017A658 /* Info.plist */,
 				0C022BFB27A42CA300B2E88A /* Utils */,
 				0C9603FA27B2BA63000F31E1 /* Views */,
+				75100A5E27A5CF69006ACB87 /* Models */,
 				0C022BE427A42C7B00B2E88A /* AppDelegate.swift */,
 				75100A5827A5B51F006ACB87 /* GameStatus.swift */,
 				0C022BEE27A42C7B00B2E88A /* Main.storyboard */,
 				0C022BF127A42C7D00B2E88A /* Assets.xcassets */,
+				7569C3AE27C7B6DD00A509C3 /* Sketch.ttf */,
 				75EAA84B27B2CD8600FFC8EF /* background.mp3 */,
 				0C022BF327A42C7D00B2E88A /* LaunchScreen.storyboard */,
-				75100A5E27A5CF69006ACB87 /* Models */,
 			);
 			path = "the-seed-game";
 			sourceTree = "<group>";
@@ -184,6 +221,10 @@
 				754374FF27B688FF0017A658 /* GoogleAds */,
 				0C4616D127AC118D0035EC39 /* DifficultyManager.swift */,
 				756C9F7927BB2EEE00B011F0 /* AchievementManager.swift */,
+				7569C39E27C6700000A509C3 /* ShopManager.swift */,
+				0C2A85A127D403A3006277B4 /* CoreHapticsManager.swift */,
+				0C2A85A327D40408006277B4 /* GameHapticsManager.swift */,
+				0C2A85A527D41095006277B4 /* UnderShopHapticsManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -191,9 +232,10 @@
 		0C9603FA27B2BA63000F31E1 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7569C3A427C6775B00A509C3 /* Components */,
 				0C022BEA27A42C7B00B2E88A /* GameScene.swift */,
 				0C022BEC27A42C7B00B2E88A /* GameViewController.swift */,
-				0C9603FB27B2BA74000F31E1 /* MenuView.swift */,
+				7569C3A227C6774700A509C3 /* UnderShopViewController.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -202,6 +244,8 @@
 			isa = PBXGroup;
 			children = (
 				751C816627BBEF2E009F65E3 /* GameKit.framework */,
+				0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */,
+				0C3B078A27BEDC71008D2E6B /* AdSupport.framework */,
 				940A4433604D922E5C27D433 /* Pods_the_seed_game.framework */,
 			);
 			name = Frameworks;
@@ -224,6 +268,9 @@
 				0C4616D427AC5E890035EC39 /* HorizontalScreenSide.swift */,
 				0C810E3927B5532700B9989E /* CauseOfGameOver.swift */,
 				0C98113027BB129D00E3F0F3 /* Fire.swift */,
+				0C244F5B27C41AE500541B36 /* Coin.swift */,
+				7569C3A027C6703500A509C3 /* ShopItem.swift */,
+				7569C3B027C91E6900A509C3 /* HomeButtons.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -236,9 +283,23 @@
 			path = GoogleAds;
 			sourceTree = "<group>";
 		};
+		7569C3A427C6775B00A509C3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				0C9603FB27B2BA74000F31E1 /* MenuView.swift */,
+				7569C3A527C6778300A509C3 /* UnderShopView.swift */,
+				7569C3AB27C7AA3C00A509C3 /* PurchaseButton.swift */,
+				7569C3A927C67A7000A509C3 /* UserCoinsView.swift */,
+				7569C3A727C6792F00A509C3 /* ShopItemView.swift */,
+				7569C3B227CE72D600A509C3 /* ExitButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		757BBD4D27A9590F00827E15 /* Singletons */ = {
 			isa = PBXGroup;
 			children = (
+				0C244F5D27C441C900541B36 /* UserCoins.swift */,
 				758812B927A81E5C00CB693A /* Score.swift */,
 				75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */,
 				0C810E3527B5405A00B9989E /* GameCrashlytics.swift */,
@@ -319,6 +380,7 @@
 			files = (
 				75EAA84C27B2CD8600FFC8EF /* background.mp3 in Resources */,
 				0C022BF027A42C7B00B2E88A /* Main.storyboard in Resources */,
+				7569C3AF27C7B6DD00A509C3 /* Sketch.ttf in Resources */,
 				0C810E3327B5344D00B9989E /* GoogleService-Info.plist in Resources */,
 				0C022BF227A42C7D00B2E88A /* Assets.xcassets in Resources */,
 				0C022BF527A42C7D00B2E88A /* LaunchScreen.storyboard in Resources */,
@@ -395,15 +457,19 @@
 			files = (
 				758812BA27A81E5C00CB693A /* Score.swift in Sources */,
 				0C022BFD27A42CB300B2E88A /* SKScene+Trunk.swift in Sources */,
+				7569C3A127C6703500A509C3 /* ShopItem.swift in Sources */,
 				75100A6027A5CF80006ACB87 /* LittleBranch.swift in Sources */,
 				0C4616D527AC5E890035EC39 /* HorizontalScreenSide.swift in Sources */,
 				0C810E3A27B5532700B9989E /* CauseOfGameOver.swift in Sources */,
 				75100A6627A60054006ACB87 /* Sun.swift in Sources */,
 				7549C06127A574CE009E993B /* Branch.swift in Sources */,
 				0C022BFF27A42CCC00B2E88A /* Trunk.swift in Sources */,
+				7569C3A627C6778400A509C3 /* UnderShopView.swift in Sources */,
 				75100A5527A5AA81006ACB87 /* Background.swift in Sources */,
 				75EAA84A27B2CD1E00FFC8EF /* MusicPlayer.swift in Sources */,
 				0C9603E027AD55BF000F31E1 /* CGPoint+.swift in Sources */,
+				0C2A85A627D41095006277B4 /* UnderShopHapticsManager.swift in Sources */,
+				7569C3B327CE72D600A509C3 /* ExitButton.swift in Sources */,
 				0C9603E427AEC21D000F31E1 /* GameInstructions.swift in Sources */,
 				0C98113127BB129D00E3F0F3 /* Fire.swift in Sources */,
 				75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */,
@@ -411,24 +477,34 @@
 				757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */,
 				0C9603EA27AF2930000F31E1 /* SKScene+GameCamera.swift in Sources */,
 				0C5DC99527AAC56600EE79E8 /* Intro.swift in Sources */,
+				0C244F5E27C441C900541B36 /* UserCoins.swift in Sources */,
 				0C810E3827B54BA700B9989E /* GameAnalytics.swift in Sources */,
 				0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */,
+				7569C39F27C6700000A509C3 /* ShopManager.swift in Sources */,
 				0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */,
 				0C9603FC27B2BA74000F31E1 /* MenuView.swift in Sources */,
 				75100A6827A600CF006ACB87 /* SKScene+Sun.swift in Sources */,
+				7569C3B127C91E6900A509C3 /* HomeButtons.swift in Sources */,
 				0C810E3627B5405A00B9989E /* GameCrashlytics.swift in Sources */,
 				75100A5327A58769006ACB87 /* SKScene+Branch.swift in Sources */,
 				75100A5927A5B51F006ACB87 /* GameStatus.swift in Sources */,
+				7569C3A327C6774700A509C3 /* UnderShopViewController.swift in Sources */,
 				0C5DC99727AACD1700EE79E8 /* SKScene+Intro.swift in Sources */,
 				0C022C0127A61DF200B2E88A /* GameOverOverlay.swift in Sources */,
+				0C2A85A227D403A3006277B4 /* CoreHapticsManager.swift in Sources */,
+				0C2A85A427D40408006277B4 /* GameHapticsManager.swift in Sources */,
 				756C9F7A27BB2EEE00B011F0 /* AchievementManager.swift in Sources */,
 				0C022BED27A42C7B00B2E88A /* GameViewController.swift in Sources */,
 				75100A5B27A5B5A5006ACB87 /* Walls.swift in Sources */,
 				0C9603E827AF2837000F31E1 /* GameCamera.swift in Sources */,
 				7543750127B689120017A658 /* AdManager.swift in Sources */,
+				7569C3AC27C7AA3C00A509C3 /* PurchaseButton.swift in Sources */,
 				0C022BE527A42C7B00B2E88A /* AppDelegate.swift in Sources */,
+				0C244F5C27C41AE500541B36 /* Coin.swift in Sources */,
+				7569C3AA27C67A7000A509C3 /* UserCoinsView.swift in Sources */,
 				75100A6227A5D2D3006ACB87 /* SKScene+LittleTrunk.swift in Sources */,
 				0C9603E627AECE27000F31E1 /* SKScene+GameInstructions.swift in Sources */,
+				7569C3A827C6792F00A509C3 /* ShopItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -577,14 +653,15 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.11;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = C7K95G5W2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "the-seed-game/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = GGiant;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Need tracking for analytics and to deliver custom ads";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -601,7 +678,7 @@
 				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiant;
 				PRODUCT_NAME = GGiant;
-				PROVISIONING_PROFILE_SPECIFIER = "Provisioning Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -622,6 +699,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "the-seed-game/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = GGiant;
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Need tracking for analytics and to deliver custom ads";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -638,7 +716,7 @@
 				MARKETING_VERSION = 1.0.4;
 				PRODUCT_BUNDLE_IDENTIFIER = com.kumpupp.greengiant;
 				PRODUCT_NAME = GGiant;
-				PROVISIONING_PROFILE_SPECIFIER = "Provisioning Profile";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
