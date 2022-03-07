@@ -152,9 +152,9 @@ class UnderShopView: UIView {
             make.top.equalTo(itemContainer.snp.bottom).offset(24)
         }
         lightRay.snp.makeConstraints { make in
-            make.leading.equalTo(caveBackground.snp.leading)
-            make.trailing.equalTo(caveBackground.snp.trailing)
-            make.bottom.equalTo(caveBackground.snp.bottom).offset(-7)
+            make.leading.equalTo(caveBackground.snp.leading).offset(1)
+            make.trailing.equalTo(caveBackground.snp.trailing).offset(-1)
+            make.bottom.equalTo(caveBackground.snp.bottom).offset(-6)
         }
        
          
