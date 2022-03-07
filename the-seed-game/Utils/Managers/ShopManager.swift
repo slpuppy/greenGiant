@@ -13,8 +13,8 @@ class ShopManager {
     var userItemsIds: [String]
     
     var items: [ShopItem] = [
-        ShopItem(name: "Organic Fertilizer", price: 210, type: .nutrient, effect: "Light Leafs", id: "organicFert", image: UIImage(named: "fertilizer") ?? UIImage()),
-        ShopItem(name: "Ancient Bookashi", price: 420, type: .booster, effect: "Steady Growth", id: "bookashi", image: UIImage(named: "bookashi") ?? UIImage())
+        ShopItem(name: "Organic Fertilizer", price: 1000, type: .nutrient, effect: "Light Leafs", id: "organicFert", image: UIImage(named: "fertilizer") ?? UIImage()),
+        ShopItem(name: "Ancient Bookashi", price: 2500, type: .booster, effect: "Steady Growth", id: "bookashi", image: UIImage(named: "bookashi") ?? UIImage())
     ]
     
     init() {
