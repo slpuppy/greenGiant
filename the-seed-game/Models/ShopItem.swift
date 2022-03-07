@@ -8,11 +8,8 @@
 import Foundation
 import UIKit
 
-
-
 class ShopItem {
-  
-   let name: String
+    let name: String
     let price: Int
     let type: ItemType
     let effect: String

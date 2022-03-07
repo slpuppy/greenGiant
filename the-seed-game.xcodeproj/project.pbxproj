@@ -19,6 +19,7 @@
 		0C022C0327A81A7600B2E88A /* SKScene+GameOverOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */; };
 		0C244F5C27C41AE500541B36 /* Coin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C244F5B27C41AE500541B36 /* Coin.swift */; };
 		0C244F5E27C441C900541B36 /* UserCoins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C244F5D27C441C900541B36 /* UserCoins.swift */; };
+		0C2A85A827D41727006277B4 /* UserSkins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A727D41727006277B4 /* UserSkins.swift */; };
 		0C3B078C27BEDCE1008D2E6B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078A27BEDC71008D2E6B /* AdSupport.framework */; };
 		0C3B078E27BEDCE8008D2E6B /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */; };
 		0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D127AC118D0035EC39 /* DifficultyManager.swift */; };
@@ -80,6 +81,7 @@
 		0C022C0227A81A7600B2E88A /* SKScene+GameOverOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SKScene+GameOverOverlay.swift"; sourceTree = "<group>"; };
 		0C244F5B27C41AE500541B36 /* Coin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coin.swift; sourceTree = "<group>"; };
 		0C244F5D27C441C900541B36 /* UserCoins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCoins.swift; sourceTree = "<group>"; };
+		0C2A85A727D41727006277B4 /* UserSkins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSkins.swift; sourceTree = "<group>"; };
 		0C3B078A27BEDC71008D2E6B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		0C4616D127AC118D0035EC39 /* DifficultyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyManager.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */,
 				0C810E3527B5405A00B9989E /* GameCrashlytics.swift */,
 				0C810E3727B54BA700B9989E /* GameAnalytics.swift */,
+				0C2A85A727D41727006277B4 /* UserSkins.swift */,
 			);
 			path = Singletons;
 			sourceTree = "<group>";
@@ -463,6 +466,7 @@
 				0C9603E427AEC21D000F31E1 /* GameInstructions.swift in Sources */,
 				0C98113127BB129D00E3F0F3 /* Fire.swift in Sources */,
 				75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */,
+				0C2A85A827D41727006277B4 /* UserSkins.swift in Sources */,
 				0C022BEB27A42C7B00B2E88A /* GameScene.swift in Sources */,
 				757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */,
 				0C9603EA27AF2930000F31E1 /* SKScene+GameCamera.swift in Sources */,

@@ -18,9 +18,7 @@ class ShopManager {
     ]
     
     init() {
-        
         self.userItemsIds = UserDefaults().array(forKey: UserDefaultsKeys.userItemsIds) as? [String] ?? []
-        
     }
     
     func purchaseItem(id itemId: String) -> ShopItem? {
