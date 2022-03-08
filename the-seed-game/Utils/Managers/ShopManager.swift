@@ -9,12 +9,11 @@ import UIKit
 
 
 class ShopManager {
-    
     var userItemsIds: [String]
     
     var items: [ShopItem] = [
-        ShopItem(name: "Organic Fertilizer", price: 210, type: .nutrient, effect: "Light Leafs", id: "organicFert", image: UIImage(named: "fertilizer") ?? UIImage()),
-        ShopItem(name: "Ancient Bookashi", price: 420, type: .booster, effect: "Steady Growth", id: "bookashi", image: UIImage(named: "bookashi") ?? UIImage())
+        ShopItem(name: "Organic Fertilizer", price: 210, type: .nutrient, effect: "Light Leafs", id: ItemIds.organicFert, image: UIImage(named: "fertilizer") ?? UIImage()),
+        ShopItem(name: "Ancient Bookashi", price: 420, type: .booster, effect: "Steady Growth", id: ItemIds.bookashi, image: UIImage(named: "bookashi") ?? UIImage())
     ]
     
     init() {
@@ -47,5 +46,19 @@ class ShopManager {
     
     enum UserDefaultsKeys {
         static let userItemsIds: String = "userItemsIds"
+    }
+    
+    enum ItemIds {
+        // nutrient
+        static let organicFert: String = "organicFert"
+        
+        // booster
+        static let bookashi: String = "bookashi"
+        
+        // skin
+        static let blueDream: String = "blueDream"
+        static let crimsonKush: String = "crimsonKush"
+        static let palmWeed: String = "palmWeed"
+        static let purpleHaze: String = "purpleHaze"
     }
 }

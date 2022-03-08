@@ -30,7 +30,6 @@ class ShopItem {
         case booster = "Booster"
         case nutrient = "Nutrient"
     }
-    
 }
 
 

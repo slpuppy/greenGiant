@@ -6,34 +6,62 @@
 //
 
 import Foundation
+import UIKit
 
-class TreeSkins {
-    var userSkinsIds: [String] = []
-    var currentSkinId: String = ""
-    static let shared = TreeSkins.init()
+class UserSkins {
+    private var currentSkinId: String = ""
+    private var currentSkinData: SkinData!
+    static let shared = UserSkins.init()
+    
+    private let skins: [SkinData] = [
+        SkinData( // DEFAULT SKIN
+            id: "",
+            branchImage: UIImage(named: "branch") ?? UIImage(),
+            littleBranchImage: UIImage(named: "branchLittle") ?? UIImage()
+        ),
+        SkinData(
+            id: ShopManager.ItemIds.blueDream,
+            branchImage: UIImage(named: "blueDream") ?? UIImage(),
+            littleBranchImage: UIImage(named: "blueDreamLittle") ?? UIImage()
+        ),
+        SkinData(
+            id: ShopManager.ItemIds.crimsonKush,
+            branchImage: UIImage(named: "crimsonKush") ?? UIImage(),
+            littleBranchImage: UIImage(named: "crimsonKushLittle") ?? UIImage()
+        ),
+        SkinData(
+            id: ShopManager.ItemIds.palmWeed,
+            branchImage: UIImage(named: "palmWeed") ?? UIImage(),
+            littleBranchImage: UIImage(named: "palmWeedLittle") ?? UIImage()
+        ),
+        SkinData(
+            id: ShopManager.ItemIds.purpleHaze,
+            branchImage: UIImage(named: "purpleHaze") ?? UIImage(),
+            littleBranchImage: UIImage(named: "purpleHazeLittle") ?? UIImage()
+        ),
+    ]
     
     private init() {
-        self.userSkinsIds = UserDefaults().array(forKey: UserDefaultsKeys.skins) as? [String] ?? []
         self.currentSkinId = UserDefaults().string(forKey: UserDefaultsKeys.currentSkinId) ?? ""
-    }
-    
-    func add(_ skinId: String) {
-        self.userSkinsIds.append(skinId)
-        
-        UserDefaults().set(self.userSkinsIds, forKey: UserDefaultsKeys.skins)
+        self.currentSkinData = getCurrentSkinData()
     }
     
     func setCurrentSkin(_ skinId: String) {
-        if self.userSkinsIds.first(where: { $0 == skinId }) == nil {
-            return
-        }
-        
         self.currentSkinId = skinId
         UserDefaults().set(self.currentSkinId, forKey: UserDefaultsKeys.currentSkinId)
     }
     
+    func getCurrentSkinData() -> SkinData {
+        guard let skin = skins.first(where: { item in
+            return item.id == self.currentSkinId
+        }) else {
+            return skins[0]
+        }
+        
+        return skin
+    }
+    
     enum UserDefaultsKeys {
-        static let skins: String = "skins"
-        static let currentSkinId: String = "currentSkin"
+        static let currentSkinId: String = "currentUserSkin"
     }
 }
