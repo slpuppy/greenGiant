@@ -11,6 +11,7 @@ struct UnderShopViewDTO {
     let userCoins: Int
     let itemData: ShopItem
     let purchased: Bool
+    let selected: Bool
 }
 class UnderShopView: UIView {
 
@@ -105,7 +106,7 @@ class UnderShopView: UIView {
     func setupViewData(_ data: UnderShopViewDTO){
         yourCoins = UserCoinsView(userCoins: data.userCoins)
         shopItemView = ShopItemView(itemData: data.itemData)
-        purchaseButton = PurchaseButton(price: data.itemData.price, purchased: data.purchased)
+        purchaseButton = PurchaseButton(price: data.itemData.price, purchased: data.purchased, selected: data.selected)
         
     }
     

@@ -24,7 +24,6 @@ class UnderShopViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Presented")
         setupView()
         setupSubviews()
         setupConstraints()
@@ -72,8 +71,9 @@ class UnderShopViewController: UIViewController {
         let purchasedFirst = shopManager.userItemsIds.contains(firstItem.id)
         underShopView = UnderShopView(data: UnderShopViewDTO(
             userCoins: UserCoins.shared.coins,
-            itemData: shopManager.items[0] ,
-            purchased: purchasedFirst
+            itemData: shopManager.items[0],
+            purchased: purchasedFirst,
+            selected: shopManager.items[0].id == UserSkins.shared.currentSkinId
         ))
     }
     

@@ -25,7 +25,6 @@ class ShopManager {
         self.userItemsIds = UserDefaults().array(forKey: UserDefaultsKeys.userItemsIds) as? [String] ?? []
         if self.userItemsIds.isEmpty {
             saveItem(id: ItemIds.regularHemp)
-            
         }
     }
     
@@ -49,8 +48,6 @@ class ShopManager {
     private func saveItem(id itemId: String) {
         userItemsIds.append(itemId)
         UserDefaults().set(userItemsIds, forKey: UserDefaultsKeys.userItemsIds)
-        
-        
     }
     
     enum UserDefaultsKeys {

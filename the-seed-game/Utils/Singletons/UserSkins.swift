@@ -43,6 +43,11 @@ class UserSkins {
     
     private init() {
         self.currentSkinId = UserDefaults().string(forKey: UserDefaultsKeys.currentSkinId) ?? ""
+        
+        if self.currentSkinId == "" {
+            setCurrentSkin(ShopManager.ItemIds.regularHemp)
+        }
+        
         self.currentSkinData = getCurrentSkinData()
     }
     

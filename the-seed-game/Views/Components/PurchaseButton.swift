@@ -24,7 +24,7 @@ class PurchaseButton: UIButton {
     }()
     
     lazy var coinImage: UIImageView = {
-        let image = UIImage(named: "coinShop")
+        let image = UIImage(named: "shopCoin")
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -55,7 +55,7 @@ class PurchaseButton: UIButton {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView }()
     
-    init(frame: CGRect = .zero, price: Int = 0, purchased: Bool = false){
+    init(frame: CGRect = .zero, price: Int = 0, purchased: Bool = false, selected: Bool = false) {
         super.init(frame: frame)
         setupSubviews(price: price, purchased: purchased)
         if purchased {
@@ -66,6 +66,12 @@ class PurchaseButton: UIButton {
             priceLabel.text = "\(price)"
             setupPriceContainerLockedConstraints()
         }
+        
+        if selected {
+            unlockLabel.text = "Selected"
+            unlockLabel.textColor = UIColor(named: "greenText")
+        }
+        
         setupConstraints()
         
     }
@@ -77,6 +83,7 @@ class PurchaseButton: UIButton {
     func update(price: Int = 0, purchased: Bool = false, selected: Bool = false) {
         priceContainer.subviews.forEach({ $0.removeFromSuperview() })
         unlockLabel.textColor = .black
+        
         if purchased {
             unlockLabel.text = "Unlocked"
             coinImage.snp.removeConstraints()

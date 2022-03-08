@@ -11,7 +11,7 @@ import SnapKit
 class UserCoinsView: UIView {
     
     lazy var coinImage: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "coinShop"))
+        let view = UIImageView(image: UIImage(named: "shopCoin"))
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
