@@ -15,7 +15,7 @@ class UserCoins {
     private init() {
 
        self.coins = UserDefaults().integer(forKey: UserDefaultsKeys.coins)
-       
+    
     }
     
     func add(_ value: Int) {

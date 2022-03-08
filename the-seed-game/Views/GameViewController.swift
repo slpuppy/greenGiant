@@ -12,7 +12,7 @@ import GameKit
 import SnapKit
 import GoogleMobileAds
 
-class GameViewController: UIViewController, GKGameCenterControllerDelegate, GameSceneDelegate {
+class GameViewController: UIViewController, GKGameCenterControllerDelegate, GameSceneDelegate, UnderShopDelegate {
     
     
     let adManager = AdManager()
@@ -54,8 +54,18 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
     }
     
     func presentShop(){
-        print("presented")
-        self.present(UnderShopViewController(), animated: true, completion: nil)
+        let view = UnderShopViewController()
+        view.underShopDelegate = self
+        self.present(view, animated: true, completion: nil)
+    }
+    
+    func updateGameScene(){
+        guard let view = self.view as! SKView? else {
+           return
+        }
+        guard let gameScene = view.scene as? GameScene else {
+            return }
+        gameScene.updateIntro()
     }
     
     func setupMenuBar(){

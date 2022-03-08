@@ -29,6 +29,7 @@ class ShopItem {
     enum ItemType: String {
         case booster = "Booster"
         case nutrient = "Nutrient"
+        case leafSkin = "Leaf Skin"
     }
 }
 

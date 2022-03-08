@@ -126,7 +126,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Prepara a cena de introdução do jogo
     func setupIntro() {
         intro = Intro(frame: self.frame)
-        
         self.addChild(intro)
         
     }
@@ -135,9 +134,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func runIntroStartAnimation() {
         intro.runStartAnimation()
         sun.runIntroStartAnimation()
-        
-        
-        
+    }
+    
+    func updateIntro(){
+        intro.node.removeFromParent()
+        setupIntro()
     }
     
     func touchDown(atPoint pos : CGPoint) {

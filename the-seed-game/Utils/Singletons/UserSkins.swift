@@ -9,13 +9,13 @@ import Foundation
 import UIKit
 
 class UserSkins {
-    private var currentSkinId: String = ""
-    private var currentSkinData: SkinData!
+    var currentSkinId = ShopManager.ItemIds.regularHemp
+    var currentSkinData: SkinData!
     static let shared = UserSkins.init()
     
     private let skins: [SkinData] = [
         SkinData( // DEFAULT SKIN
-            id: "",
+            id: ShopManager.ItemIds.regularHemp,
             branchImage: UIImage(named: "branch") ?? UIImage(),
             littleBranchImage: UIImage(named: "branchLittle") ?? UIImage()
         ),
@@ -49,6 +49,7 @@ class UserSkins {
     func setCurrentSkin(_ skinId: String) {
         self.currentSkinId = skinId
         UserDefaults().set(self.currentSkinId, forKey: UserDefaultsKeys.currentSkinId)
+        self.currentSkinData = getCurrentSkinData()
     }
     
     func getCurrentSkinData() -> SkinData {
