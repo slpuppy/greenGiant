@@ -14,11 +14,11 @@ class ShopManager {
     var items: [ShopItem] = [
 //        ShopItem(name: "Organic Fertilizer", price: 210, type: .nutrient, effect: "Light Leafs", id: ItemIds.organicFert, image: UIImage(named: "fertilizer") ?? UIImage()),
 //        ShopItem(name: "Ancient Bookashi", price: 420, type: .booster, effect: "Steady Growth", id: ItemIds.bookashi, image: UIImage(named: "bookashi") ?? UIImage()),
-        ShopItem(name: "Regular Hemp", price: 420, type: .leafSkin, effect: "Cosmetics", id: ItemIds.regularHemp, image: UIImage(named: "branchLittle") ?? UIImage()),
-        ShopItem(name: "Palm Weed", price: 420, type: .leafSkin, effect: "Cosmetics", id: ItemIds.palmWeed, image: UIImage(named: "palmWeedLittle") ?? UIImage()),
-        ShopItem(name: "Blue Dream", price: 880, type: .leafSkin, effect: "Cosmetics", id: ItemIds.blueDream, image: UIImage(named: "blueDreamLittle") ?? UIImage()),
-        ShopItem(name: "Crimson Kush", price: 1340, type: .leafSkin, effect: "Cosmetics", id: ItemIds.crimsonKush, image: UIImage(named: "crimsonKushLittle") ?? UIImage()),
-        ShopItem(name: "Purple Haze", price: 2000, type: .leafSkin, effect: "Cosmetics", id: ItemIds.purpleHaze, image: UIImage(named: "purpleHazeLittle") ?? UIImage())
+        ShopItem(name: "Regular Hemp", price: 0, type: .leafSkin, effect: "Cosmetics", id: ItemIds.regularHemp, image: UIImage(named: "branchLittle") ?? UIImage()),
+        ShopItem(name: "Palm Weed", price: 25, type: .leafSkin, effect: "Cosmetics", id: ItemIds.palmWeed, image: UIImage(named: "palmWeedLittle") ?? UIImage()),
+        ShopItem(name: "Blue Dream", price: 100, type: .leafSkin, effect: "Cosmetics", id: ItemIds.blueDream, image: UIImage(named: "blueDreamLittle") ?? UIImage()),
+        ShopItem(name: "Crimson Kush", price: 250, type: .leafSkin, effect: "Cosmetics", id: ItemIds.crimsonKush, image: UIImage(named: "crimsonKushLittle") ?? UIImage()),
+        ShopItem(name: "Purple Haze", price: 420, type: .leafSkin, effect: "Cosmetics", id: ItemIds.purpleHaze, image: UIImage(named: "purpleHazeLittle") ?? UIImage())
     ]
     
     init() {

@@ -17,27 +17,27 @@ class UserSkins {
         SkinData( // DEFAULT SKIN
             id: ShopManager.ItemIds.regularHemp,
             branchImage: UIImage(named: "branch") ?? UIImage(),
-            littleBranchImage: UIImage(named: "branchLittle") ?? UIImage()
+            littleBranchImage: UIImage(named: "branchLittle") ?? UIImage(), introBranchImage: UIImage(named: "branchIntro") ?? UIImage()
         ),
         SkinData(
             id: ShopManager.ItemIds.blueDream,
             branchImage: UIImage(named: "blueDream") ?? UIImage(),
-            littleBranchImage: UIImage(named: "blueDreamLittle") ?? UIImage()
+            littleBranchImage: UIImage(named: "blueDreamLittle") ?? UIImage(), introBranchImage: UIImage(named: "blueDreamIntro") ?? UIImage()
         ),
         SkinData(
             id: ShopManager.ItemIds.crimsonKush,
             branchImage: UIImage(named: "crimsonKush") ?? UIImage(),
-            littleBranchImage: UIImage(named: "crimsonKushLittle") ?? UIImage()
+            littleBranchImage: UIImage(named: "crimsonKushLittle") ?? UIImage(), introBranchImage: UIImage(named: "crimsonKushIntro") ?? UIImage()
         ),
         SkinData(
             id: ShopManager.ItemIds.palmWeed,
             branchImage: UIImage(named: "palmWeed") ?? UIImage(),
-            littleBranchImage: UIImage(named: "palmWeedLittle") ?? UIImage()
+            littleBranchImage: UIImage(named: "palmWeedLittle") ?? UIImage(), introBranchImage: UIImage(named: "palmWeedIntro") ?? UIImage()
         ),
         SkinData(
             id: ShopManager.ItemIds.purpleHaze,
             branchImage: UIImage(named: "purpleHaze") ?? UIImage(),
-            littleBranchImage: UIImage(named: "purpleHazeLittle") ?? UIImage()
+            littleBranchImage: UIImage(named: "purpleHazeLittle") ?? UIImage(), introBranchImage: UIImage(named: "purpleHazeIntro") ?? UIImage()
         ),
     ]
     

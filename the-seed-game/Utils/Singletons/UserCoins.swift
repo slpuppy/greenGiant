@@ -15,6 +15,7 @@ class UserCoins {
     private init() {
 
        self.coins = UserDefaults().integer(forKey: UserDefaultsKeys.coins)
+     
     
     }
     

@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Group 117@1x.png",
+      "filename" : "blueDreamIntro.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Group 117@2x.png",
+      "filename" : "blue@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "Group 117@3x.png",
+      "filename" : "blue@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

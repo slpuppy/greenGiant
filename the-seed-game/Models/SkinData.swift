@@ -11,10 +11,13 @@ class SkinData {
     let id: String
     let branchImage: UIImage
     let littleBranchImage: UIImage
+    let introBranchImage: UIImage
     
-    init(id: String, branchImage: UIImage, littleBranchImage: UIImage) {
+    init(id: String, branchImage: UIImage, littleBranchImage: UIImage, introBranchImage: UIImage) {
         self.id = id
         self.branchImage = branchImage
         self.littleBranchImage = littleBranchImage
+        self.introBranchImage = introBranchImage
+        
     }
 }

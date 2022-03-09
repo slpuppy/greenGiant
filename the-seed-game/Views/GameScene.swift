@@ -325,7 +325,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             branch.node.position.x = lastTrunk.node.position.x - branch.node.frame.width/2
             branch.node.zRotation = -0.33
         case .right:
-            branch.node.position.x = lastTrunk.node.position.x + branch.node.frame.width/2
+            branch.node.position.x = lastTrunk.node.position.x + branch.node.frame.width/2 - 3
             branch.node.zRotation = 0.33
         }
         
@@ -460,12 +460,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBoard.removeScoreBoard()
         sun.removeSun()
         Score.shared.resetScore()
-        
+        removeLeftCoins()
         setupIntro()
         setupHomeButtons()
         setupSun()
         runIntroStartAnimation()
         status = .intro
+    }
+    
+    func removeLeftCoins(){
+        let coin = self.childNode(withName: Coin.Names.coin)
+        if coin != nil {
+            coin?.removeFromParent()
+        }
     }
     
     func resetCameraPosition(delay: TimeInterval) {
@@ -529,7 +536,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let randomValue = Int.random(in: 1...10)
         
-        if randomValue <= 3 {
+        if randomValue <= 6 {
             spawnCoin()
         }
     }
