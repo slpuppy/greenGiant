@@ -160,6 +160,7 @@ class UnderShopViewController: UIViewController {
     }
     
     @objc func exitShopButtonPressed() {
+        hapticsManager.playTouchPattern()
         underShopDelegate?.updateGameScene()
         self.dismiss(animated: true, completion: nil)
     }

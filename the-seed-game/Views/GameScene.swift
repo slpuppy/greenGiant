@@ -163,14 +163,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameSceneDelegate?.leaderboardTapped()
                 return
             }
-            let introCordinatePos = intro.node.convert(pos, from: self)
-            if intro.seed.contains(introCordinatePos) {
-                hapticsManager.playTouchPattern()
-                gameSceneDelegate?.reportFirstAchievement()
-                runIntroCutsceneAnimation()
-                setupStartGame()
-                gameSceneDelegate?.setupMenuBar()
-            }
+            
+            hapticsManager.playTouchPattern()
+            gameSceneDelegate?.reportFirstAchievement()
+            runIntroCutsceneAnimation()
+            setupStartGame()
+            gameSceneDelegate?.setupMenuBar()
         case .playing:
             if self.scene?.isPaused == true || !playerCanPlay {
                 break
