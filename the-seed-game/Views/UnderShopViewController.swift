@@ -8,18 +8,22 @@
 import UIKit
 import SnapKit
 
+protocol UnderShopDelegate: AnyObject {
+    func updateGameScene()
+}
+
 class UnderShopViewController: UIViewController {
     var underShopView: UnderShopView!
     var backgroundView: UIView!
     var currentItemIndex = 0
     var exitButton: ExitButton!
+    weak var underShopDelegate: UnderShopDelegate?
     
     var shopManager = ShopManager()
     let hapticsManager = UnderShopHapticsManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("Presented")
         setupView()
         setupSubviews()
         setupConstraints()
@@ -65,8 +69,9 @@ class UnderShopViewController: UIViewController {
         let purchasedFirst = shopManager.userItemsIds.contains(firstItem.id)
         underShopView = UnderShopView(data: UnderShopViewDTO(
             userCoins: UserCoins.shared.coins,
-            itemData: shopManager.items[0] ,
-            purchased: purchasedFirst
+            itemData: shopManager.items[0],
+            purchased: purchasedFirst,
+            selected: shopManager.items[0].id == UserSkins.shared.currentSkinId
         ))
     }
     
@@ -124,29 +129,55 @@ class UnderShopViewController: UIViewController {
         let item = shopManager.items[currentItemIndex]
         let purchased = shopManager.userItemsIds.contains(item.id)
         
+        if item.type == .leafSkin && purchased {
+            updateSkin(item: item)
+            return
+        }
+        purchaseItem(item: item)
+    }
+    
+    func purchaseItem(item: ShopItem) {
+       let purchased = shopManager.userItemsIds.contains(item.id)
+        
         if UserCoins.shared.coins >= item.price && !purchased {
             hapticsManager.playUnlockPattern()
             shopManager.purchaseItem(id: item.id)
             updateYourCoins()
             updateCurrentItem()
+            updateSkin(item: item)
         } else {
             hapticsManager.playNotEnoughCoinsPattern()
             cantPurchaseAnimatition()
         }
     }
     
+    func updateSkin(item: ShopItem){
+        if item.type != .leafSkin {
+            return
+        }
+        UserSkins.shared.setCurrentSkin(item.id)
+       updateCurrentItem()
+    }
+    
     @objc func exitShopButtonPressed() {
         hapticsManager.playTouchPattern()
+        underShopDelegate?.updateGameScene()
         self.dismiss(animated: true, completion: nil)
     }
     
     func updateCurrentItem() {
         let item = shopManager.items[currentItemIndex]
         let purchasedItem = shopManager.userItemsIds.contains(item.id)
-        print(purchasedItem)
         underShopView.shopItemView.update(item)
+        if item.type == .leafSkin && UserSkins.shared.currentSkinId == item.id {
+            underShopView.purchaseButton.update(price: item.price, purchased: purchasedItem, selected: true)
+            return
+        }
         underShopView.purchaseButton.update(price: item.price, purchased: purchasedItem)
+        
     }
+    
+    
     
     func updateYourCoins() {
         underShopView.yourCoins.update(userCoins: UserCoins.shared.coins)

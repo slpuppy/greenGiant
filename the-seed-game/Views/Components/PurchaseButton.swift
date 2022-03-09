@@ -8,7 +8,7 @@
 import UIKit
 
 class PurchaseButton: UIButton {
-
+    
     lazy var frameImage: UIImageView = {
         let image = UIImage(named: "buttonFrame")
         let imageView = UIImageView(image: image)
@@ -40,7 +40,7 @@ class PurchaseButton: UIButton {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-
+    
     lazy var unlockLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Sketch", size: 18)
@@ -54,8 +54,8 @@ class PurchaseButton: UIButton {
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView }()
-   
-    init(frame: CGRect = .zero, price: Int = 0, purchased: Bool = false){
+    
+    init(frame: CGRect = .zero, price: Int = 0, purchased: Bool = false, selected: Bool = false) {
         super.init(frame: frame)
         setupSubviews(price: price, purchased: purchased)
         if purchased {
@@ -66,6 +66,12 @@ class PurchaseButton: UIButton {
             priceLabel.text = "\(price)"
             setupPriceContainerLockedConstraints()
         }
+        
+        if selected {
+            unlockLabel.text = "Selected"
+            unlockLabel.textColor = UIColor(named: "greenText")
+        }
+        
         setupConstraints()
         
     }
@@ -74,14 +80,20 @@ class PurchaseButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func update(price: Int = 0, purchased: Bool = false) {
+    func update(price: Int = 0, purchased: Bool = false, selected: Bool = false) {
         priceContainer.subviews.forEach({ $0.removeFromSuperview() })
+        unlockLabel.textColor = .black
+        
         if purchased {
             unlockLabel.text = "Unlocked"
             coinImage.snp.removeConstraints()
             priceLabel.snp.removeConstraints()
             priceContainer.addSubview(leafImage)
-           setupPriceContainerUnlockedConstraints()
+            setupPriceContainerUnlockedConstraints()
+            if selected {
+                unlockLabel.text = "Selected"
+                unlockLabel.textColor = UIColor(named: "greenText")
+            }
         } else {
             unlockLabel.text = "Unlock"
             priceLabel.text = "\(price)"
@@ -91,7 +103,7 @@ class PurchaseButton: UIButton {
             setupPriceContainerLockedConstraints()
         }
         setupConstraints()
-   }
+    }
     
     
     private func setupSubviews(price: Int, purchased:Bool) {
@@ -106,7 +118,7 @@ class PurchaseButton: UIButton {
         }
         self.addSubview(priceContainer)
         self.addSubview(unlockLabel)
-  }
+    }
     
     func setupPriceContainerUnlockedConstraints(){
         leafImage.snp.makeConstraints { make in

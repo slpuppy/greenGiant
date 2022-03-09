@@ -86,10 +86,8 @@ class Intro {
     }
     
     static private func buildBranch(from frame: CGRect) -> Branch {
-        let branch = Branch.buildBranch()
-        let scaleMultiplier = 3.0
+        let branch = Branch.buildIntroBranch()
         branch.node.zPosition = 3
-        branch.node.scale(to: CGSize(width: (branch.node.size.width * scaleMultiplier), height: (branch.node.size.height * scaleMultiplier)))
         branch.node.position.y = frame.midY + 200
         branch.node.physicsBody = nil
         return branch

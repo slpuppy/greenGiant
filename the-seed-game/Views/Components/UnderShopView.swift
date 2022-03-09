@@ -11,6 +11,7 @@ struct UnderShopViewDTO {
     let userCoins: Int
     let itemData: ShopItem
     let purchased: Bool
+    let selected: Bool
 }
 class UnderShopView: UIView {
 
@@ -105,7 +106,7 @@ class UnderShopView: UIView {
     func setupViewData(_ data: UnderShopViewDTO){
         yourCoins = UserCoinsView(userCoins: data.userCoins)
         shopItemView = ShopItemView(itemData: data.itemData)
-        purchaseButton = PurchaseButton(price: data.itemData.price, purchased: data.purchased)
+        purchaseButton = PurchaseButton(price: data.itemData.price, purchased: data.purchased, selected: data.selected)
         
     }
     
@@ -152,9 +153,9 @@ class UnderShopView: UIView {
             make.top.equalTo(itemContainer.snp.bottom).offset(24)
         }
         lightRay.snp.makeConstraints { make in
-            make.leading.equalTo(caveBackground.snp.leading)
-            make.trailing.equalTo(caveBackground.snp.trailing)
-            make.bottom.equalTo(caveBackground.snp.bottom).offset(-7)
+            make.leading.equalTo(caveBackground.snp.leading).offset(1)
+            make.trailing.equalTo(caveBackground.snp.trailing).offset(-1)
+            make.bottom.equalTo(caveBackground.snp.bottom).offset(-6)
         }
        
          

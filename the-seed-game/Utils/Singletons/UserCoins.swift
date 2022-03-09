@@ -12,10 +12,11 @@ class UserCoins {
     var coins: Int
     static let shared = UserCoins.init()
     
-   private init() {
+    private init() {
 
        self.coins = UserDefaults().integer(forKey: UserDefaultsKeys.coins)
-       
+     
+    
     }
     
     func add(_ value: Int) {

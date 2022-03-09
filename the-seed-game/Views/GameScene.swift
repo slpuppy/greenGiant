@@ -126,7 +126,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     // Prepara a cena de introdução do jogo
     func setupIntro() {
         intro = Intro(frame: self.frame)
-        
         self.addChild(intro)
         
     }
@@ -135,6 +134,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func runIntroStartAnimation() {
         intro.runStartAnimation()
         sun.runIntroStartAnimation()
+    }
+    
+    func updateIntro(){
+        intro.node.removeFromParent()
+        setupIntro()
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -159,14 +163,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 gameSceneDelegate?.leaderboardTapped()
                 return
             }
-            let introCordinatePos = intro.node.convert(pos, from: self)
-            if intro.seed.contains(introCordinatePos) {
-                hapticsManager.playTouchPattern()
-                gameSceneDelegate?.reportFirstAchievement()
-                runIntroCutsceneAnimation()
-                setupStartGame()
-                gameSceneDelegate?.setupMenuBar()
-            }
+            
+            hapticsManager.playTouchPattern()
+            gameSceneDelegate?.reportFirstAchievement()
+            runIntroCutsceneAnimation()
+            setupStartGame()
+            gameSceneDelegate?.setupMenuBar()
         case .playing:
             if self.scene?.isPaused == true || !playerCanPlay {
                 break
@@ -323,7 +325,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             branch.node.position.x = lastTrunk.node.position.x - branch.node.frame.width/2
             branch.node.zRotation = -0.33
         case .right:
-            branch.node.position.x = lastTrunk.node.position.x + branch.node.frame.width/2
+            branch.node.position.x = lastTrunk.node.position.x + branch.node.frame.width/2 - 3
             branch.node.zRotation = 0.33
         }
         
@@ -458,12 +460,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         scoreBoard.removeScoreBoard()
         sun.removeSun()
         Score.shared.resetScore()
-        
+        removeLeftCoins()
         setupIntro()
         setupHomeButtons()
         setupSun()
         runIntroStartAnimation()
         status = .intro
+    }
+    
+    func removeLeftCoins(){
+        let coin = self.childNode(withName: Coin.Names.coin)
+        if coin != nil {
+            coin?.removeFromParent()
+        }
     }
     
     func resetCameraPosition(delay: TimeInterval) {
@@ -527,7 +536,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let randomValue = Int.random(in: 1...10)
         
-        if randomValue <= 3 {
+        if randomValue <= 6 {
             spawnCoin()
         }
     }
