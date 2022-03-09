@@ -8,11 +8,8 @@
 import Foundation
 import UIKit
 
-
-
 class ShopItem {
-  
-   let name: String
+    let name: String
     let price: Int
     let type: ItemType
     let effect: String
@@ -32,8 +29,8 @@ class ShopItem {
     enum ItemType: String {
         case booster = "Booster"
         case nutrient = "Nutrient"
+        case leafSkin = "Leaf Skin"
     }
-    
 }
 
 

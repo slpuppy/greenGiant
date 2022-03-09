@@ -22,6 +22,8 @@
 		0C2A85A227D403A3006277B4 /* CoreHapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A127D403A3006277B4 /* CoreHapticsManager.swift */; };
 		0C2A85A427D40408006277B4 /* GameHapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A327D40408006277B4 /* GameHapticsManager.swift */; };
 		0C2A85A627D41095006277B4 /* UnderShopHapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A527D41095006277B4 /* UnderShopHapticsManager.swift */; };
+		0C2A85A827D41727006277B4 /* UserSkins.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A727D41727006277B4 /* UserSkins.swift */; };
+		0C2A85AA27D64854006277B4 /* SkinData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C2A85A927D64854006277B4 /* SkinData.swift */; };
 		0C3B078C27BEDCE1008D2E6B /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078A27BEDC71008D2E6B /* AdSupport.framework */; };
 		0C3B078E27BEDCE8008D2E6B /* AppTrackingTransparency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */; };
 		0C4616D227AC118D0035EC39 /* DifficultyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C4616D127AC118D0035EC39 /* DifficultyManager.swift */; };
@@ -86,6 +88,8 @@
 		0C2A85A127D403A3006277B4 /* CoreHapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreHapticsManager.swift; sourceTree = "<group>"; };
 		0C2A85A327D40408006277B4 /* GameHapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameHapticsManager.swift; sourceTree = "<group>"; };
 		0C2A85A527D41095006277B4 /* UnderShopHapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderShopHapticsManager.swift; sourceTree = "<group>"; };
+		0C2A85A727D41727006277B4 /* UserSkins.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSkins.swift; sourceTree = "<group>"; };
+		0C2A85A927D64854006277B4 /* SkinData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinData.swift; sourceTree = "<group>"; };
 		0C3B078A27BEDC71008D2E6B /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		0C3B078D27BEDCE7008D2E6B /* AppTrackingTransparency.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppTrackingTransparency.framework; path = System/Library/Frameworks/AppTrackingTransparency.framework; sourceTree = SDKROOT; };
 		0C4616D127AC118D0035EC39 /* DifficultyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyManager.swift; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 				0C244F5B27C41AE500541B36 /* Coin.swift */,
 				7569C3A027C6703500A509C3 /* ShopItem.swift */,
 				7569C3B027C91E6900A509C3 /* HomeButtons.swift */,
+				0C2A85A927D64854006277B4 /* SkinData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 				75EAA84927B2CD1E00FFC8EF /* MusicPlayer.swift */,
 				0C810E3527B5405A00B9989E /* GameCrashlytics.swift */,
 				0C810E3727B54BA700B9989E /* GameAnalytics.swift */,
+				0C2A85A727D41727006277B4 /* UserSkins.swift */,
 			);
 			path = Singletons;
 			sourceTree = "<group>";
@@ -473,6 +479,7 @@
 				0C9603E427AEC21D000F31E1 /* GameInstructions.swift in Sources */,
 				0C98113127BB129D00E3F0F3 /* Fire.swift in Sources */,
 				75100A5727A5AD51006ACB87 /* SKScene+Background.swift in Sources */,
+				0C2A85A827D41727006277B4 /* UserSkins.swift in Sources */,
 				0C022BEB27A42C7B00B2E88A /* GameScene.swift in Sources */,
 				757BBD4F27A9592300827E15 /* Scoreboard.swift in Sources */,
 				0C9603EA27AF2930000F31E1 /* SKScene+GameCamera.swift in Sources */,
@@ -504,6 +511,7 @@
 				7569C3AA27C67A7000A509C3 /* UserCoinsView.swift in Sources */,
 				75100A6227A5D2D3006ACB87 /* SKScene+LittleTrunk.swift in Sources */,
 				0C9603E627AECE27000F31E1 /* SKScene+GameInstructions.swift in Sources */,
+				0C2A85AA27D64854006277B4 /* SkinData.swift in Sources */,
 				7569C3A827C6792F00A509C3 /* ShopItemView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
