@@ -1,9 +1,3 @@
-//
-//  CoinManager.swift
-//  the-seed-game
-//
-//  Created by Gustavo Kumasawa on 21/02/22.
-//
 
 import Foundation
 
