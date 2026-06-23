@@ -21,8 +21,6 @@
 	<string>FALSE</string>
 	<key>FacebookDisplayName</key>
 	<string>GGiant</string>
-	<key>GADApplicationIdentifier</key>
-	<string>ca-app-pub-1833918678590844~1495655742</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>
@@ -178,5 +176,8 @@
 	<array>
 		<string>Sketch.ttf</string>
 	</array>
+	<key>com.apple.developer.game-center
+com.apple.developer.game-center</key>
+	<true/>
 </dict>
 </plist>

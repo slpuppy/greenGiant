@@ -10,12 +10,10 @@ import SpriteKit
 import GameplayKit
 import GameKit
 import SnapKit
-import GoogleMobileAds
 
 class GameViewController: UIViewController, GKGameCenterControllerDelegate, GameSceneDelegate, UnderShopDelegate {
     
     
-    let adManager = AdManager()
     var gcEnabled = Bool() // Check if the user has Game Center enabled
     var gcDefaultLeaderBoard = String() // Check the default leaderboardID
     var achievementManager = AchievementManager()
@@ -46,11 +44,7 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
         GameCenterVC.gameCenterDelegate = self
         present(GameCenterVC, animated: true, completion: nil)
-        
-        // Ad resquest
-        
-        adManager.initialize()
-        
+                
     }
     
     func presentShop(){
@@ -80,9 +74,6 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
         menuView.pauseButton.addTarget(self, action: #selector(pauseTapped), for: .touchDown)
     }
     
-    func displayAd(){
-        adManager.presentInterstitialAd(in: self)
-    }
     
     @objc func muteTapped() {
         GameAnalytics.shared.logTappedMuteButton()
