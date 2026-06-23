@@ -41,10 +41,6 @@ class GameViewController: UIViewController, GKGameCenterControllerDelegate, Game
             authenticateLocalPlayer()
         }
         
-        let GameCenterVC = GKGameCenterViewController(leaderboardID: self.gcDefaultLeaderBoard, playerScope: .global, timeScope: .allTime)
-        GameCenterVC.gameCenterDelegate = self
-        present(GameCenterVC, animated: true, completion: nil)
-                
     }
     
     func presentShop(){
